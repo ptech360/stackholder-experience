@@ -1,0 +1,48 @@
+.first-nav{
+  background: #103a71;
+  border-bottom: 4px solid #29aecc;
+  height: 48px;
+  border-radius: 0px;
+  margin-bottom: 0px;
+}
+
+.first-nav .nav>li>a{
+  background-color: transparent;
+  color: #8397b2;
+}
+
+.first-nav .nav>li>a:focus, .first-nav .nav>li>a:hover {
+  text-decoration: none;
+  background-color: transparent;
+  color: white;
+}
+
+.second-nav-bar{
+  border: 1px solid #ebebeb;
+  border-top: none;
+  height: 111px;
+}
+.second-nav-bar a img {
+  margin-left: 11px;
+  width: 387px;
+  height: auto;
+}
+
+.navbar-login
+{
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.navbar-login-session
+{
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.icon-size
+{
+    font-size: 87px;
+}

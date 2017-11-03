@@ -1,0 +1,90 @@
+<div class="login-page">
+  <div id="hbmsu-container">
+    <div id="hbmsu-top">
+      <div id="hbmsu-header">
+        <div class="header">
+          <div class="logo">
+            <img id="LogoImage" alt="HBMSU" src="assets\images\i\logo.png" style="font-size: 11px">
+          </div>
+          <div class="title">
+            <h1>
+              HBMSU Stakeholders Experience Management</h1>
+            <h1>
+              An organizational Commitment to Excellence</h1>
+          </div>
+          <div class="loginDisplay">
+
+            [ <a href="Login.aspx?IsAssociate=False" id="HeadLoginView_HeadLoginStatus">Log In</a>]
+
+            <br>
+
+          </div>
+          <div class="clear hideSkiplink">
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="hbmsu-content">
+      <div class="main">
+        <h2>
+          Log In
+        </h2>
+        <p>
+          Please enter your username and password.
+          <a id="MainContent_RegisterHyperLink" href="RequestVendorAccess.aspx">Registration</a> if you don't have an account.
+          <br> <b>If you are an Associate Faculty then please</b> <a id2="RegisterHyperLink" href="http://acm.hbmsu.ac.ae/portal">click here</a>.
+        </p>
+        <input type="hidden" name="ctl00$MainContent$hdnLoginAttempt" id="MainContent_hdnLoginAttempt" value="0">
+
+        <span class="failureNotification">
+                
+            </span>
+        <div id="MainContent_LoginUser_LoginUserValidationSummary" class="failureNotification" style="display:none;">
+
+        </div>
+        <div class="accountInfo">
+          <fieldset class="login">
+            <legend>Account Information</legend>
+            <p>
+              <label for="MainContent_LoginUser_UserName" id="MainContent_LoginUser_UserNameLabel">Username:</label>
+              <input name="ctl00$MainContent$LoginUser$UserName" type="text" id="MainContent_LoginUser_UserName" class="vendorTextEntry">
+              <span id="MainContent_LoginUser_UserNameRequired" title="User Name is required." class="failureNotification" style="visibility:hidden;">*</span>
+            </p>
+            <p>
+              <label for="MainContent_LoginUser_Password" id="MainContent_LoginUser_PasswordLabel">Password:</label>
+              <input name="ctl00$MainContent$LoginUser$Password" type="password" id="MainContent_LoginUser_Password" class="vendorTextEntry">
+              <span id="MainContent_LoginUser_PasswordRequired" title="Password is required." class="failureNotification" style="visibility:hidden;">*</span>
+            </p>
+            <p>
+              <input id="MainContent_LoginUser_RememberMe" type="checkbox" name="ctl00$MainContent$LoginUser$RememberMe">
+              <label for="MainContent_LoginUser_RememberMe" id="MainContent_LoginUser_RememberMeLabel" class="inline">Keep me logged in</label>
+            </p>
+            <p>
+            </p>
+          </fieldset>
+
+          <p class="submitButton">
+            <input type="submit" name="ctl00$MainContent$LoginUser$LoginButton" value="Log In" onclick=""
+              id="MainContent_LoginUser_LoginButton">
+          </p>
+        </div>
+
+
+        <p>
+          Forgot your password?
+          <a id="MainContent_ForgotPasswordHyperLink" href="RecoverPassword.aspx">Click Here</a>.
+        </p>
+
+
+      </div>
+      <div class="clear">
+      </div>
+    </div>
+    <div id="hbmsu-footer">
+      <div class="footer">
+      </div>
+    </div>
+  </div>
+</div>
