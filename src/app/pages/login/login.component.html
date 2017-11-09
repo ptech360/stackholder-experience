@@ -44,17 +44,17 @@
         <div id="MainContent_LoginUser_LoginUserValidationSummary" class="failureNotification" style="display:none;">
 
         </div>
-        <div class="accountInfo">
+        <form class="accountInfo" [formGroup]="loginForm" (submit)="submit()">
           <fieldset class="login">
             <legend>Account Information</legend>
             <p>
               <label for="MainContent_LoginUser_UserName" id="MainContent_LoginUser_UserNameLabel">Username:</label>
-              <input name="ctl00$MainContent$LoginUser$UserName" type="text" id="MainContent_LoginUser_UserName" class="vendorTextEntry">
+              <input name="ctl00$MainContent$LoginUser$UserName" type="text" id="MainContent_LoginUser_UserName" class="vendorTextEntry" formControlName="username">
               <span id="MainContent_LoginUser_UserNameRequired" title="User Name is required." class="failureNotification" style="visibility:hidden;">*</span>
             </p>
             <p>
               <label for="MainContent_LoginUser_Password" id="MainContent_LoginUser_PasswordLabel">Password:</label>
-              <input name="ctl00$MainContent$LoginUser$Password" type="password" id="MainContent_LoginUser_Password" class="vendorTextEntry">
+              <input name="ctl00$MainContent$LoginUser$Password" type="password" id="MainContent_LoginUser_Password" class="vendorTextEntry" formControlName="password">
               <span id="MainContent_LoginUser_PasswordRequired" title="Password is required." class="failureNotification" style="visibility:hidden;">*</span>
             </p>
             <p>
@@ -69,7 +69,7 @@
             <input type="submit" name="ctl00$MainContent$LoginUser$LoginButton" value="Log In" onclick=""
               id="MainContent_LoginUser_LoginButton">
           </p>
-        </div>
+        </form>
 
 
         <p>

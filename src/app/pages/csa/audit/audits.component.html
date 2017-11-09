@@ -1,0 +1,49 @@
+<div class="container">
+  <h2 style="font-family:serif">Audits</h2>
+  <hr>
+  <table class="table table-hover table-bordered">
+      <thead style="    background: #0cc0db;">
+        <tr>
+          <th>Unit</th>
+          <th>Stakeholder</th>
+          <th>Touch Point</th>
+          <th>Channel</th>
+          <th>Experience</th>
+          <th>Data Source</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let audit of audits;let a=index;">
+        <tr>
+          <td [attr.rowspan]="getRowSpan(audit.touchpoints)">{{audit.department}}</td>
+          <td [attr.rowspan]="getRowSpan(audit.touchpoints)">{{audit.stackholder}}</td>
+        </tr>
+        <ng-template ngFor let-tp [ngForOf]= "audit.touchpoints" let-t="index">
+          <tr>
+            <td>{{tp.touchPoint}}</td>
+            <td>
+              <ul style="list-style:none;">
+                <li style="float:left" *ngFor="let channel of tp.channels;let c = index;">{{channel.channel}},</li>
+              </ul>
+            </td>
+            <td>{{tp.experience}}</td>
+            <td>
+              <ul style="list-style:none;">
+                <li style="float:left" *ngFor="let dataSource of tp.dataSources;let c = index;">{{dataSource.dataSource}},</li>
+              </ul>
+            </td>
+          </tr>
+          <!-- <ng-template ngFor let-channel [ngForOf]= "tp.channels" let-c="index">
+            <tr>
+              <td [attr.rowspan]="getRowSpanOfChannelOrDataSource(tp)">{{channel.channel}}</td>
+            </tr>
+          </ng-template> 
+          <ng-template ngFor let-dataSource [ngForOf]= "tp.dataSources" let-d="index">
+            <tr>
+              <td>{{dataSource.dataSource}}</td>
+            </tr>
+          </ng-template>          -->
+        </ng-template>
+        
+      </tbody>
+    </table>
+</div>

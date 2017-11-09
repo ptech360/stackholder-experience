@@ -21,6 +21,7 @@
   border: 1px solid #ebebeb;
   border-top: none;
   height: 111px;
+  margin-top: 50px;
 }
 .second-nav-bar a img {
   margin-left: 11px;
@@ -28,21 +29,30 @@
   height: auto;
 }
 
-.navbar-login
-{
+.second-nav-bar ul{
+  right: 15px;
+  bottom: 0;
+  position: absolute;
+}
+
+.second-nav-bar>ul>li>a:focus, .second-nav-bar>ul>li>a:hover, .second-nav-bar>ul>li.active>a {
+  text-decoration: none;
+  background-color: #103a71;
+  color: white;
+}
+
+.navbar-login{
     width: 305px;
     padding: 10px;
     padding-bottom: 0px;
 }
 
-.navbar-login-session
-{
+.navbar-login-session{
     padding: 10px;
     padding-bottom: 0px;
     padding-top: 0px;
 }
 
-.icon-size
-{
+.icon-size{
     font-size: 87px;
 }

@@ -2,12 +2,14 @@ import {NgModule} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CSAComponent } from "./csa.component";
 import { DataService } from "./csa.service";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
   declarations: [
     CSAComponent
   ],
   imports: [
+    SharedModule,
     RouterModule.forChild([
       {
         path: '',
@@ -21,6 +23,10 @@ import { DataService } from "./csa.service";
           {
             path:'config',
             loadChildren:'app/pages/csa/config/config.module#ConfigModule'
+          },
+          {
+            path:'audit',
+            loadChildren:'app/pages/csa/audit/audits.module#AuditModule'
           }
         ]
       }

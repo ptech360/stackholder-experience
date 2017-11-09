@@ -1,14 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 
 import { Routes, RouterModule } from "@angular/router";
+import { CommonModule } from "@angular/common";
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'csa',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
@@ -26,9 +27,10 @@ export const routes: Routes = [
     AppComponent
   ],
   imports: [
-    BrowserModule, RouterModule.forRoot(routes, { useHash: true, })
+    BrowserModule, 
+    RouterModule.forRoot(routes, { useHash: true, })
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
