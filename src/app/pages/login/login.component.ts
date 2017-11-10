@@ -31,7 +31,7 @@ export class LoginComponent{
 
   public onSuccess() {
     this.loginStart = false;
-    this.router.navigateByUrl("/csa");
+    this.router.navigateByUrl("/home");
   }  
 
   public onError() {

@@ -1,16 +1,21 @@
 import {Component} from '@angular/core';
 import { AuditService } from "./audits.service";
 
+declare let $:any;
+
 @Component({
   selector:'audit',
   templateUrl:'./audits.component.html',
   styleUrls:['./audits.component.css'],
   providers:[AuditService]
 })
-export class AuditComponent{
-  audits:any[]=[];  
+export class AuditsComponent{
+  audits:any[]=[]; 
+  selectedEmployees:any;
+  selectedUnit:any; 
   constructor(public as:AuditService){
     this.getAudits();
+    this.getEmployees();
   }
 
   getAudits(){
@@ -23,12 +28,39 @@ export class AuditComponent{
     })
   }
 
+  employees:any[];
+  getEmployees(){
+    this.as.getEmployees().subscribe((response:any)=>{
+      this.employees = response;
+    })
+  }
+
+  assignUnit(){
+    this.as.assignUnit(this.selectedUnit,this.selectedEmployees).subscribe((response:any)=>{
+      $('#myModal').modal('hide');
+    })
+  }
+
   getRowSpan(array:any){
     var rowSpan = 1;
     rowSpan += array.length;
     array.forEach((element) => {
       rowSpan += element.channels.length;
       // rowSpan += element.dataSources.length;
+    });
+    if(rowSpan == 1)
+      return rowSpan+1;
+    return rowSpan;
+  }
+
+  getRowSpanOfStakeholder(array){
+    var rowSpan = 1;
+    rowSpan += array.length;
+    array.forEach((element) => {
+      rowSpan += element.touchpoints.length;
+      element.touchpoints.forEach(innerElement => {
+        rowSpan += innerElement.channels.length;
+      });
     });
     if(rowSpan == 1)
       return rowSpan+1;

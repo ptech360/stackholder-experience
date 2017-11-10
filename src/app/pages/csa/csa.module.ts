@@ -13,20 +13,20 @@ import { SharedModule } from "../shared/shared.module";
     RouterModule.forChild([
       {
         path: '',
-        redirectTo:'config',
+        redirectTo:'audit',
         pathMatch:'full'
       },
       {
         path: '',
         component: CSAComponent,
-        children:[
-          {
-            path:'config',
-            loadChildren:'app/pages/csa/config/config.module#ConfigModule'
-          },
+        children:[          
           {
             path:'audit',
-            loadChildren:'app/pages/csa/audit/audits.module#AuditModule'
+            loadChildren:'app/pages/csa/audit/audit.module#AuditModule'
+          },
+          {
+            path:'de',
+            loadChildren:'app/pages/csa/de/de.module#DEModule'
           }
         ]
       }

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import { CustomHttpService } from "../../shared/shared.service";
+import { CustomHttpService } from "../../../shared/shared.service";
 
 @Injectable()
 export class ConfigService{
@@ -20,13 +20,13 @@ export class ConfigService{
   }
 
   public postAudit(data:any){
-    return this.http.post("https://hamdan.cloud.cms500.com/api/csa/audit",data)
+    return this.http.post("https://hamdan.cloud.cms500.com/api/employee/csa/audit",data)
     .map(this.extractData)
     .catch(this.handleError);
   }
 
   public getAudits(){
-    return this.http.get("https://hamdan.cloud.cms500.com/api/csa/audit")
+    return this.http.get("https://hamdan.cloud.cms500.com/api/employee/csa/audit")
     .map(this.extractData)
     .catch(this.handleError);
   }

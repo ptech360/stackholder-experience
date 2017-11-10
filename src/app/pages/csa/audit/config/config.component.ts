@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {DataService} from '../csa.service';
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from "@angular/forms";
 import { ConfigService } from "./config.service";
 @Component({
@@ -18,7 +17,7 @@ export class ConfigComponent{
   selectedDs:any={};
   checkedChannels:any[]=[];
   checkedDataSources:any[]=[];
-  constructor(private ds: DataService,
+  constructor(
     private fb: FormBuilder,
     public cs: ConfigService) {
     this.configForm = this.fb.group({
@@ -86,8 +85,8 @@ export class ConfigComponent{
 
   submitConfig(){
     console.log(this.configForm.value);
-    // this.cs.postAudit(this.configForm.value).subscribe((response:any)=>{
-    //   console.log(response);
-    // })
+    this.cs.postAudit(this.configForm.value).subscribe((response:any)=>{
+      console.log(response);
+    })
   }
 }

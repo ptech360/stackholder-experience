@@ -17,7 +17,7 @@ export const routes: Routes = [
     loadChildren:'app/pages/login/login.module#LoginModule'
   },
   {
-    path: 'csa',
+    path: 'home',
     loadChildren: 'app/pages/csa/csa.module#CSAModule'
   },
 ];
