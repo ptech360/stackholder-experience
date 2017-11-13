@@ -1,6 +1,6 @@
 <nav class="navbar first-nav navbar-fixed-top">
-  <div class="container-fluid">
-    <!-- <div class="navbar-header">
+    <div class="container-fluid">
+        <!-- <div class="navbar-header">
       <a class="navbar-brand" href="#">WebSiteName</a>
     </div>
     <ul class="nav navbar-nav">
@@ -8,55 +8,80 @@
       <li><a href="#">Page 1</a></li>
       <li><a href="#">Page 2</a></li>
     </ul> -->
-    <ul class="nav navbar-nav navbar-right">
-      <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <span class="glyphicon glyphicon-user"></span> 
               <strong>Pankaj</strong>
               <span class="glyphicon glyphicon-chevron-down"></span>
           </a>
-          <ul class="dropdown-menu">
-              <li>
-                  <div class="navbar-login">
-                      <div class="row">
-                          <div class="col-lg-4">
-                              <p class="text-center">
-                                <span class="glyphicon glyphicon-user icon-size"></span>
-                              </p>
-                          </div>
-                          <div class="col-lg-8">
-                              <p class="text-left"><strong>{{userDetails.firstName}} {{userDetails.lastName}}</strong></p>
-                              <p class="text-left small">{{userDetails.email}}</p>
-                              <p class="text-left">
-                                  <a href="#" class="btn btn-primary btn-block btn-sm">Profile</a>
-                              </p>
-                          </div>
-                      </div>
-                  </div>
-              </li>
-              <li class="divider"></li>
-              <li>
-                  <div class="navbar-login navbar-login-session">
-                      <div class="row">
-                          <div class="col-lg-12">
-                              <p>
-                                  <a href="#" class="btn btn-danger btn-block" (click)="logout()">Logout</a>
-                              </p>
-                          </div>
-                      </div>
-                  </div>
-              </li>
-          </ul>
-      </li>
-  </ul>
-  </div>
+                <ul class="dropdown-menu">
+                    <li>
+                        <div class="navbar-login">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <p class="text-center">
+                                        <span class="glyphicon glyphicon-user icon-size"></span>
+                                    </p>
+                                </div>
+                                <div class="col-lg-8">
+                                    <p class="text-left"><strong>{{userDetails.firstName}} {{userDetails.lastName}}</strong></p>
+                                    <p class="text-left small">{{userDetails.email}}</p>
+                                    <p class="text-left">
+                                        <a href="#" class="btn btn-primary btn-block btn-sm">Profile</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <div class="navbar-login navbar-login-session">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <p>
+                                        <a href="#" class="btn btn-danger btn-block" (click)="logout()">Logout</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
 </nav>
 <nav class="navbar second-nav-bar container">
-  <a class="navbar-brand" href="#"><img src="assets\images\HBMSU-home.jpg"></a>
-  <ul class="nav navbar-nav navbar-right">
-    <li routerLinkActive="active" ><a [routerLink]="['./audit']">Csa</a></li>
-    <li routerLinkActive="active" ><a [routerLink]="['./de']">Data Entry</a></li>
-    <li routerLinkActive="active" ><a [routerLink]="['./view']">Reports</a></li>
-  </ul>
+    <a class="navbar-brand" href="#"><img src="assets\images\HBMSU-home.jpg"></a>
+    <ul class="nav navbar-nav navbar-right">
+        <li routerLinkActive="active"><a [routerLink]="['./audit']">CSA</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['./de']">DATA ENTRY</a></li>
+        <li routerLinkActive="active"><a [routerLink]="['./view']">REPORTS</a></li>
+    </ul>
+</nav>
+
+<!-- new code -->
+<nav class="navbar new-nav-bar fluid-container">
+    <div class="row">
+        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+            <a class="navbar-brand" href="#"><img src="assets\images\HBMSU-home.jpg" class="navbar-brand"></a>
+        </div>
+    
+                <ul class="nav navbar-nav navbar-right">
+                <div class=" col-lg-2 col-md-2 item-one">
+                    <span class="glyphicon glyphicon-file"></span>
+                    <li routerLinkActive="active"><a [routerLink]="['./audit']">CSA</a></li>
+                </div>
+                <div class="col-lg-2 col-md-2 item-two">
+                        <span class="glyphicon glyphicon-book"></span>
+                    <li routerLinkActive="active"><a [routerLink]="['./de']">DATA ENTRY</a></li>
+                </div>
+                <div class="col-lg-2 col-md-2 item-three">
+                        <span class="glyphicon glyphicon-envelope"></span>
+                    <li routerLinkActive="active"><a [routerLink]="['./view']">REPORTS</a></li>
+                </div>
+            </ul>
+       
+    </div>
 </nav>
 <router-outlet></router-outlet>

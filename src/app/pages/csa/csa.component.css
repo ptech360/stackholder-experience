@@ -56,3 +56,37 @@
 .icon-size{
     font-size: 87px;
 }
+
+
+
+/* new css */
+.new-nav-bar{
+  border:1px solid #ebebeb;
+}
+
+
+.navbar-brand img{
+  margin-left: 11px;
+  width: 387px;
+  height: auto;
+
+}
+
+navbar-nav li {
+  font-size:20px;
+}
+
+
+ .glyphicon-file ,.glyphicon-book, .glyphicon-envelope {
+  font-size: 50px;
+}
+
+.item-one ,.item-two,.item-three{
+  font-size: 20px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+a{
+  text-decoration: none;
+}
