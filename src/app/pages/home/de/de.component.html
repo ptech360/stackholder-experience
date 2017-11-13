@@ -1,0 +1,147 @@
+<div class="container">
+  <h2 style="font-family:serif">Data Entry
+    <!-- <button class="btn btn-default pull-right" data-toggle="modal" data-target="#myModal">Fill finding</button> -->
+  </h2>
+  <hr>
+  <table class="table table-hover table-bordered">
+    <thead style="background: #0cc0db;text-align: center">
+      <tr>
+        <th>Unit</th>
+        <th>Stakeholder</th>
+        <th>Touch Point</th>
+        <th>Channel</th>
+        <th>Experience</th>
+        <th>Data Source</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let audit of audits;let a=index;">
+      <tr>
+        <td [attr.rowspan]="getRowSpanOfStakeholder(audit.stackholders)">{{audit.department}}</td>
+      </tr>
+      <ng-template ngFor let-stackholder [ngForOf]="audit.stackholders" let-s="index">
+        <tr>
+          <td [attr.rowspan]="stackholder.touchpoints.length + 2">{{stackholder.stackholder}}</td>
+        </tr>
+        <ng-template ngFor let-tp [ngForOf]="stackholder.touchpoints" let-t="index">
+          <tr>
+            <td>{{tp.touchPoint}}</td>
+            <td>
+              <ul style="list-style:none;">
+                <li style="float:left" *ngFor="let channel of tp.channels;let c = index;">{{channel.channel}},</li>
+              </ul>
+            </td>
+            <td>{{tp.experience}}</td>
+            <td>
+              <ul style="list-style:none;">
+                <li style="float:left" *ngFor="let dataSource of tp.dataSources;let c = index;">{{dataSource.dataSource}},</li>
+              </ul>
+            </td>
+            <td>
+              <button *ngIf="!tp.findings.length" class="btn btn-link" data-toggle="modal" data-target="#myModal" (click)="selectedTouchpoint = tp.touchpointId">Fill Finding</button>
+              <button *ngIf="tp.findings.length" class="btn btn-link" data-toggle="collapse" [attr.data-target]="'#findings' + t">view-findings</button>
+            </td>
+          </tr>
+          <tr [attr.id]="'findings' + t" class="collapse" >
+            <td colspan="6" style="width: 100%;position: relative;padding: 0px;">
+              <div class="panel panel-default" style="position: absolute;width: 100%;z-index: 1;background: white;">
+                <div class="panel-heading">
+                  <h4 class="panel-title">Findings
+                  <button class="pull-right" data-toggle="modal" data-target="#myModal" (click)="selectedTouchpoint = tp.touchpointId">Add More</button></h4>
+                </div>
+                <div class="panel-body">
+                  <ul style="list-style:none;padding:0px;">
+                    <li class="row" *ngFor="let find of tp.findings;let f = index;" style="padding: 5px;
+                    border: 1px solid gainsboro;
+                    border-radius: 5px;
+                    margin: 0px;
+                    margin-bottom: 5px;">
+                      <div class="col-sm-6">
+                        <p><b>Finding :</b>{{find.finding}}</p>
+                        <p><b>Category :</b>{{find.category}}</p>
+                        <p><b>Improvements :</b>{{find.improvements}}</p>                        
+                      </div>            
+                      <div class="col-sm-6">
+                        <p><b>Responsible Staff :</b>{{find.responsibleStaff}}</p>
+                        <p><b>Root Cause :</b>{{find.rootCause}}</p>
+                        <p><b>Source Required :</b>{{find.sourceRequired}}</p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-template>        
+      </ng-template>      
+    </tbody>
+  </table>
+  <!-- Modal -->
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Fill Finding</h4>
+        </div>
+        <form class="form-horizontal" [formGroup]="findingForm" (submit)="submitFinding()">
+        <div class="modal-body">
+          
+            <div class="form-group">
+              <label class="control-label col-sm-2">Finding : </label>
+              <div class="col-sm-10">
+                <textarea class="form-control" formControlName="finding"></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2">Category : </label>
+              <div class="col-sm-10">
+                <select class="form-control" formControlName="categoryId">
+                  <option *ngFor="let cat of categories;let c=index;" [value]="cat.id">{{cat.category}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2">Root Cause : </label>
+              <div class="col-sm-10">
+                <textarea class="form-control" formControlName="rootCause"></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2">Improvements : </label>
+              <div class="col-sm-10">
+                <textarea class="form-control" formControlName="improvements"></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2">Responsible Staff : </label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" formControlName="responsibleStaff">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2">Deadline : </label>
+              <div class="col-sm-10">
+                <input type="date" class="form-control" formControlName="deadline">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2">Source Required : </label>
+              <div class="col-sm-10">
+                <textarea class="form-control" formControlName="sourceRequired"></textarea>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="type" class="btn btn-success">Submit</button>            
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+      
+      </div>
+
+    </div>
+  </div>
+</div>

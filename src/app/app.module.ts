@@ -19,7 +19,7 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: 'app/pages/csa/csa.module#CSAModule',canActivate:[AuthGuard]
+    loadChildren: 'app/pages/home/home.module#HomeModule',canActivate:[AuthGuard]
   },
 ];
 

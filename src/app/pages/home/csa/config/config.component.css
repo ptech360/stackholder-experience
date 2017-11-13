@@ -1,0 +1,63 @@
+.checkbox-list{
+  position: relative;
+}
+
+.checkbox-list>ul{
+  list-style:none;
+  padding-left:0px;
+  border: 1px solid #0686e1;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  background: white;
+}
+
+.checkbox-list>ul>li{
+  padding-left: 5px; 
+}
+.checkbox-list>ul>li:hover, .checkbox-list>ul>li:focus{
+  background: #0686e1;
+  color: white;
+}
+
+.checkbox-list>ul>li>label>input {display:none;}
+
+.checkbox-list>ul>li>label>span{
+  /* padding: 0px 2px 0px 2px;
+  border: 1px solid;
+  border-radius: 3px; */
+  cursor: pointer;
+}
+
+.is-present:before {
+  content: '\00a0 \00a0';  
+}
+
+label>input:checked + .is-present:before{
+  content: '\2713';
+}
+
+
+.checkbox-list>ul>li>label>input:checked + .is-present:before{
+  content: '\2713';
+}
+
+/* .checkbox-list>ul>li>label>input:checked:checked + .is-present{
+  background: #4af64a;  
+} */
+
+.checkbox-list>ul>li>label>input:checked:disabled + .is-present{
+  cursor:not-allowed;
+}
+
+.checkbox-list>ul>li>label{
+  width: 100%;
+  /* float: right;
+  margin-bottom: 0px;
+  margin-right: 5px; */
+}
+
+.checkbox-list>ul>li>label>span{
+  float: right;
+  margin-right: 5px;
+}
