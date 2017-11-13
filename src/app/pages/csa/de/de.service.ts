@@ -10,11 +10,22 @@ import { CustomHttpService } from "../../shared/shared.service";
 @Injectable()
 export class DEAuditService{
   constructor(public http: CustomHttpService){
-    this.getAudits();
+  }
+
+  public getPrerequisite(){
+    return this.http.get("https://hamdan-nxtlife.ind-cloud.everdata.com/api/prerequisite")
+    .map(this.extractData)
+    .catch(this.handleError);
   }
 
   public getAudits(){
-    return this.http.get("https://hamdan.cloud.cms500.com/api/employee/de/audits")
+    return this.http.get("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/de/audits")
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
+  public postFinding(data:any){
+    return this.http.post("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/de/finding",data)
     .map(this.extractData)
     .catch(this.handleError);
   }

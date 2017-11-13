@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 
 import { Routes, RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
+import { AuthGuard } from "./pages/shared/auth.gaurd";
 
 export const routes: Routes = [
   {
@@ -18,7 +19,7 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: 'app/pages/csa/csa.module#CSAModule'
+    loadChildren: 'app/pages/csa/csa.module#CSAModule',canActivate:[AuthGuard]
   },
 ];
 
@@ -30,7 +31,7 @@ export const routes: Routes = [
     BrowserModule, 
     RouterModule.forRoot(routes, { useHash: true, })
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

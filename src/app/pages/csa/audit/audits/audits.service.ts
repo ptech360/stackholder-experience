@@ -14,19 +14,19 @@ export class AuditService{
   }
 
   public getAudits(){
-    return this.http.get("https://hamdan.cloud.cms500.com/api/employee/csa/audits")
+    return this.http.get("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/csa/audits")
     .map(this.extractData)
     .catch(this.handleError);
   }
 
   public getEmployees(){
-    return this.http.get("https://hamdan.cloud.cms500.com/api/employee/csa/employees")
+    return this.http.get("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/csa/employees")
     .map(this.extractData)
     .catch(this.handleError);
   }
 
   public assignUnit(unitId:any,employeeIds:any){
-    return this.http.post("https://hamdan.cloud.cms500.com/api/employee/csa/assign/unit/"+unitId+"/de",{de:employeeIds})
+    return this.http.post("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/csa/assign/unit/"+unitId+"/de",{de:employeeIds})
   }
 
   private extractData(res: Response) {

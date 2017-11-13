@@ -13,7 +13,7 @@ export class AuthService{
   }
 
   public login(data){
-    return this.http.post("https://hamdan.cloud.cms500.com/api/login",data)
+    return this.http.post("https://hamdan-nxtlife.ind-cloud.everdata.com/api/login",data)
     .map(this.extractData)
     .catch(this.handleError);
   }

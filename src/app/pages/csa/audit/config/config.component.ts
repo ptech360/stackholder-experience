@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from "@angular/forms";
 import { ConfigService } from "./config.service";
+import { Location } from '@angular/common';
 @Component({
   selector:'config',
   templateUrl:'./config.component.html',
@@ -19,7 +20,8 @@ export class ConfigComponent{
   checkedDataSources:any[]=[];
   constructor(
     private fb: FormBuilder,
-    public cs: ConfigService) {
+    public cs: ConfigService,
+    public _location:Location) {
     this.configForm = this.fb.group({
       unitId: ['',Validators.required],
       stackholderId: ['',Validators.required],
@@ -42,6 +44,12 @@ export class ConfigComponent{
     })
   }
 
+  getStakeholder(unitId:any){
+    this.cs.getStakeholder(unitId).subscribe((response:any)=>{
+      this.stackholders = response;
+    })
+  }
+
   removeTouchPoint(index:any){
     const touchpoints = <FormArray>this.configForm.controls["touchpoints"];
     touchpoints.removeAt(index);
@@ -56,8 +64,8 @@ export class ConfigComponent{
     return this.fb.group({
       touchPoint: ['',Validators.required],
       experience: ['',Validators.required],
-      channelIds: new FormArray([]),
-      dataSourceIds: new FormArray([]),        
+      channelIds:[''],
+      dataSourceIds:[''],        
     })
   }
 
@@ -87,6 +95,7 @@ export class ConfigComponent{
     console.log(this.configForm.value);
     this.cs.postAudit(this.configForm.value).subscribe((response:any)=>{
       console.log(response);
+      this._location.back();
     })
   }
 }

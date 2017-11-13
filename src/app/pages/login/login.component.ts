@@ -24,6 +24,7 @@ export class LoginComponent{
     console.log(this.loginForm.value);
     this.auth.login(this.loginForm.value).subscribe((response:any)=>{
       this.storageService.storeData("access_token", response.access_token);
+      this.storageService.storeData("userDetails",response.userDetails);
       console.log(response);
       this.onSuccess();
     })

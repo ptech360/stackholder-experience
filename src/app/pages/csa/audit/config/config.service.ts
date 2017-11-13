@@ -14,19 +14,25 @@ export class ConfigService{
   }
 
   public getPrerequisite(){
-    return this.http.get("https://hamdan.cloud.cms500.com/api/prerequisite")
+    return this.http.get("https://hamdan-nxtlife.ind-cloud.everdata.com/api/prerequisite")
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
+  public getStakeholder(unitId:any){
+    return this.http.get("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/csa/unit/"+unitId+"/stackholders")
     .map(this.extractData)
     .catch(this.handleError);
   }
 
   public postAudit(data:any){
-    return this.http.post("https://hamdan.cloud.cms500.com/api/employee/csa/audit",data)
+    return this.http.post("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/csa/audit",data)
     .map(this.extractData)
     .catch(this.handleError);
   }
 
   public getAudits(){
-    return this.http.get("https://hamdan.cloud.cms500.com/api/employee/csa/audit")
+    return this.http.get("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/csa/audit")
     .map(this.extractData)
     .catch(this.handleError);
   }
