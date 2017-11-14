@@ -28,8 +28,8 @@ export class ConfigComponent{
       touchpoints: this.fb.array([this.fb.group({
         touchPoint: ['',Validators.required],
         experience: ['',Validators.required],
-        channelIds:[this.checkedChannels,Validators.required],
-        dataSourceIds:[this.checkedDataSources,Validators.required],       
+        channelIds:this.fb.array([]),
+        dataSourceIds:this.fb.array([])   
       })])
     });
     this.getPrerequisite();
@@ -64,8 +64,8 @@ export class ConfigComponent{
     return this.fb.group({
       touchPoint: ['',Validators.required],
       experience: ['',Validators.required],
-      channelIds:[''],
-      dataSourceIds:[''],        
+      channelIds:this.fb.array([]),
+      dataSourceIds:this.fb.array([])        
     })
   }
 
@@ -73,22 +73,26 @@ export class ConfigComponent{
     this.configForm.reset();
   }
 
-  getChannels(event:any){
-    this.checkedChannels = [];
-    Object.keys(this.selectedChannel).forEach(element => {
-      if(this.selectedChannel[element]) {
-        this.checkedChannels.push(element);
-      }      
-    });    
+  getChannels(touchPoint:any,channel:any, isChecked: boolean){
+    const formArray = <FormArray>touchPoint.controls.channelIds;
+    
+      if(isChecked) {
+        formArray.push(new FormControl(channel));
+      } else {
+        let index = formArray.controls.findIndex(x => x.value == channel)
+        formArray.removeAt(index);
+      }    
   }
 
-  getdataSources(event:any){
-    this.checkedDataSources = [];
-    Object.keys(this.selectedDs).forEach(element => {
-      if(this.selectedDs[element]) {
-        this.checkedDataSources.push(element);
-      }      
-    });
+  getdataSources(touchPoint:any,dataSource:any, isChecked: boolean){
+    const formArray = <FormArray>touchPoint.controls.dataSourceIds;
+    
+      if(isChecked) {
+        formArray.push(new FormControl(dataSource));
+      } else {
+        let index = formArray.controls.findIndex(x => x.value == dataSource)
+        formArray.removeAt(index);
+      } 
   }
 
   submitConfig(){
