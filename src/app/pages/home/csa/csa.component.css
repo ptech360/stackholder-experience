@@ -1,0 +1,26 @@
+h1{
+    color: #414141;
+    text-align: center;
+    font-weight: 100;
+    font-size: 38px;
+}
+
+.btn-new{
+    width: 13%;
+    border-radius:0px;
+    border-color: #ed2d73;
+    color: #fffbfb;
+    margin: 10px;
+    font-size: 19px;
+    font-weight: 200;
+    background: #ed2d73;
+    transition:  1s;
+}
+
+.btn-new:hover{
+    background: transparent;
+    color:black;
+}
+.glyphicon-plus{
+    padding: 10px;
+}

@@ -56,3 +56,76 @@
 .icon-size{
     font-size: 87px;
 }
+
+/* new code */
+
+.navbar-brand img{
+  width: 460px;
+}
+
+.new-nav-bar{
+ border: 1px solid #ebebeb;
+}
+
+.csa-detail{
+  text-align:center;
+  font-size: 30px;
+  padding-top: 22px;
+  border-left: 1px solid #ebebeb;
+  border-right: 1px solid #ebebeb;
+  color:#ff5931;
+}
+.csa-detail:focus{
+    outline: -webkit-focus-ring-color auto 0px;
+    outline-color: -webkit-focus-ring-color;
+    outline-style: auto;
+    outline-width: 0px;
+}
+
+
+.data-detail{
+  text-align:center;
+  font-size: 30px;
+  padding-top: 22px;
+  border-right: 1px solid #ebebeb;
+  color: #ff5931;
+}
+
+.data-detail:focus{
+      outline: -webkit-focus-ring-color auto 0px;
+      outline-color: -webkit-focus-ring-color;
+      outline-style: auto;
+      outline-width: 0px;
+  }
+
+.report-detail{
+  text-align:center;
+  font-size: 30px;
+  padding-top: 22px;
+  color: #ff5931;
+}
+
+.report-detail:focus{
+      outline: -webkit-focus-ring-color auto 0px;
+      outline-color: -webkit-focus-ring-color;
+      outline-style: auto;
+      outline-width: 0px;
+  }
+
+.glyphicon-asterisk{
+  color: #ff5931;
+  font-size: 30px!important;
+  transition: 1s;
+}
+
+.glyphicon-compressed{
+  color: #ff5931;
+  font-size: 30px!important;
+  transition: 1s;
+}
+
+.glyphicon-file{
+  color: #ff5931;
+  font-size: 30px!important;
+  transition: 1s;
+}
