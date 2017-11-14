@@ -25,7 +25,11 @@ import { SharedModule } from "../shared/shared.module";
           },
           {
             path:'de',
-            loadChildren:'app/pages/home/de/de.module.ts#DEModule'
+            loadChildren:'app/pages/home/de/de.module#DEModule'
+          },
+          {
+            path:'report',
+            loadChildren:'app/pages/home/reports/report.module#ReportModule'
           }
         ]
       }
