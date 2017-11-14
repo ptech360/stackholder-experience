@@ -18,14 +18,14 @@
 }
 
 .second-nav-bar{
-  border: 1px solid #ebebeb;
+  /* border: 1px solid #ebebeb; */
   border-top: none;
-  height: 95px;
+  height: 55px;
   margin-top: 50px;
 }
 .second-nav-bar a img {
   margin-left: 11px;
-  width: 387px;
+  width: 345px;
   height: auto;
 }
 
@@ -63,18 +63,31 @@
   width: 460px;
 }
 
-.new-nav-bar{
+/* .new-nav-bar{
  border: 1px solid #ebebeb;
-}
+} */
 
 .csa-detail{
   text-align:center;
-  font-size: 30px;
-  padding-top: 22px;
+  font-size: 20px;
+  padding: 10px;
   border-left: 1px solid #ebebeb;
   border-right: 1px solid #ebebeb;
-  color:#ff5931;
+  color:white;
+  cursor:pointer;
+  border-bottom: 1px solid #ebebeb;
+  background: #29aecc;
 }
+.csa-detail span{
+  padding-left: 10px;
+}
+
+.csa-deatil:active{
+  background: white;
+  color:#103a71;
+  border: 1 px solid #103a71;
+}
+
 .csa-detail:focus{
     outline: -webkit-focus-ring-color auto 0px;
     outline-color: -webkit-focus-ring-color;
@@ -85,10 +98,19 @@
 
 .data-detail{
   text-align:center;
-  font-size: 30px;
-  padding-top: 22px;
+  font-size: 20px;
+  padding: 10px;
   border-right: 1px solid #ebebeb;
-  color: #ff5931;
+  color: white;
+  cursor:pointer;
+  border-bottom: 1px solid #ebebeb;
+  background: #29aecc;
+  border-left: 1px solid #ebebeb;
+  border-right: 1px solid #ebebeb;
+  
+}
+.data-detail span{
+  padding-left:10px;
 }
 
 .data-detail:focus{
@@ -100,11 +122,18 @@
 
 .report-detail{
   text-align:center;
-  font-size: 30px;
-  padding-top: 22px;
-  color: #ff5931;
+  font-size: 20px;
+  padding: 10px;
+  color: white;
+  cursor:pointer;
+  border-bottom: 1px solid #ebebeb;
+  border-left: 1px solid #ebebeb;
+  border-right: 1px solid #ebebeb;
+  background: #29aecc;
 }
-
+.report-detail span{
+  padding-left:10px;
+}
 .report-detail:focus{
       outline: -webkit-focus-ring-color auto 0px;
       outline-color: -webkit-focus-ring-color;
@@ -112,20 +141,20 @@
       outline-width: 0px;
   }
 
-.glyphicon-asterisk{
-  color: #ff5931;
-  font-size: 30px!important;
+.glyphicon-list-alt{
+  color: white;
+  font-size: 18px!important;
   transition: 1s;
 }
 
 .glyphicon-compressed{
-  color: #ff5931;
-  font-size: 30px!important;
+  color: white;
+  font-size: 18px!important;
   transition: 1s;
 }
 
 .glyphicon-file{
-  color: #ff5931;
-  font-size: 30px!important;
+  color: white;
+  font-size: 18px!important;
   transition: 1s;
 }

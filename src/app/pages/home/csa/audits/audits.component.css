@@ -6,4 +6,36 @@
 
 .badge{
     border-radius: 0px;
+    cursor:pointer;
+}
+.width-size{
+    width: 17%;
+}
+
+.thead-dark  th{
+text-align: center;
+}
+
+tbody td{
+    text-align: center;
+}
+
+.table-bordered{
+          border: 1px solid #092a55;
+  
+}
+
+.table-bordered th{
+    border: 1px solid #092a55;
+}
+
+tbody td[rowspan] {
+    vertical-align: middle;
+    text-align: center;
+  }
+
+
+.list li{
+    list-style: none;
+    text-align: initial;
 }

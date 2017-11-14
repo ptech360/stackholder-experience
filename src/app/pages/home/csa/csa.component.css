@@ -6,11 +6,10 @@ h1{
 }
 
 .btn-new{
-    width: 13%;
     border-radius:0px;
     border-color: #ed2d73;
     color: #fffbfb;
-    margin: 10px;
+    margin: 15px;
     font-size: 19px;
     font-weight: 200;
     background: #ed2d73;
@@ -22,5 +21,5 @@ h1{
     color:black;
 }
 .glyphicon-plus{
-    padding: 10px;
+    padding: 5px;
 }

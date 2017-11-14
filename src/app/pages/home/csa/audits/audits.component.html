@@ -1,49 +1,3 @@
-<table class="table table-hover table-bordered">
-  <thead style="background: #0cc0db;text-align: center">
-    <tr>
-      <th>Unit</th>
-      <th>Stakeholder</th>
-      <th>Touch Point</th>
-      <th>Channel</th>
-      <th>Experience</th>
-      <th>Data Source</th>
-      <!-- <th></th> -->
-    </tr>
-  </thead>
-  <tbody *ngFor="let audit of audits;let a=index;">
-    <tr>
-      <td [attr.rowspan]="getRowSpanOfStakeholder(audit.stackholders)">{{audit.department}}<br>
-        <button class="btn btn-link" data-toggle="modal" data-target="#myModal" (click)="selectedUnit = audit.departmentId">Assign</button><br>
-      </td>
-    </tr>
-    <ng-template ngFor let-stackholder [ngForOf]="audit.stackholders" let-s="index">
-      <tr>
-        <td [attr.rowspan]="stackholder.touchpoints.length + 1">{{stackholder.stackholder}}</td>
-      </tr>
-      <ng-template ngFor let-tp [ngForOf]="stackholder.touchpoints" let-t="index">
-        <tr>
-          <td>{{tp.touchPoint}}</td>
-          <td>
-            <ul style="list-style:none;">
-              <li style="float:left" *ngFor="let channel of tp.channels;let c = index;">{{channel.channel}},</li>
-            </ul>
-          </td>
-          <td>{{tp.experience}}</td>
-          <td>
-            <ul style="list-style:none;">
-              <li style="float:left" *ngFor="let dataSource of tp.dataSources;let c = index;">{{dataSource.dataSource}},</li>
-            </ul>
-          </td>
-        </tr>
-      </ng-template>
-    </ng-template>
-    <!-- <tr>
-        <td>
-          <button class="btn btn-link" data-toggle="modal" data-target="#myModal" (click)="selectedUnit = audit.departmentId">Assign</button>
-        </td>
-      </tr> -->
-  </tbody>
-</table>
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -78,11 +32,11 @@
 <!-- new code -->
 
 <table class="table table-responsive  table-bordered">
-   <thead class="thead-dark ">
+   <thead class="thead-dark  ">
       <tr>
           <th>Unit</th>
           <th>Stakeholder</th>
-          <th>Touch Point</th>
+          <th class="width-size">Touch Point</th>
           <th>Channel</th>
           <th>Experience</th>
           <th>Data Source</th>
@@ -103,13 +57,13 @@
           <tr>
             <td>{{tp.touchPoint}}</td>
             <td>
-              <ul style="list-style:none;">
+              <ul class="list">
                 <li style="float:left" *ngFor="let channel of tp.channels;let c = index;">{{channel.channel}},</li>
               </ul>
             </td>
             <td>{{tp.experience}}</td>
             <td>
-              <ul style="list-style:none;">
+              <ul class="list">
                 <li style="float:left" *ngFor="let dataSource of tp.dataSources;let c = index;">{{dataSource.dataSource}},</li>
               </ul>
             </td>
