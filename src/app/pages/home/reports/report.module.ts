@@ -1,23 +1,24 @@
 import {NgModule} from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { DEComponent } from "./de.component";
+import { ReportComponent } from "./report.component";
 import { SharedModule } from "../../shared/shared.module";
 
 @NgModule({
   declarations: [
-    DEComponent
+    ReportComponent
   ],
   imports: [
     SharedModule,
     RouterModule.forChild([
       {
         path: '',
-        component: DEComponent
+        component: ReportComponent
       }
     ])
   ],  
 })
-export class DEModule{
+export class ReportModule{
+  
   constructor(){
     
   }

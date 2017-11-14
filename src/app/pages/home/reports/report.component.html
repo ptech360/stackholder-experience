@@ -1,0 +1,79 @@
+<div class="container">
+  <h2 style="font-family:serif">Reports
+  </h2>
+  <hr>
+  <table class="table table-hover table-bordered">
+    <thead style="background: #0cc0db;text-align: center">
+      <tr>
+        <th>Unit</th>
+        <th>Stakeholder</th>
+        <th>Touch Point</th>
+        <th>Experience</th>
+        <th>Channel</th>
+        <th>Data Source</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let audit of audits;let a=index;">
+      <tr>
+        <td [attr.rowspan]="getRowSpanOfStakeholder(audit.stackholders) + 1">{{audit.department}}</td>
+      </tr>
+      <ng-template ngFor let-stackholder [ngForOf]="audit.stackholders" let-s="index">
+        <tr>
+          <td [attr.rowspan]="stackholder.touchpoints.length * 2 + 1">{{stackholder.stackholder}}</td>
+        </tr>
+        <ng-template ngFor let-tp [ngForOf]="stackholder.touchpoints" let-t="index">
+          <tr>
+            <td rowspan="1">{{tp.touchPoint}}</td>
+            <td rowspan="1">
+              <ul style="list-style:none;">
+                <li style="float:left" *ngFor="let channel of tp.channels;let c = index;">{{channel.channel}},</li>
+              </ul>
+            </td>
+            <td rowspan="1">{{tp.experience}}</td>
+            <td rowspan="1">
+              <ul style="list-style:none;">
+                <li style="float:left" *ngFor="let dataSource of tp.dataSources;let c = index;">{{dataSource.dataSource}},</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="5" style="width: 100%;position: relative;padding: 0px;" *ngIf="tp.findings.length">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">Findings
+                  </h4>
+                </div>
+                <div class="panel-body">
+                  <ul style="list-style:none;padding:0px;">
+                    <li class="row" *ngFor="let find of tp.findings;let f = index;" style="padding: 5px;
+                      border: 1px solid gainsboro;
+                      border-radius: 5px;
+                      margin: 0px;
+                      margin-bottom: 5px;">
+                      <div class="col-sm-6">
+                        <p>
+                          <b>Finding :</b>{{find.finding}}</p>
+                        <p>
+                          <b>Category :</b>{{find.category}}</p>
+                        <p>
+                          <b>Improvements :</b>{{find.improvements}}</p>
+                      </div>
+                      <div class="col-sm-6">
+                        <p>
+                          <b>Responsible Staff :</b>{{find.responsibleStaff}}</p>
+                        <p>
+                          <b>Root Cause :</b>{{find.rootCause}}</p>
+                        <p>
+                          <b>Source Required :</b>{{find.sourceRequired}}</p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </ng-template>
+    </tbody>
+  </table>
+</div>

@@ -15,6 +15,12 @@ export class LoginComponent{
 
   loginForm:FormGroup;
   constructor(private fb:FormBuilder,private auth:AuthService,private storageService:StorageService,private router:Router){
+
+    if (localStorage.getItem('userDetails')) {
+      // logged in so return true
+      this.onSuccess();
+    }
+
     this.loginForm = this.fb.group({
       username:['',Validators.required],
       password:['',Validators.required]

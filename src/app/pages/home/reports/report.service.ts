@@ -5,28 +5,17 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import { CustomHttpService } from "../../../shared/shared.service";
+import { CustomHttpService } from "../../shared/shared.service";
 
 @Injectable()
-export class AuditService{
+export class ReportService{
   constructor(public http: CustomHttpService){
-
   }
 
   public getAudits(){
-    return this.http.get("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/csa/audits")
+    return this.http.get("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/audits/reports")
     .map(this.extractData)
     .catch(this.handleError);
-  }
-
-  public getEmployees(){
-    return this.http.get("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/csa/employees")
-    .map(this.extractData)
-    .catch(this.handleError);
-  }
-
-  public assignUnit(unitId:any,employeeIds:any){
-    return this.http.post("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/csa/assign/unit/"+unitId+"/de",{de:employeeIds})
   }
 
   private extractData(res: Response) {

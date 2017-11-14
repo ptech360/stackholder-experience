@@ -51,17 +51,17 @@
         </ul>
     </div>
 </nav>
-<nav class="navbar second-nav-bar container">
-    <a class="navbar-brand" href="#"><img src="assets\images\HBMSU-home.jpg"></a>
-    <ul class="nav navbar-nav navbar-right">
-        <li routerLinkActive="active"><a [routerLink]="['./csa']">Csa</a></li>
-        <li routerLinkActive="active"><a [routerLink]="['./de']">Data Entry</a></li>
-        <li routerLinkActive="active"><a [routerLink]="['./view']">Reports</a></li>
-    </ul>
-</nav>
+<!-- <nav class="navbar second-nav-bar container">
+<a class="navbar-brand" href="#"><img src="assets\images\HBMSU-home.jpg"></a>
+<ul class="nav navbar-nav navbar-right">
+  <li routerLinkActive="active" ><a [routerLink]="['./csa']">Csa</a></li>
+  <li routerLinkActive="active" ><a [routerLink]="['./de']">Data Entry</a></li>
+  <li routerLinkActive="active" ><a [routerLink]="['./report']">Reports</a></li>
+</ul>
+</nav> -->
 <!-- new code -->
 
-<nav class="navbar new-nav-bar fluid-container">
+<nav class="navbar new-nav-bar fluid-container second-nav-bar">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <a class="navbar-brand" href="#"><img src="assets\images\HBMSU-home.jpg"></a>
@@ -79,13 +79,12 @@
             </div>
         </div>
         <div class="col-lg-2 col-md-2 co-sm-6 col-xs-6" routerLinkActive="active">
-            <div class="report-detail" [routerLink]="['./view']">
+            <div class="report-detail" [routerLink]="['./report']">
                 <i class="glyphicon glyphicon-file"></i>
                 <h4>REPORTS</h4>
             </div>
         </div>
     </div>
+
 </nav>
-
-
 <router-outlet></router-outlet>
