@@ -1,0 +1,25 @@
+.border-all{
+    border: 1px solid black;
+    margin-top: 85px;
+}
+.header-text{
+    font-family: Raleway;
+    text-align: center;
+   
+}
+.the-legend {
+    border-style: none;
+    border-width: 0;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 0;
+    width: auto;
+    padding: 0 10px;
+    border: 1px solid #e0e0e0;
+  text-align:center;
+  
+}
+.the-fieldset {
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+}

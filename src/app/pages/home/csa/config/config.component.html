@@ -1,10 +1,12 @@
-<div class="container">
+<div class="container"><br><br><br><br><br>
   <!-- <div class="row">
     <div class="col-sm-offset-2 col-sm-10"> -->
-    <h2 style="font-family:serif">Configuration</h2>
-    <hr>
     <!-- </div>
   </div> -->
+  <fieldset class="the-fieldset">
+    <legend class="the-legend">CONFIGURATION</legend>
+
+
   <form class="form-horizontal" [formGroup]="configForm" (submit)="submitConfig()">
     <div class="form-group">
       <label class="control-label col-sm-2" for="unit">Unit : </label>
@@ -78,4 +80,5 @@
       </div>
     </div>    
   </form>
+</fieldset>
 </div>

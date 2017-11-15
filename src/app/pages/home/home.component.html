@@ -61,30 +61,30 @@
 </nav> -->
 <!-- new code -->
 
-<nav class="navbar new-nav-bar fluid-container second-nav-bar">
-    <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-            <a class="navbar-brand" href="#"><img src="assets\images\HBMSU-home.jpg"></a>
-        </div>
-        <div class="col-lg-2 col-md-2 co-sm-6 col-xs-6 csa-deatil" routerLinkActive="active" >
-            <div class="csa-detail"  [routerLink]="['./csa']">
-                <i class="glyphicon glyphicon-list-alt"><span>CSA</span></i>
-                <!-- <h4>CSA</h4> -->
+<nav class="navbar new-nav-bar container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <a class="navbar-brand" href="#"><img src="assets\images\HBMSU-home.jpg"></a>
             </div>
-        </div>
-        <div class="col-lg-2 col-md-2 co-sm-6 col-xs-6" routerLinkActive="active">
-            <div class="data-detail" [routerLink]="['./de']">
-                <i class="glyphicon glyphicon-compressed"><span>DATA-ENTRY</span></i>
-               
+            <div class="col-lg-2 col-md-2 co-sm-6 col-xs-6" routerLinkActive="active" style="padding: 0px;" >
+                <div class="csa-detail"  [routerLink]="['./csa']">
+                    <img src="assets\images\data.png" class="data-img"/>
+                    <h5 class="font-detail">CSA</h5>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-2 col-md-2 co-sm-6 col-xs-6" routerLinkActive="active">
-            <div class="report-detail" [routerLink]="['./report']">
-                <i class="glyphicon glyphicon-file"><span>REPORTS</span></i>
-                
+            <div class="col-lg-2 col-md-2 co-sm-6 col-xs-6" routerLinkActive="active"  style="padding: 0px;" >
+                <div class="csa-detail" [routerLink]="['./de']">
+                    <img src="assets\images\data1.png" class="data-img"/>
+                    <h5 class="font-detail">DATA ENTRY</h5>
+                </div>
             </div>
-        </div>
-    </div>
+            <div class="col-lg-2 col-md-2 co-sm-6 col-xs-6" routerLinkActive="active"  style="padding: 0px;" >
+                <div class="csa-detail" [routerLink]="['./view']">
+                    <img src="assets\images\report.png" class="data-img"/>
+                   <h5 class="font-detail">REPORTS</h5>
 
-</nav>
+                </div>
+            </div>
+       </div>
+     </nav>
 <router-outlet></router-outlet>

@@ -1,12 +1,19 @@
 .thead-dark{
     background: #103a71;
     color: white;
-    font-size: 18px;
+    font-size: 15px;
+    font-family: Raleway;
+    font-weight: 100;
 }
 
 .badge{
-    border-radius: 0px;
+    border-radius:0px;
     cursor:pointer;
+    background-color: #103a71; 
+}
+
+.badge:hover{
+    color:#ff5931;
 }
 .width-size{
     width: 17%;
@@ -33,9 +40,47 @@ tbody td[rowspan] {
     vertical-align: middle;
     text-align: center;
   }
-
+.table-gap{
+    background-color: #29aecc; 
+    padding-top: 0px;
+    padding-bottom: 4px
+}
 
 .list li{
     list-style: none;
     text-align: initial;
+}
+
+.modal-content{
+    border-radius: 0px!important;
+}
+
+.modal-title{
+    text-align: center;
+   color:white;
+}
+.modal-header{
+    background:#145766;
+}
+
+.btn-success,.btn-default{
+    border-radius: 0px;
+}
+
+.close{
+  opacity: 1;
+  color: white
+}
+/* .assign-img{
+    width:30%;
+    cursor: pointer;
+} */
+
+.glyphicon-arrow-right{
+    padding-left: 5px;
+   
+}
+
+.glyphicon-arrow-right:hover{
+color: #ff5931;
 }

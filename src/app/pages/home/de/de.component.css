@@ -1,0 +1,61 @@
+.table-responsive{
+    margin-top: 35px;
+}
+
+.thead-dark{
+    background: #103a71;
+    color: white;
+    font-size: 18px;
+}
+
+.thead-dark  th{
+    text-align: center;
+    }
+
+tbody td{
+    text-align: center;
+
+}
+
+.table-bordered{
+    border: 1px solid #092a55;
+
+}
+.table-bordered th{
+    border: 1px solid #092a55;
+}
+
+tbody td[rowspan] {
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  .list li{
+    list-style: none;
+    text-align: initial;
+}
+
+.modal-header{
+  background:#145766;    
+}
+
+.close{
+    opacity: 1;
+    color: white
+  }
+
+.modal-content{
+    border-radius: 0px;
+}
+
+.modal-title{
+    text-align: center;
+    color: white;
+}
+.btn-success,.btn-default{
+    border-radius: 0px;
+}
+.btn-link{
+    background: #e4e4e4;
+    border: 1px   #e4e4e4;
+}
