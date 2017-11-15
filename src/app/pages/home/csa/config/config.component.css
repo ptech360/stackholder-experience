@@ -1,25 +1,58 @@
-.border-all{
-    border: 1px solid black;
-    margin-top: 85px;
-}
-.header-text{
-    font-family: Raleway;
-    text-align: center;
-   
-}
+ 
 .the-legend {
     border-style: none;
-    border-width: 0;
-    font-size: 14px;
+    border-width: 0px;
+    font-size: 30px;
     line-height: 20px;
-    margin-bottom: 0;
-    width: auto;
-    padding: 0 10px;
-    border: 1px solid #e0e0e0;
-  text-align:center;
-  
+    margin-bottom: 31px;
+    width: 35%;
+    padding: 19px 10px;
+    border: 1px solid #29aecc;
+    text-align: center;
+    height: 58px;
+    background: #29aecc;
+    color: white;
+    font-family:Raleway;
 }
 .the-fieldset {
-    border: 1px solid #e0e0e0;
+    border: 1px solid #103a71;
     padding: 10px;
+}
+.form-control{
+    width:70%;
+    font-family: Raleway;
+}
+
+.nav-tabs{
+    border-bottom:0 solid #ddd;
+}
+.btn-add{
+    background:#29aecc;
+    color: white;
+    font-family: Raleway;
+    border: 1px solid #29aecc;
+}
+.btn-add[disabled]:hover{
+    background:#103a71;
+    color: white;
+}
+
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+    outline: 5px auto -webkit-focus-ring-
+}
+
+input[type=checkbox] {
+    zoom: 1.5;
+    margin: 0px 0 0;
+    margin-left: -16px;
+}
+
+.myinput[type="checkbox"]:before{
+    border: 1px solid #106ABE;
+    background: #FFF;
+}
+
+.myinput[type="checkbox"]:after{
+    border: 1px solid #0C44BD;
+    background: #FFF;
 }

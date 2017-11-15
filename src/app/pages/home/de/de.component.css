@@ -5,7 +5,8 @@
 .thead-dark{
     background: #103a71;
     color: white;
-    font-size: 18px;
+    font-size: 15px;
+    font-family: Raleway;
 }
 
 .thead-dark  th{
@@ -55,7 +56,61 @@ tbody td[rowspan] {
 .btn-success,.btn-default{
     border-radius: 0px;
 }
-.btn-link{
-    background: #e4e4e4;
-    border: 1px   #e4e4e4;
+.btn-finding{
+    background: #103a71;
+    border: 1px #103a71;
+    color: white;
+}
+.table-gap{
+    background-color:#29aecc; 
+    padding-top: 0px;
+    padding-bottom: 4px
+}
+.panel-body{
+    border-bottom: 3px solid #29aecc;
+}
+.panel-finding{
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    background: white;
+}
+.panel-heading{
+    background:#29aecc;
+    border-color: 1 px solid #29aecc; 
+    padding: 14px 15px;
+}
+.panel-title{
+    color: white;
+    font-family: Raleway;
+    font-size: 18px;
+    font-weight: bolder;
+}
+.btn-add{
+    float: right;
+    font-size: 28px;
+    top: -6px;
+}
+.panel-finding ul{
+    list-style:none;
+    padding:0px
+}
+
+.panel-finding ul li{
+    padding: 5px;
+    /* border: 1px solid #29aecc; */
+    border-radius: 5px;
+    margin: 0px;
+    margin-bottom: 5px;
+}
+.btn-finding i{
+    padding-left:7px;
+}
+
+.btn-finding:hover{
+    color:#ff5931;
+}
+.table-bordered{
+    height: 150px;
+    width: 105%;
 }

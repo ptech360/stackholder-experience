@@ -10,6 +10,7 @@
     border-radius:0px;
     cursor:pointer;
     background-color: #103a71; 
+    margin-top: 3px;
 }
 
 .badge:hover{
