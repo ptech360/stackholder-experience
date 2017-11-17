@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, AfterViewInit} from '@angular/core';
 import { DEAuditService } from "./de.service";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { StorageService } from "../../shared/common.service";
@@ -11,7 +11,7 @@ declare let $:any;
   styleUrls:['./de.component.css'],
   providers:[DEAuditService,StorageService]
 })
-export class DEComponent{
+export class DEComponent implements AfterViewInit{
   userDetails:any = this.storage.getData("userDetails");
   categories: any[];
   audits: any[];
@@ -33,7 +33,11 @@ export class DEComponent{
       "sourceRequired":["10 work hours for LD"],
       "touchpointId":[''],
       "createdBy":[this.userDetails.id]
-  })
+  });
+  }
+
+  ngAfterViewInit(){
+
   }
 
 

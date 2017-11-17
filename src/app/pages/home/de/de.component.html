@@ -1,6 +1,6 @@
 <div class="container">
-    <table class="table table-responsive  table-bordered">
-        <thead class="thead-dark  ">
+  <table class="table table-responsive  table-bordered" id="accordion">
+    <thead class="thead-dark  " >
       <tr>
         <th>UNIT</th>
         <th>STAKEHOLDER</th>
@@ -8,8 +8,7 @@
         <th>CHANNEL</th>
         <th>EXPERIENCE</th>
         <th>DATA SOURCE</th>
-        <th>FINDINGS</th>
-     
+        <th>FINDINGS</th>     
       </tr>
     </thead>
     <tbody *ngFor="let audit of audits;let a=index;">
@@ -21,7 +20,7 @@
       </tr>
       <ng-template ngFor let-stackholder [ngForOf]="audit.stackholders" let-s="index">
         <tr>
-          <td [attr.rowspan]="stackholder.touchpoints.length + 2">{{stackholder.stackholder}}</td>
+          <td [attr.rowspan]="stackholder.touchpoints.length + 3">{{stackholder.stackholder}}</td>
         </tr>
         <ng-template ngFor let-tp [ngForOf]="stackholder.touchpoints" let-t="index">
           <tr>
@@ -39,12 +38,12 @@
             </td>
             <td>
               <button *ngIf="!tp.findings.length" class="btn btn-link btn-finding" data-toggle="modal" data-target="#myModal" (click)="selectedTouchpoint = tp.touchpointId">Fill Finding<i class="glyphicon glyphicon-pencil"></i></button>
-              <button *ngIf="tp.findings.length" class="btn btn-link btn-finding" data-toggle="collapse" [attr.data-target]="'#findings' + t">View-Findings<i class="glyphicon glyphicon-search"></i></button>
+              <button *ngIf="tp.findings.length" class="btn btn-link btn-finding accordion" data-toggle="collapse" [attr.data-target]="'#findings' + a + s + t" data-parent="#accordion">View-Findings<i class="glyphicon glyphicon-search"></i></button>
             </td>
           </tr>
-          <tr [attr.id]="'findings' + t" class="collapse" >
+          <tr>
             <td colspan="6" style="width: 100%;position: relative;padding: 0px;">
-              <div class="panel panel-default panel-finding">
+              <div class="panel panel-default panel-finding collapse" [attr.id]="'findings' + a + s + t">
                 <div class="panel-heading">
                   <h4 class="panel-title">FINDINGS
                       <i class="glyphicon glyphicon-plus-sign btn-add" data-toggle="modal" data-target="#myModal" (click)="selectedTouchpoint = tp.touchpointId"></i>
@@ -57,15 +56,15 @@
                       <div class="col-sm-6">
                         <table class="table-bordered">
                           <tr>
-                            <td>Finding </td>
+                            <td><b>Finding</b></td>
                             <td>{{find.finding}}</td>
                           </tr>
                           <tr>
-                            <td>Category</td>
+                            <td><b>Category</b></td>
                             <td>{{find.category}}</td>
                           </tr>
                           <tr>
-                            <td>Improvements</td>
+                            <td><b>Improvements</b></td>
                             <td>{{find.improvements}}</td>
                           </tr>
                         </table>
@@ -76,15 +75,15 @@
                       <div class="col-sm-6">
                           <table class="table-bordered">
                               <tr>
-                                <td>Responsible Staff </td>
+                                <td><b>Responsible Staff</b></td>
                                 <td>{{find.responsibleStaff}}</td>
                               </tr>
                               <tr>
-                                <td>Root Cause</td>
+                                <td><b>Root Cause</b></td>
                                 <td>{{find.rootCause}}</td>
                               </tr>
                               <tr>
-                                <td>Source Required</td>
+                                <td><b>Source Required</b></td>
                                 <td>{{find.sourceRequired}}</td>
                               </tr>
                             </table>
