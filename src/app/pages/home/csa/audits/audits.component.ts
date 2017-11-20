@@ -10,12 +10,13 @@ declare let $:any;
   providers:[AuditService]
 })
 export class AuditsComponent{
+  units: any[]=[];
   audits:any[]=[]; 
   selectedEmployees:any;
   selectedUnit:any; 
   constructor(public as:AuditService){
     this.getAudits();
-    this.getEmployees();
+    this.getPrerequisite();
   }
 
   getAudits(){
@@ -29,15 +30,32 @@ export class AuditsComponent{
   }
 
   employees:any[];
-  getEmployees(){
-    this.as.getEmployees().subscribe((response:any)=>{
-      this.employees = response;
+  getEmployees(unitId:any){
+    this.as.getEmployees(unitId).subscribe((response:any)=>{
+      if(response.status == 204){
+        this.employees = [];
+      }else{
+        this.employees = response;
+      }
+      
+    })
+  }
+
+  getPrerequisite(){
+    this.as.getPrerequisite().subscribe((response:any)=>{
+      if(response.status == 204){
+        this.units = [];
+      }else{
+        this.units = response.units;
+      }
     })
   }
 
   assignUnit(){
     this.as.assignUnit(this.selectedUnit,this.selectedEmployees).subscribe((response:any)=>{
       $('#myModal').modal('hide');
+    },(error:any)=>{
+      alert("This unit can not be assigned caused either already assigned to this Employee or other issue");
     })
   }
 
