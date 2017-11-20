@@ -1,6 +1,6 @@
 <div class="container">
   <table class="table table-responsive  table-bordered" id="accordion">
-    <thead class="thead-dark  " >
+    <thead class="thead-dark  ">
       <tr>
         <th>UNIT</th>
         <th>STAKEHOLDER</th>
@@ -8,13 +8,13 @@
         <th>CHANNEL</th>
         <th>EXPERIENCE</th>
         <th>DATA SOURCE</th>
-        <th>FINDINGS</th>     
+        <th>FINDINGS</th>
       </tr>
     </thead>
     <tbody *ngFor="let audit of audits;let a=index;">
-        <tr>
-            <td colspan="7" class="table-gap"></td>
-          </tr>
+      <tr>
+        <td colspan="7" class="table-gap"></td>
+      </tr>
       <tr>
         <td [attr.rowspan]="getRowSpanOfStakeholder(audit.stackholders)">{{audit.department}}</td>
       </tr>
@@ -37,9 +37,10 @@
               </ul>
             </td>
             <td>
-              
+
               <button *ngIf="!tp.findings.length" class="btn btn-link btn-finding" data-toggle="modal" data-target="#myModal" (click)="selectedTouchpoint = tp.touchpointId">FILL</button>
-              <button *ngIf="tp.findings.length" class="btn btn-link btn-finding accordion" data-toggle="collapse" [attr.data-target]="'#findings' + a + s + t" data-parent="#accordion">VIEW</button>
+              <button *ngIf="tp.findings.length" class="btn btn-link btn-finding accordion" data-toggle="collapse" [attr.data-target]="'#findings' + a + s + t"
+                data-parent="#accordion">VIEW</button>
             </td>
           </tr>
           <tr>
@@ -47,120 +48,85 @@
               <div class="panel panel-default panel-finding collapse" [attr.id]="'findings' + a + s + t">
                 <div class="panel-heading">
                   <h4 class="panel-title">{{tp.touchPoint}} : FINDINGS
-                      <i class="glyphicon glyphicon-plus-sign btn-add" data-toggle="modal" data-target="#myModal" (click)="selectedTouchpoint = tp.touchpointId"></i>
+                    <i class="glyphicon glyphicon-plus-sign btn-add" data-toggle="modal" data-target="#myModal" (click)="selectedTouchpoint = tp.touchpointId"></i>
                     <!-- <button class="pull-right btn-add" data-toggle="modal" data-target="#myModal" (click)="selectedTouchpoint = tp.touchpointId">Add More</button>--></h4>
                 </div>
                 <div class="panel-body finding-panel">
 
                   <div class="panel panel-default" *ngFor="let find of tp.findings;let f = index;">
-                    <div class="panel-heading"><div class="badge badge-numbering">{{(f+1)}}<br></div>{{find.finding}}</div> 
+                    <div class="panel-heading left-side">
+                      <div class="badge badge-numbering">{{(f+1)}}<br></div> {{find.finding}}</div>
                     <div class="panel-body">
                       <div class="row">
-                      <div class="col-md-4 col-lg-4 col-sm-4">
-                        <table class="table-bordered">
-                          <tr>
-                            <td>category</td>
-                           
-                          </tr>
-                          <tr>
-                            <td>{{find.category}}</td>
-                          </tr>
-                        </table>
-
-                      </div> <!-- table1 -->
-                      <div class="col-md-4 col-lg-4 col-sm-4">
-                        <table class="table-bordered">
-                          <tr>
-                            <td>Improvements</td>
-                          </tr>
-                          <tr>
-                            <td>{{find.improvements}}</td>
-                          </tr>
-                        </table>
-                      </div>
-                      <div class="col-md-4 col-lg-4 col-sm-4">
-                          <table class="table-bordered">
+                        <div class="col-md-4 col-lg-4 col-sm-4">
+                          <table class="table-bordered failur-table">
                             <tr>
-                              <td>Responsible Staff</td>
+                              <td><b>Category</b></td>
+
                             </tr>
                             <tr>
-                              <td>{{find.responsibleStaff}}</td>
+                              <td>{{find.category}}</td>
+                            </tr>
+                          </table>
+
+                        </div>
+                        <!-- table1 -->
+                        <div class="col-md-4 col-lg-4 col-sm-4">
+                          <table class="table-bordered failur-table">
+                            <tr>
+                              <td><b>Improvements</b></td>
+                            </tr>
+                            <tr>
+                              <td>{{find.improvements}}</td>
                             </tr>
                           </table>
                         </div>
+                        <div class="col-md-4 col-lg-4 col-sm-4">
+                          <table class="table-bordered failur-table">
+                            <tr>
+                              <td><b>Responsible Staff</b></td>
+                            </tr>
+                            <tr>
+                              <td>{{find.sourceRequired}}</td>
+                            </tr>
+                          </table>
                         </div>
-                        <div class="row">
-                          <div class="col-md-4 col-lg-4 col-sm-4">
-                              <table class="table-bordered" style="margin-top:19px;">
-                                  <tr>
-                                    <td>Root Cause</td>
-                                  </tr>
-                                  <tr>
-                                    <td>{{find.rootCause}}</td>
-                                  </tr>
-                                </table>
-                          </div>
-                          <div class="col-md-4 col-lg-4 col-sm-4">
-                              <table class="table-bordered"  style="margin-top:19px;">
-                                  <tr>
-                                    <td>Source Required</td>
-                                  </tr>
-                                  <tr>
-                                    <td>{{find.sourceRequired}}</td>
-                                  </tr>
-                                </table>
-                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-2 col-lg-2 col-sm-2">
+
                         </div>
+                        <div class="col-md-4 col-lg-4 col-sm-4">
+                          <table class="table-bordered failur-table" style="margin-top:19px;">
+                            <tr>
+                              <td><b>Root Cause</b></td>
+                            </tr>
+                            <tr>
+                              <td>{{find.rootCause}}</td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="col-md-4 col-lg-4 col-sm-4">
+                          <table class="table-bordered failur-table" style="margin-top:19px;">
+                            <tr>
+                              <td><b>Source Required</b></td>
+                            </tr>
+                            <tr>
+                              <td>{{find.sourceRequired}}</td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  
-                  <ul>
-                    <li class="row" *ngFor="let find of tp.findings;let f = index;">
-                       
-                      <div class="col-sm-6">
-                        <table class="table-bordered">
-                          <tr>
-                            <td><b>Finding</b></td>
-                            <td>{{find.finding}}</td>
-                          </tr>
-                          <tr>
-                            <td><b>Category</b></td>
-                            <td>{{find.category}}</td>
-                          </tr>
-                          <tr>
-                            <td><b>Improvements</b></td>
-                            <td>{{find.improvements}}</td>
-                          </tr>
-                        
-                        <!-- <p><b>Finding :</b>{{find.finding}}</p>
-                        <p><b>Category :</b>{{find.category}}</p>
-                        <p><b>Improvements :</b>{{find.improvements}}</p>                         -->
-                                
-                      
-                        
-                              <tr>
-                                <td><b>Responsible Staff</b></td>
-                                <td>{{find.responsibleStaff}}</td>
-                              </tr>
-                              <tr>
-                                <td><b>Root Cause</b></td>
-                                <td>{{find.rootCause}}</td>
-                              </tr>
-                              <tr>
-                                <td><b>Source Required</b></td>
-                                <td>{{find.sourceRequired}}</td>
-                              </tr>
-                        </table>
-                      </div>
-                      
-                    </li>
-                  </ul>                
-                </div><!--  panel-body end -->
+                  <!--faliur-1-->
+                </div>
+                <!--  panel-body end -->
               </div>
             </td>
           </tr>
-        </ng-template>        
-      </ng-template>      
+        </ng-template>
+      </ng-template>
     </tbody>
   </table>
   <!-- Modal -->
@@ -174,8 +140,8 @@
           <h4 class="modal-title">FILL FINDINGS</h4>
         </div>
         <form class="form-horizontal" [formGroup]="findingForm" (submit)="submitFinding()">
-        <div class="modal-body">
-          
+          <div class="modal-body">
+
             <div class="form-group">
               <label class="control-label col-sm-2">Finding : </label>
               <div class="col-sm-10">
@@ -220,13 +186,13 @@
                 <textarea class="form-control" formControlName="sourceRequired"></textarea>
               </div>
             </div>
-        </div>
-        <div class="modal-footer">
-          <button type="type" class="btn btn-success">Submit</button>            
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </form>
-      
+          </div>
+          <div class="modal-footer">
+            <button type="type" class="btn btn-success">Submit</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+
       </div>
 
     </div>

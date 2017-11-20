@@ -209,3 +209,7 @@ input[type="submit"] {
   text-align: center;
   text-shadow: 1px 1px 1px #7a7058;
 }
+
+.login-img{
+  width:8%;
+}
