@@ -62,17 +62,22 @@
             <td>{{tp.touchPoint}}</td>
             <td>
               <ul class="list">
-                <li style="float:left" *ngFor="let channel of tp.channels;let c = index;">{{channel.channel}},</li>
+                <li style="float:left" *ngFor="let channel of tp.channels;let c = index;">{{channel.channel}}<span *ngIf="c!=tp.channels.length-1">,</span></li>
               </ul>
             </td>
             <td>{{tp.experience}}</td>
             <td>
               <ul class="list">
-                <li style="float:left" *ngFor="let dataSource of tp.dataSources;let c = index;">{{dataSource.dataSource}},</li>
+                <li style="float:left" *ngFor="let dataSource of tp.dataSources;let d = index;">{{dataSource.dataSource}}<span *ngIf="d!=tp.dataSources.length-1">,</span></li>
               </ul>
             </td>
           </tr>
         </ng-template>
       </ng-template>      
    </tbody>
+   <tbody>
+    <tr>
+      <td colspan="7" class="table-gap"></td>
+    </tr>
+  </tbody>
   </table>

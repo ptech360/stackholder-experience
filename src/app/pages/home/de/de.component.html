@@ -27,18 +27,18 @@
             <td>{{tp.touchPoint}}</td>
             <td>
               <ul class="list">
-                <li style="float:left" *ngFor="let channel of tp.channels;let c = index;">{{channel.channel}},</li>
+                <li style="float:left" *ngFor="let channel of tp.channels;let c = index;">{{channel.channel}}<span *ngIf="c!=tp.channels.length -1">,</span></li>
               </ul>
             </td>
             <td>{{tp.experience}}</td>
             <td>
               <ul class="list">
-                <li style="float:left" *ngFor="let dataSource of tp.dataSources;let c = index;">{{dataSource.dataSource}},</li>
+                <li style="float:left" *ngFor="let dataSource of tp.dataSources;let d = index;">{{dataSource.dataSource}}<span *ngIf="d!=tp.dataSources.length -1">,</span></li>
               </ul>
             </td>
             <td>
               <button *ngIf="!tp.findings.length" class="btn btn-link btn-finding" data-toggle="modal" data-target="#myModal" (click)="selectedTouchpoint = tp.touchpointId">Fill Finding<i class="glyphicon glyphicon-pencil"></i></button>
-              <button *ngIf="tp.findings.length" class="btn btn-link btn-finding accordion" data-toggle="collapse" [attr.data-target]="'#findings' + a + s + t" data-parent="#accordion">View-Findings<i class="glyphicon glyphicon-search"></i></button>
+              <button *ngIf="tp.findings.length" class="btn btn-link btn-finding" data-toggle="collapse" [attr.data-target]="'#findings' + a + s + t" (click)="collapse('#findings' + a + s + t)">View-Findings<i class="glyphicon glyphicon-search"></i></button>
             </td>
           </tr>
           <tr>
@@ -99,6 +99,11 @@
           </tr>
         </ng-template>        
       </ng-template>      
+    </tbody>
+    <tbody>
+      <tr>
+        <td colspan="7" class="table-gap"></td>
+      </tr>
     </tbody>
   </table>
   <!-- Modal -->

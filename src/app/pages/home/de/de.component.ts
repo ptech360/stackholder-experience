@@ -37,7 +37,15 @@ export class DEComponent implements AfterViewInit{
   }
 
   ngAfterViewInit(){
+    $(window).click(function() {
+      $(".panel-finding").removeClass("in");
+      });
+  }
 
+  collapse(id){
+    $(id).collapse('toggle');  
+      $(".panel-finding").removeClass("in");  // remove active class from all
+             // add active class to clicked element
   }
 
 

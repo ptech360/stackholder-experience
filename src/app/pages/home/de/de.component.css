@@ -115,3 +115,6 @@ tbody td[rowspan] {
     width: 105%;
 }
 
+.table>tbody+tbody {
+    border-top: 0px solid #ddd;
+}
