@@ -40,7 +40,7 @@
 
               <button *ngIf="!tp.findings.length" class="btn btn-link btn-finding" data-toggle="modal" data-target="#myModal" (click)="selectedTouchpoint = tp.touchpointId">FILL</button>
               <button *ngIf="tp.findings.length" class="btn btn-link btn-finding accordion" data-toggle="collapse" [attr.data-target]="'#findings' + a + s + t"
-                data-parent="#accordion">VIEW</button>
+                data-parent="#accordion" (click)="collapse('#findings' + a + s + t)">VIEW</button>
             </td>
           </tr>
           <tr>
@@ -137,12 +137,54 @@
                 <textarea class="form-control" formControlName="improvements"></textarea>
               </div>
             </div>
-            <div class="form-group">
-              <label class="control-label col-sm-2">RESPONSIBLE-STAFF </label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" formControlName="responsibleStaff">
+            <div class="form-group" *ngIf="type == 'pankaj'">
+              <div class="col-sm-6">
+                <label class="control-label col-sm-offset-3 col-sm-3" for="unit">Unit : </label>
+                <div class="col-sm-6">
+                  <select class="form-control" name="unit" [(ngModel)]="unitIdForEmp" [ngModelOptions]="{standalone: true}" (change)="getEmployees(unitIdForEmp)">
+                    <option *ngFor="let unit of units;let u = index;" [value]="unit.departmentId">{{unit.department}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <label class="control-label col-sm-3">Employee :</label>
+                <div class="col-sm-9">
+                  <select class="form-control" formControlName="responsibleStaffIds" multiple>
+                    <option *ngFor="let emp of employees;let e=index;" [value]="emp.id">
+                      {{emp.firstName}} {{emp.lastName}}
+                    </option>
+                  </select>
+                </div>
               </div>
             </div>
+            
+            <div class="form-group" *ngIf="type == 'tushar'" formArrayName="responsibleRole">
+              <div *ngFor="let resRole of findingForm.controls.responsibleRole['controls']; let r = index;" [formGroupName]="r">
+                <div class="col-sm-6">
+                  <label class="control-label col-sm-offset-3 col-sm-3" for="unit">Unit : </label>
+                  <div class="col-sm-6">
+                    <select class="form-control" name="unit" formControlName="departmentId" (ngModelChange)="getRoles($event)">
+                      <option *ngFor="let unit of units;let u = index;" [value]="unit.departmentId">{{unit.department}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <label class="control-label col-sm-3">Roles</label>
+                  <div class="col-sm-9">
+                    <select class="form-control " formControlName="roleId">
+                      <option *ngFor="let role of roles;let r=index;" [value]="role.roleId">
+                        {{role.role}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-2">
+                  <button (click)="addRole()" *ngIf="resRole.valid && r == findingForm.controls.responsibleRole['controls'].length - 1">Add</button>
+                  <button (click)="removeRole(r)" *ngIf="findingForm.controls.responsibleRole['controls'].length!=1">Remove</button>
+                </div>
+              </div>
+            </div>
+
             <div class="form-group">
               <label class="control-label col-sm-2">DEADLINE</label>
               <div class="col-sm-10">
