@@ -105,21 +105,22 @@
 
       <!-- Modal content-->
       <div class="modal-content detail-content">
-        <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Fill Finding</h4>
+        <div class="modal-header">
+          
+          <h4 class="modal-title">FILL FINDING</h4>
         </div>
         <form class="form-horizontal" [formGroup]="findingForm" (submit)="submitFinding()">
           <div class="modal-body">
 
             <div class="form-group">
-              <label class="control-label col-sm-3">Finding : </label>
+              <label class="control-label col-sm-3">FINDING</label>
               <div class="col-sm-9">
                 <textarea class="form-control" formControlName="finding"></textarea>
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-3">Category : </label>
+              <label class="control-label col-sm-3">CATEGORY </label>
               <div class="col-sm-9">
                 <select class="form-control" formControlName="categoryId">
                     <option *ngFor="let cat of categories;let c=index;" [value]="cat.id">{{cat.category}}</option>
@@ -127,31 +128,31 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-3">Root Cause : </label>
+              <label class="control-label col-sm-3">ROOT-CAUSE</label>
               <div class="col-sm-9">
                 <textarea class="form-control" formControlName="rootCause"></textarea>
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-3">Improvements : </label>
+              <label class="control-label col-sm-3">IMPROVEMENTS </label>
               <div class="col-sm-9">
                 <textarea class="form-control" formControlName="improvements"></textarea>
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-3">Assigned by : </label>
+              <label class="control-label col-sm-3">ASSIGNED BY </label>
               <div class="col-sm-9">
                 <label class="radio-inline">
-                    <input type="radio" name="type" [(ngModel)]="type" [ngModelOptions]="{standalone: true}" value="pankaj" > Employee Name
+                    <input type="radio" name="type" [(ngModel)]="type" [ngModelOptions]="{standalone: true}" value="pankaj" > EMPLOYEE  NAME
                   </label>
                 <label class="radio-inline">
-                    <input type="radio" name="type" [(ngModel)]="type" [ngModelOptions]="{standalone: true}" value="tushar"> Employee Role
+                    <input type="radio" name="type" [(ngModel)]="type" [ngModelOptions]="{standalone: true}" value="tushar"> EMPLOYEE  ROLE
                   </label>
               </div>
             </div>
             <div class="form-group" *ngIf="type == 'pankaj'">
               <div class="col-sm-6">
-                <label class="control-label col-sm-offset-3 col-sm-3" for="unit">Unit : </label>
+                <label class="control-label col-sm-offset-3 col-sm-3" for="unit">UNIT </label>
                 <div class="col-sm-6">
                   <select class="form-control" name="unit" [(ngModel)]="unitIdForEmp" [ngModelOptions]="{standalone: true}" (change)="getEmployees(unitIdForEmp)">
                       <option *ngFor="let unit of units;let u = index;" [value]="unit.departmentId">{{unit.department}}</option>
@@ -159,7 +160,7 @@
                 </div>
               </div>
               <div class="col-sm-6">
-                <label class="control-label col-sm-3">Employee :</label>
+                <label class="control-label col-sm-3">EMPLOYEE</label>
                 <div class="col-sm-9">
                   <select class="form-control" formControlName="responsibleStaffIds" multiple>
                       <option *ngFor="let emp of employees;let e=index;" [value]="emp.id">
@@ -173,7 +174,7 @@
             <div class="form-group" *ngIf="type == 'tushar'" formArrayName="responsibleRole">
               <div *ngFor="let resRole of findingForm.controls.responsibleRole['controls']; let r = index;" [formGroupName]="r">
                 <div class="col-sm-6">
-                  <label class="control-label col-sm-offset-3 col-sm-3" for="unit">Unit : </label>
+                  <label class="control-label col-sm-offset-3 col-sm-3" for="unit">UNIT </label>
                   <div class="col-sm-6">
                     <select class="form-control" name="unit" formControlName="departmentId" (ngModelChange)="getRoles($event,r)">
                       <option *ngFor="let unit of units;let u = index;" [value]="unit.departmentId">{{unit.department}}</option>
@@ -181,7 +182,7 @@
                   </div>
                 </div>
                 <div class="col-sm-4">
-                  <label class="control-label col-sm-3">Roles</label>
+                  <label class="control-label col-sm-3">ROLES</label>
                   <div class="col-sm-9">
                     <select class="form-control " formControlName="roleId">
                       <option *ngFor="let role of roles[r];let r=index;" [value]="role.roleId">
@@ -191,28 +192,28 @@
                   </div>
                 </div>
                 <div class="col-sm-2">
-                  <button (click)="addRole()" *ngIf="resRole.valid && r == findingForm.controls.responsibleRole['controls'].length - 1">Add</button>
-                  <button (click)="removeRole(r)" *ngIf="findingForm.controls.responsibleRole['controls'].length!=1">Remove</button>
+                  <button (click)="addRole()" *ngIf="resRole.valid && r == findingForm.controls.responsibleRole['controls'].length - 1">ADD</button>
+                  <button (click)="removeRole(r)" *ngIf="findingForm.controls.responsibleRole['controls'].length!=1">REMOVE</button>
                 </div>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="control-label col-sm-3">Deadline : </label>
+              <label class="control-label col-sm-3">DEADLINE</label>
               <div class="col-sm-9">
                 <input type="date" class="form-control" formControlName="deadline">
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-3">Source Required : </label>
+              <label class="control-label col-sm-3">SOURCE REQUIRED </label>
               <div class="col-sm-9">
                 <textarea class="form-control" formControlName="sourceRequired"></textarea>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="type" class="btn btn-success btn-submit">Submit</button>
-            <button type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
+            <button type="type" class="btn btn-success btn-submit">SUBMIT</button>
+            <button type="button" class="btn btn-default btn-close" data-dismiss="modal">CLOSE</button>
           </div>
         </form>
 
