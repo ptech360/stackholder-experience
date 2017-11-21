@@ -187,6 +187,9 @@ tbody td[rowspan] {
     padding: 10px;
 }
 
+.table>tbody+tbody {
+    border-top: 0px solid #ddd;
+}
 .info-table tr td{
     text-transform: uppercase;
 }
@@ -285,3 +288,4 @@ tbody td[rowspan] {
 .btn-close:focus {
     outline: -webkit-focus-ring-color auto 0px;
 }
+

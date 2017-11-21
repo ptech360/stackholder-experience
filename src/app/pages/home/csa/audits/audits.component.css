@@ -89,3 +89,7 @@ tbody td[rowspan] {
 .glyphicon-arrow-right:hover{
 color: #ff5931;
 }
+
+.table>tbody+tbody {
+    border-top: 0px solid #ddd;
+}

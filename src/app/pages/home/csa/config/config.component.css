@@ -2,14 +2,14 @@
 .the-legend {
     border-style: none;
     border-width: 0px;
-    font-size: 30px;
+    font-size: 20px;
     line-height: 20px;
     margin-bottom: 31px;
-    width: 35%;
-    padding: 19px 10px;
+    width: 22%;
+    padding: 11px 10px;
     border: 1px solid #29aecc;
     text-align: center;
-    height: 58px;
+    height: 50px;
     background: #29aecc;
     color: white;
     font-family:Raleway;
@@ -38,21 +38,26 @@
 }
 
 .btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
-    outline: 5px auto -webkit-focus-ring-
+    outline: 0px auto -webkit-focus-ring-
 }
 
 input[type=checkbox] {
     zoom: 1.5;
     margin: 0px 0 0;
     margin-left: -16px;
+    
 }
 
-.myinput[type="checkbox"]:before{
-    border: 1px solid #106ABE;
+input[type="checkbox"]:before{
+    border: 1px solid #106ABE!important;
     background: #FFF;
 }
 
-.myinput[type="checkbox"]:after{
-    border: 1px solid #0C44BD;
+input[type="checkbox"]:after{
+    border: 1px solid #0C44BD!important;
     background: #FFF;
+}
+
+.form-group{
+    font-family:Raleway;
 }

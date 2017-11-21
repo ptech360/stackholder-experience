@@ -27,20 +27,19 @@
             <td>{{tp.touchPoint}}</td>
             <td>
               <ul class="list">
-                <li style="float:left" *ngFor="let channel of tp.channels;let c = index;">{{channel.channel}},</li>
+                <li style="float:left" *ngFor="let channel of tp.channels;let c = index;">{{channel.channel}}<span *ngIf="c!=tp.channels.length -1">,</span></li>
               </ul>
             </td>
             <td>{{tp.experience}}</td>
             <td>
               <ul class="list">
-                <li style="float:left" *ngFor="let dataSource of tp.dataSources;let c = index;">{{dataSource.dataSource}},</li>
+                <li style="float:left" *ngFor="let dataSource of tp.dataSources;let d = index;">{{dataSource.dataSource}}<span *ngIf="d!=tp.dataSources.length -1">,</span></li>
               </ul>
             </td>
             <td>
-
               <button *ngIf="!tp.findings.length" class="btn btn-link btn-finding" data-toggle="modal" data-target="#myModal" (click)="selectedTouchpoint = tp.touchpointId">FILL</button>
-              <button *ngIf="tp.findings.length" class="btn btn-link btn-finding accordion" data-toggle="collapse" [attr.data-target]="'#findings' + a + s + t"
-                data-parent="#accordion" (click)="collapse('#findings' + a + s + t)">VIEW</button>
+              <button *ngIf="tp.findings.length" class="btn btn-link btn-finding" data-toggle="collapse" [attr.data-target]="'#findings' + a + s + t"
+                (click)="collapse('#findings' + a + s + t)">VIEW</button>
             </td>
           </tr>
           <tr>
@@ -55,7 +54,7 @@
 
                   <div class="panel panel-default" *ngFor="let find of tp.findings;let f = index;">
                     <div class="panel-heading left-side">
-                      <div class="badge badge-numbering">{{(f+1)}}<br></div>   {{find.finding}}</div>
+                      <div class="badge badge-numbering">{{(f+1)}}<br></div> {{find.finding}}</div>
                     <div class="panel-body no-padding">
                       <div class="row">
                         <div class="col-lg-12 col-sm-12 col-md-10">
@@ -64,7 +63,7 @@
                               <tr>
                                 <th width="10%" class="cell1">CATEGORY</th>
                                 <th width="10%">
-                                    IMPROVEMENTS
+                                  IMPROVEMENTS
                                 </th>
                                 <th width="10%">RESPONSIBLE STAFF</th>
                                 <th width="10%">ROOT CAUSE</th>
@@ -78,13 +77,11 @@
                                 <td>{{find.sourceRequired}}</td>
                                 <td>{{find.rootCause}}</td>
                                 <td>{{find.sourceRequired}}</td>
-                                
                               </tr>
                             </tbody>
                           </table>
+                        </div>
                       </div>
-                      </div>
-
                     </div>
                   </div>
                   <!--faliur-1-->
@@ -96,6 +93,11 @@
         </ng-template>
       </ng-template>
     </tbody>
+    <tbody>
+      <tr>
+        <td colspan="7" class="table-gap"></td>
+      </tr>
+    </tbody>
   </table>
   <!-- Modal -->
   <div id="myModal" class="modal fade" role="dialog">
@@ -103,38 +105,48 @@
 
       <!-- Modal content-->
       <div class="modal-content detail-content">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
         <div class="modal-header">
-         
-          <h4 class="modal-title">FILL FINDINGS</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Fill Finding</h4>
         </div>
         <form class="form-horizontal" [formGroup]="findingForm" (submit)="submitFinding()">
           <div class="modal-body">
 
             <div class="form-group">
-              <label class="control-label col-sm-2">FINDINGS</label>
-              <div class="col-sm-10">
+              <label class="control-label col-sm-3">Finding : </label>
+              <div class="col-sm-9">
                 <textarea class="form-control" formControlName="finding"></textarea>
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-2">CATEGORY</label>
-              <div class="col-sm-10">
+              <label class="control-label col-sm-3">Category : </label>
+              <div class="col-sm-9">
                 <select class="form-control" formControlName="categoryId">
-                  <option *ngFor="let cat of categories;let c=index;" [value]="cat.id">{{cat.category}}</option>
-                </select>
+                    <option *ngFor="let cat of categories;let c=index;" [value]="cat.id">{{cat.category}}</option>
+                  </select>
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-2">ROOT CAUSE</label>
-              <div class="col-sm-10">
+              <label class="control-label col-sm-3">Root Cause : </label>
+              <div class="col-sm-9">
                 <textarea class="form-control" formControlName="rootCause"></textarea>
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-2">IMPROVEMENTS</label>
-              <div class="col-sm-10">
+              <label class="control-label col-sm-3">Improvements : </label>
+              <div class="col-sm-9">
                 <textarea class="form-control" formControlName="improvements"></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-3">Assigned by : </label>
+              <div class="col-sm-9">
+                <label class="radio-inline">
+                    <input type="radio" name="type" [(ngModel)]="type" [ngModelOptions]="{standalone: true}" value="pankaj" > Employee Name
+                  </label>
+                <label class="radio-inline">
+                    <input type="radio" name="type" [(ngModel)]="type" [ngModelOptions]="{standalone: true}" value="tushar"> Employee Role
+                  </label>
               </div>
             </div>
             <div class="form-group" *ngIf="type == 'pankaj'">
@@ -142,40 +154,40 @@
                 <label class="control-label col-sm-offset-3 col-sm-3" for="unit">Unit : </label>
                 <div class="col-sm-6">
                   <select class="form-control" name="unit" [(ngModel)]="unitIdForEmp" [ngModelOptions]="{standalone: true}" (change)="getEmployees(unitIdForEmp)">
-                    <option *ngFor="let unit of units;let u = index;" [value]="unit.departmentId">{{unit.department}}</option>
-                  </select>
+                      <option *ngFor="let unit of units;let u = index;" [value]="unit.departmentId">{{unit.department}}</option>
+                    </select>
                 </div>
               </div>
               <div class="col-sm-6">
                 <label class="control-label col-sm-3">Employee :</label>
                 <div class="col-sm-9">
                   <select class="form-control" formControlName="responsibleStaffIds" multiple>
-                    <option *ngFor="let emp of employees;let e=index;" [value]="emp.id">
-                      {{emp.firstName}} {{emp.lastName}}
-                    </option>
-                  </select>
+                      <option *ngFor="let emp of employees;let e=index;" [value]="emp.id">
+                        {{emp.firstName}} {{emp.lastName}}
+                      </option>
+                    </select>
                 </div>
               </div>
             </div>
-            
+
             <div class="form-group" *ngIf="type == 'tushar'" formArrayName="responsibleRole">
               <div *ngFor="let resRole of findingForm.controls.responsibleRole['controls']; let r = index;" [formGroupName]="r">
                 <div class="col-sm-6">
                   <label class="control-label col-sm-offset-3 col-sm-3" for="unit">Unit : </label>
                   <div class="col-sm-6">
                     <select class="form-control" name="unit" formControlName="departmentId" (ngModelChange)="getRoles($event)">
-                      <option *ngFor="let unit of units;let u = index;" [value]="unit.departmentId">{{unit.department}}</option>
-                    </select>
+                        <option *ngFor="let unit of units;let u = index;" [value]="unit.departmentId">{{unit.department}}</option>
+                      </select>
                   </div>
                 </div>
                 <div class="col-sm-4">
                   <label class="control-label col-sm-3">Roles</label>
                   <div class="col-sm-9">
                     <select class="form-control " formControlName="roleId">
-                      <option *ngFor="let role of roles;let r=index;" [value]="role.roleId">
-                        {{role.role}}
-                      </option>
-                    </select>
+                        <option *ngFor="let role of roles;let r=index;" [value]="role.roleId">
+                          {{role.role}}
+                        </option>
+                      </select>
                   </div>
                 </div>
                 <div class="col-sm-2">
@@ -186,21 +198,21 @@
             </div>
 
             <div class="form-group">
-              <label class="control-label col-sm-2">DEADLINE</label>
-              <div class="col-sm-10">
+              <label class="control-label col-sm-3">Deadline : </label>
+              <div class="col-sm-9">
                 <input type="date" class="form-control" formControlName="deadline">
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-2">SOURCE-REQUIRED</label>
-              <div class="col-sm-10">
+              <label class="control-label col-sm-3">Source Required : </label>
+              <div class="col-sm-9">
                 <textarea class="form-control" formControlName="sourceRequired"></textarea>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="type" class="btn btn-success btn-submit">SUBMIT</button>
-            <button type="button" class="btn btn-default btn-close" data-dismiss="modal">CLOSE</button>
+            <button type="type" class="btn btn-success btn-submit">Submit</button>
+            <button type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
           </div>
         </form>
 

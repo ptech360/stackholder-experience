@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import {Component, AfterViewInit} from '@angular/core';
 import { DEAuditService } from "./de.service";
 import { FormGroup, FormBuilder, FormControl } from "@angular/forms";
 import { StorageService } from "../../shared/common.service";
@@ -6,135 +6,136 @@ import { log } from 'util';
 import { FormArray } from '@angular/forms/src/model';
 import { Validators } from '@angular/forms';
 
-declare let $: any;
+declare let $:any;
 
 @Component({
-  selector: 'de',
-  templateUrl: './de.component.html',
-  styleUrls: ['./de.component.css'],
-  providers: [DEAuditService, StorageService]
+  selector:'de',
+  templateUrl:'./de.component.html',
+  styleUrls:['./de.component.css'],
+  providers:[DEAuditService,StorageService]
 })
-export class DEComponent implements AfterViewInit {
+export class DEComponent implements AfterViewInit{
   roles: any[];
   units: any[];
-  userDetails: any = this.storage.getData("userDetails");
+  userDetails:any = this.storage.getData("userDetails");
   categories: any[];
   audits: any[];
-  findingForm: FormGroup;
-  selectedRoles: any[] = [];
-  constructor(public des: DEAuditService,
-    private fb: FormBuilder,
-    private storage: StorageService) {
+  findingForm:FormGroup;
+  selectedRoles:any[]=[];
+  constructor(public des: DEAuditService, 
+              private fb:FormBuilder,
+              private storage:StorageService) {
     this.getAudits();
-    this.des.getPrerequisite().subscribe((response: any) => {
-      if (response.status == 204) {
+    this.des.getPrerequisite().subscribe((response:any)=>{
+      if(response.status == 204){
         this.categories = [];
         this.units = [];
-      } else {
-        this.categories = response.categories;
-        this.units = response.units;
+      }else{
+      this.categories = response.categories;
+      this.units = response.units;
       }
     })
     this.findingForm = this.fb.group({
-      "finding": ["failure"],
-      "categoryId": [1],
-      "rootCause": ["need personal attention"],
-      "improvements": ["assign 2 employees for the work"],
-      "responsibleRole": this.fb.array([this.initRoles()]),
-      "responsibleStaffIds": [''],
-      "deadline": ["2017-11-20"],
-      "sourceRequired": ["10 work hours for LD"],
-      "touchpointId": [''],
-      "createdBy": [this.userDetails.id]
-    });
+      "finding":["failure"],
+      "categoryId":[1],
+      "rootCause":["need personal attention"],
+      "improvements":["assign 2 employees for the work"],
+      "responsibleRole":this.fb.array([this.initRoles()]),
+      "responsibleStaffIds":[''],
+      "deadline":["2017-11-20"],
+      "sourceRequired":["10 work hours for LD"],
+      "touchpointId":[''],
+      "createdBy":[this.userDetails.id]
+  });
   }
 
-  ngAfterViewInit() {
-    $(window).click(function () {
-      $(".panel-finding").removeClass("in");
+  ngAfterViewInit(){
+    $(window).click(function() {
+    $(".panel-finding").removeClass("in");
     });
-  }
+    }
 
-  collapse(id) {
-    $(id).collapse('toggle');
-    $(".panel-finding").removeClass("in"); // remove active class from all
-    // add active class to clicked element
-  }
-  addRole(form: any) {
+    collapse(id){
+      $(id).collapse('toggle'); 
+      $(".panel-finding").removeClass("in"); // remove active class from all
+      // add active class to clicked element
+      }
+  addRole(){
     const responsibleRole = this.findingForm.controls["responsibleRole"] as FormArray;
     responsibleRole.push(this.initRoles());
   }
 
-  removeRole(index: any) {
+  removeRole(index:any){
     const responsibleRole = this.findingForm.controls["responsibleRole"] as FormArray;
     responsibleRole.removeAt(index);
   }
 
-  initRoles() {
+  initRoles(){
     return this.fb.group({
-      departmentId: ['', Validators.required],
-      roleId: ['', Validators.required]
+      departmentId:['',Validators.required],
+      roleId:['',Validators.required]
     })
   }
 
-  employees: any[];
-  getEmployees(unitId: any) {
-    if (this.findingForm.contains('responsibleRole')) {
+  employees:any[];
+  getEmployees(unitId:any){
+    if(this.findingForm.contains('responsibleRole')){
       this.findingForm.removeControl('responsibleRole');
     }
-    this.findingForm.addControl('responsibleStaffIds', this.fb.array([this.initRoles()]))
+    this.findingForm.addControl('responsibleStaffIds',this.fb.array([this.initRoles()]))
     console.log("log", unitId);
-    this.des.getEmployees(unitId).subscribe((response: any) => {
-      if (response.status == 204) {
+    this.des.getEmployees(unitId).subscribe((response:any)=>{
+      if(response.status == 204){
         this.employees = [];
-      } else {
+      }else{
         this.employees = response;
       }
-
+      
     })
   }
 
-  getRoles(unitId: any) {
-    if (this.findingForm.contains('responsibleStaffIds')) {
+  getRoles(unitId:any){
+    console.log(unitId);
+        if(this.findingForm.contains('responsibleStaffIds')){
       this.findingForm.removeControl('responsibleStaffIds');
     }
-    this.findingForm.addControl('responsibleRole', new FormControl())
-    console.log("role", unitId);
-    this.des.getRoles(unitId).subscribe((response: any) => {
-      if (response.status == 204) {
+    this.findingForm.addControl('responsibleRole',new FormControl())
+    console.log("role",unitId);
+    this.des.getRoles(unitId).subscribe((response:any)=>{
+      if(response.status == 204){
         this.roles = [];
-      } else {
+      }else{
         this.roles = response;
       }
-
+      
     })
-
+    
   }
 
 
-  getAudits() {
-    this.des.getAudits().subscribe((response: any) => {
-      if (response.status == 204) {
+  getAudits(){
+    this.des.getAudits().subscribe((response:any)=>{
+      if(response.status == 204){
         this.audits = [];
-      } else {
-        this.audits = response;
-      }
+      }else{
+      this.audits = response;
+    }
     })
   }
 
-  getRowSpan(array: any) {
+  getRowSpan(array:any){
     var rowSpan = 1;
     rowSpan += array.length;
     array.forEach((element) => {
       rowSpan += element.channels.length;
       // rowSpan += element.dataSources.length;
     });
-    if (rowSpan == 1)
-      return rowSpan + 1;
+    if(rowSpan == 1)
+      return rowSpan+1;
     return rowSpan;
   }
 
-  getRowSpanOfStakeholder(array) {
+  getRowSpanOfStakeholder(array){
     var rowSpan = 1;
     rowSpan += array.length;
     array.forEach((element) => {
@@ -143,23 +144,23 @@ export class DEComponent implements AfterViewInit {
         rowSpan += innerElement.channels.length;
       });
     });
-    if (rowSpan == 1)
-      return rowSpan + 1;
+    if(rowSpan == 1)
+      return rowSpan+1;
     return rowSpan;
   }
 
-  getRowSpanOfTouchPoint(tp: any) {
-    if (tp.channels.length > tp.dataSources.length)
+  getRowSpanOfTouchPoint(tp:any){
+    if(tp.channels.length>tp.dataSources.length)
       return tp.channels.length + 2;
     else
       return tp.dataSources.length + 2;
   }
 
-  selectedTouchpoint: any;
-  submitFinding() {
+  selectedTouchpoint:any;
+  submitFinding(){
     this.findingForm.controls["touchpointId"].setValue(this.selectedTouchpoint);
     console.log(this.findingForm.value);
-    this.des.postFinding(this.findingForm.value).subscribe((response: any) => {
+    this.des.postFinding(this.findingForm.value).subscribe((response:any)=>{
       console.log(response);
       $('#myModal').modal('hide');
     })
