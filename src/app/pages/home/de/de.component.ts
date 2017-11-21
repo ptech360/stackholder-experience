@@ -14,13 +14,8 @@ declare let $:any;
   styleUrls:['./de.component.css'],
   providers:[DEAuditService,StorageService]
 })
-<<<<<<< HEAD
-export class DEComponent implements AfterViewInit{
-  roles: any[];
-=======
 export class DEComponent{
   roles: any[] =[[]];
->>>>>>> ab5514933c9afcb81cbe96f6c23cb12b32b4ad4c
   units: any[];
   userDetails:any = this.storage.getData("userDetails");
   categories: any[];
