@@ -37,8 +37,10 @@ export class DEComponent implements AfterViewInit{
   }
 
   ngAfterViewInit(){
-
-  }
+    $(window).click(function() {
+    $(".panel-finding").removeClass("in");
+    });
+    }
 
 
 

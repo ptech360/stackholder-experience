@@ -19,8 +19,14 @@ export class AuditService{
     .catch(this.handleError);
   }
 
-  public getEmployees(){
-    return this.http.get("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/csa/employees")
+  public getEmployees(unitId:any){
+    return this.http.get("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/unit/"+unitId+"/employees")
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
+  public getPrerequisite(){
+    return this.http.get("https://hamdan-nxtlife.ind-cloud.everdata.com/api/prerequisite")
     .map(this.extractData)
     .catch(this.handleError);
   }

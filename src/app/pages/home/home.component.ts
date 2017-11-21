@@ -10,7 +10,7 @@ import { Router } from "@angular/router";
   providers:[CustomHttpService,StorageService]
 })
 export class HomeComponent{
-  userDetails:string;
+  userDetails:any;
   constructor(public storage:StorageService,private router: Router){
     this.userDetails = this.storage.getData('userDetails');
   }

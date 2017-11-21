@@ -55,68 +55,36 @@
 
                   <div class="panel panel-default" *ngFor="let find of tp.findings;let f = index;">
                     <div class="panel-heading left-side">
-                      <div class="badge badge-numbering">{{(f+1)}}<br></div> {{find.finding}}</div>
-                    <div class="panel-body">
+                      <div class="badge badge-numbering">{{(f+1)}}<br></div>   {{find.finding}}</div>
+                    <div class="panel-body no-padding">
                       <div class="row">
-                        <div class="col-md-4 col-lg-4 col-sm-4">
-                          <table class="table-bordered failur-table">
-                            <tr>
-                              <td><b>Category</b></td>
-
-                            </tr>
-                            <tr>
-                              <td>{{find.category}}</td>
-                            </tr>
+                        <div class="col-lg-12 col-sm-12 col-md-10">
+                          <table class="table table-finding">
+                            <thead>
+                              <tr>
+                                <th width="10%" class="cell1">CATEGORY</th>
+                                <th width="10%">
+                                    IMPROVEMENTS
+                                </th>
+                                <th width="10%">RESPONSIBLE STAFF</th>
+                                <th width="10%">ROOT CAUSE</th>
+                                <th width="10%">SOURCE REQUIRED</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>{{find.category}}</td>
+                                <td>{{find.improvements}}</td>
+                                <td>{{find.sourceRequired}}</td>
+                                <td>{{find.rootCause}}</td>
+                                <td>{{find.sourceRequired}}</td>
+                                
+                              </tr>
+                            </tbody>
                           </table>
-
-                        </div>
-                        <!-- table1 -->
-                        <div class="col-md-4 col-lg-4 col-sm-4">
-                          <table class="table-bordered failur-table">
-                            <tr>
-                              <td><b>Improvements</b></td>
-                            </tr>
-                            <tr>
-                              <td>{{find.improvements}}</td>
-                            </tr>
-                          </table>
-                        </div>
-                        <div class="col-md-4 col-lg-4 col-sm-4">
-                          <table class="table-bordered failur-table">
-                            <tr>
-                              <td><b>Responsible Staff</b></td>
-                            </tr>
-                            <tr>
-                              <td>{{find.sourceRequired}}</td>
-                            </tr>
-                          </table>
-                        </div>
                       </div>
-                      <div class="row">
-                        <div class="col-md-2 col-lg-2 col-sm-2">
-
-                        </div>
-                        <div class="col-md-4 col-lg-4 col-sm-4">
-                          <table class="table-bordered failur-table" style="margin-top:19px;">
-                            <tr>
-                              <td><b>Root Cause</b></td>
-                            </tr>
-                            <tr>
-                              <td>{{find.rootCause}}</td>
-                            </tr>
-                          </table>
-                        </div>
-                        <div class="col-md-4 col-lg-4 col-sm-4">
-                          <table class="table-bordered failur-table" style="margin-top:19px;">
-                            <tr>
-                              <td><b>Source Required</b></td>
-                            </tr>
-                            <tr>
-                              <td>{{find.sourceRequired}}</td>
-                            </tr>
-                          </table>
-                        </div>
                       </div>
+
                     </div>
                   </div>
                   <!--faliur-1-->
@@ -134,22 +102,23 @@
     <div class="modal-dialog modal-lg">
 
       <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
+      <div class="modal-content detail-content">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="modal-header">
+         
           <h4 class="modal-title">FILL FINDINGS</h4>
         </div>
         <form class="form-horizontal" [formGroup]="findingForm" (submit)="submitFinding()">
           <div class="modal-body">
 
             <div class="form-group">
-              <label class="control-label col-sm-2">Finding : </label>
+              <label class="control-label col-sm-2">FINDINGS</label>
               <div class="col-sm-10">
                 <textarea class="form-control" formControlName="finding"></textarea>
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-2">Category : </label>
+              <label class="control-label col-sm-2">CATEGORY</label>
               <div class="col-sm-10">
                 <select class="form-control" formControlName="categoryId">
                   <option *ngFor="let cat of categories;let c=index;" [value]="cat.id">{{cat.category}}</option>
@@ -157,39 +126,39 @@
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-2">Root Cause : </label>
+              <label class="control-label col-sm-2">ROOT CAUSE</label>
               <div class="col-sm-10">
                 <textarea class="form-control" formControlName="rootCause"></textarea>
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-2">Improvements : </label>
+              <label class="control-label col-sm-2">IMPROVEMENTS</label>
               <div class="col-sm-10">
                 <textarea class="form-control" formControlName="improvements"></textarea>
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-2">Responsible Staff : </label>
+              <label class="control-label col-sm-2">RESPONSIBLE-STAFF </label>
               <div class="col-sm-10">
                 <input type="text" class="form-control" formControlName="responsibleStaff">
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-2">Deadline : </label>
+              <label class="control-label col-sm-2">DEADLINE</label>
               <div class="col-sm-10">
                 <input type="date" class="form-control" formControlName="deadline">
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-2">Source Required : </label>
+              <label class="control-label col-sm-2">SOURCE-REQUIRED</label>
               <div class="col-sm-10">
                 <textarea class="form-control" formControlName="sourceRequired"></textarea>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="type" class="btn btn-success">Submit</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="type" class="btn btn-success btn-submit">SUBMIT</button>
+            <button type="button" class="btn btn-default btn-close" data-dismiss="modal">CLOSE</button>
           </div>
         </form>
 

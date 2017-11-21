@@ -11,6 +11,12 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
+          <label class="control-label">Unit</label>
+          <select class="form-control" name="unit" [(ngModel)]="selectedunitId" (ngModelChange)="getEmployees($event)">
+            <option *ngFor="let unit of units;let u = index;" [value]="unit.departmentId">{{unit.department}}</option>
+          </select>
+        </div>
+        <div class="form-group">
           <label class="control-label">EMPLOYEES</label>
           <select class="form-control" [(ngModel)]="selectedEmployees" multiple>
               <option *ngFor="let emp of employees;let e=index;" [value]="emp.id">
