@@ -14,8 +14,13 @@ declare let $:any;
   styleUrls:['./de.component.css'],
   providers:[DEAuditService,StorageService]
 })
+<<<<<<< HEAD
 export class DEComponent implements AfterViewInit{
   roles: any[];
+=======
+export class DEComponent{
+  roles: any[] =[[]];
+>>>>>>> ab5514933c9afcb81cbe96f6c23cb12b32b4ad4c
   units: any[];
   userDetails:any = this.storage.getData("userDetails");
   categories: any[];
@@ -94,8 +99,7 @@ export class DEComponent implements AfterViewInit{
     })
   }
 
-  getRoles(unitId:any){
-    console.log(unitId);
+  getRoles(unitId:any,index:any){
         if(this.findingForm.contains('responsibleStaffIds')){
       this.findingForm.removeControl('responsibleStaffIds');
     }
@@ -103,9 +107,9 @@ export class DEComponent implements AfterViewInit{
     console.log("role",unitId);
     this.des.getRoles(unitId).subscribe((response:any)=>{
       if(response.status == 204){
-        this.roles = [];
+        this.roles[index] = [];
       }else{
-        this.roles = response;
+        this.roles[index] = response;
       }
       
     })
