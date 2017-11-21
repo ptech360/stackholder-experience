@@ -24,6 +24,18 @@ export class DEAuditService{
     .catch(this.handleError);
   }
 
+  public getEmployees(unitId:any){
+    return this.http.get("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/unit/"+unitId+"/employees")
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
+  public getRoles(unitId:any){
+    return this.http.get("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/unit/"+unitId+"/roles")
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
   public postFinding(data:any){
     return this.http.post("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/de/finding",data)
     .map(this.extractData)

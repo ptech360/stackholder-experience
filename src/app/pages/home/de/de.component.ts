@@ -1,7 +1,10 @@
 import {Component} from '@angular/core';
 import { DEAuditService } from "./de.service";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, FormControl } from "@angular/forms";
 import { StorageService } from "../../shared/common.service";
+import { log } from 'util';
+import { FormArray } from '@angular/forms/src/model';
+import { Validators } from '@angular/forms';
 
 declare let $:any;
 
@@ -12,23 +15,33 @@ declare let $:any;
   providers:[DEAuditService,StorageService]
 })
 export class DEComponent{
+  roles: any[];
+  units: any[];
   userDetails:any = this.storage.getData("userDetails");
   categories: any[];
   audits: any[];
   findingForm:FormGroup;
+  selectedRoles:any[]=[];
   constructor(public des: DEAuditService, 
               private fb:FormBuilder,
               private storage:StorageService) {
     this.getAudits();
     this.des.getPrerequisite().subscribe((response:any)=>{
+      if(response.status == 204){
+        this.categories = [];
+        this.units = [];
+      }else{
       this.categories = response.categories;
+      this.units = response.units;
+      }
     })
     this.findingForm = this.fb.group({
       "finding":["failure"],
       "categoryId":[1],
       "rootCause":["need personal attention"],
       "improvements":["assign 2 employees for the work"],
-      "responsibleStaff":["manager"],
+      "responsibleRole":this.fb.array([this.initRoles()]),
+      "responsibleStaffIds":[''],
       "deadline":["2017-11-20"],
       "sourceRequired":["10 work hours for LD"],
       "touchpointId":[''],
@@ -36,6 +49,56 @@ export class DEComponent{
   })
   }
 
+  addRole(form:any){
+    const responsibleRole = this.findingForm.controls["responsibleRole"] as FormArray;
+    responsibleRole.push(this.initRoles());
+  }
+
+  removeRole(index:any){
+    const responsibleRole = this.findingForm.controls["responsibleRole"] as FormArray;
+    responsibleRole.removeAt(index);
+  }
+
+  initRoles(){
+    return this.fb.group({
+      departmentId:['',Validators.required],
+      roleId:['',Validators.required]
+    })
+  }
+
+  employees:any[];
+  getEmployees(unitId:any){
+    if(this.findingForm.contains('responsibleRole')){
+      this.findingForm.removeControl('responsibleRole');
+    }
+    this.findingForm.addControl('responsibleStaffIds',this.fb.array([this.initRoles()]))
+    console.log("log", unitId);
+    this.des.getEmployees(unitId).subscribe((response:any)=>{
+      if(response.status == 204){
+        this.employees = [];
+      }else{
+        this.employees = response;
+      }
+      
+    })
+  }
+
+  getRoles(unitId:any){
+        if(this.findingForm.contains('responsibleStaffIds')){
+      this.findingForm.removeControl('responsibleStaffIds');
+    }
+    this.findingForm.addControl('responsibleRole',new FormControl())
+    console.log("role",unitId);
+    this.des.getRoles(unitId).subscribe((response:any)=>{
+      if(response.status == 204){
+        this.roles = [];
+      }else{
+        this.roles = response;
+      }
+      
+    })
+    
+  }
 
 
   getAudits(){
