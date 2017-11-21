@@ -15,7 +15,7 @@ declare let $:any;
   providers:[DEAuditService,StorageService]
 })
 export class DEComponent{
-  roles: any[];
+  roles: any[] =[[]];
   units: any[];
   userDetails:any = this.storage.getData("userDetails");
   categories: any[];
@@ -83,7 +83,7 @@ export class DEComponent{
     })
   }
 
-  getRoles(unitId:any){
+  getRoles(unitId:any,index:any){
         if(this.findingForm.contains('responsibleStaffIds')){
       this.findingForm.removeControl('responsibleStaffIds');
     }
@@ -91,9 +91,9 @@ export class DEComponent{
     console.log("role",unitId);
     this.des.getRoles(unitId).subscribe((response:any)=>{
       if(response.status == 204){
-        this.roles = [];
+        this.roles[index] = [];
       }else{
-        this.roles = response;
+        this.roles[index] = response;
       }
       
     })

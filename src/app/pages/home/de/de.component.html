@@ -152,7 +152,7 @@
                 <div class="col-sm-6">
                   <label class="control-label col-sm-offset-3 col-sm-3" for="unit">Unit : </label>
                   <div class="col-sm-6">
-                    <select class="form-control" name="unit" formControlName="departmentId" (ngModelChange)="getRoles($event)">
+                    <select class="form-control" name="unit" formControlName="departmentId" (ngModelChange)="getRoles($event,r)">
                       <option *ngFor="let unit of units;let u = index;" [value]="unit.departmentId">{{unit.department}}</option>
                     </select>
                   </div>
@@ -161,7 +161,7 @@
                   <label class="control-label col-sm-3">Roles</label>
                   <div class="col-sm-9">
                     <select class="form-control " formControlName="roleId">
-                      <option *ngFor="let role of roles;let r=index;" [value]="role.roleId">
+                      <option *ngFor="let role of roles[r];let r=index;" [value]="role.roleId">
                         {{role.role}}
                       </option>
                     </select>
