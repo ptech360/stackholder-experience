@@ -1,8 +1,6 @@
 <div class="login-page">
-  <div id="hbmsu-container">
     <div id="hbmsu-top">
       <div id="hbmsu-header">
-        <div class="header">
           <div class="logo">
             <img id="LogoImage" alt="HBMSU" src="assets\images\i\logo.png" style="font-size: 11px">
           </div>
@@ -12,25 +10,12 @@
             <h1>
               An organizational Commitment to Excellence</h1>
           </div>
-          <div class="loginDisplay">
-
-            [ <a href="Login.aspx?IsAssociate=False" id="HeadLoginView_HeadLoginStatus">Log In</a>]
-
-            <br>
-
-          </div>
           <div class="clear hideSkiplink">
-
-
-          </div>
-        </div>
+                </div>
+    
       </div>
     </div>
     <div id="hbmsu-content">
-      <div class="main">
-        <h2>
-          Log In
-        </h2>
         <!-- <p>
           Please enter your username and password.
           <a id="MainContent_RegisterHyperLink" href="RequestVendorAccess.aspx">Registration</a> if you don't have an account.
@@ -44,7 +29,7 @@
         <div id="MainContent_LoginUser_LoginUserValidationSummary" class="failureNotification" style="display:none;">
 
         </div>
-        <form class="accountInfo" [formGroup]="loginForm" (submit)="submit()">
+        <!-- <form class="accountInfo" [formGroup]="loginForm" (submit)="submit()">
           <fieldset class="login">
             <legend>Account Information</legend>
             <p>
@@ -69,36 +54,72 @@
             <input type="submit" name="ctl00$MainContent$LoginUser$LoginButton" value="Log In" onclick=""
               id="MainContent_LoginUser_LoginButton">
           </p>
-        </form>
+        </form> -->
+        <div class="container">
+          <div class="login-wrap">
+            <img src="assets\images\login.png" alt="login-icon" class="login-icon">
+            <form [formGroup]="loginForm" (submit)="submit()">
+              <div class="row">
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                  <input type="text" placeholder="Username" name="user" formControlName="username" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                  <input type="password" placeholder="Password" name="pass" formControlName="password" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                  <button type="submit" class="btn btn-primary btn-sign">LOGIN</button>
+                </div>
+              </div>
+            </form>
+            <br>
+            <p class="forgot">
+              Forgot your password?
+              <a id="MainContent_ForgotPasswordHyperLink" href="RecoverPassword.aspx">Click Here</a>.
+            </p>
+          </div>
+        </div>
 
 
-        <p>
-          Forgot your password?
-          <a id="MainContent_ForgotPasswordHyperLink" href="RecoverPassword.aspx">Click Here</a>.
-        </p>
 
 
-      </div>
-      <div class="clear">
-      </div>
+     
+      <!-- <div class="clear">
+      </div> -->
     </div>
-    <div id="hbmsu-footer">
+    <!-- <div id="hbmsu-footer">
       <div class="footer">
       </div>
-    </div>
-  </div>
+    </div> -->
+  
 </div>
 
 <!-- new code -->
-<!-- <div class="login-page">
-  <div class="container">
+<!-- <div class="container-fluid">
+  <div class="login-wrap">
+    <h2>LOGIN</h2>
+    <img src="assets\images\login.png" alt="login-icon" class="login-icon">
+    <form [formGroup]="loginForm" (submit)="submit()">
     <div class="row">
-      <div class="col-md-6 col-lg-6 col-sm-12">
-
+      <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+          <input type="text" placeholder="Username" name="user" formControlName="username"/>
+      </div>
+    </div> 
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <input type="password" placeholder="Password" name="pass" formControlName="password"/>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+          <button type="submit" class="btn btn-primary btn-sign">log In</button>
       </div>
     </div>
-  </div>>
+    
+  </form>
+    
+  </div>
 </div> -->
-
-
-

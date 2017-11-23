@@ -16,7 +16,7 @@
   font-family: Arial;
   font-size: 13px;
   line-height: 1.5;
-  height: 136vh;
+  height: 100vh;
 }
 
 #hbmsu-container {
@@ -28,15 +28,16 @@
   width: 100%;
   float: left;
   background-image: url(../../../assets/images/i/inner-top.png);
-  height: 368px;
+  /* height: 368px; */
   background-repeat: no-repeat;
   background-position: center top;
+  margin-top: 15px;
 }
 
 #hbmsu-header {
   width: 960px;
   background-color: transparent;
-  margin: 168px auto 0px auto;
+  margin: 35px auto 0px auto;
 }
 
 .header {
@@ -112,6 +113,7 @@ div.hideSkiplink {
   background-image: url(../../../assets/images/i/inner-body-bg.png);
   background-position: center center;
   background-repeat: repeat-y;
+  height: 73vh;
 }
 
 .main {
@@ -212,4 +214,79 @@ input[type="submit"] {
 
 .login-img{
   width:8%;
+}
+
+/* new code */
+
+.login-wrap{
+  width: 45%;
+  height: 400px;
+  background: #f5fefd45;
+  margin:auto;
+  display: block;
+  padding: 20px;
+  box-shadow: 0 0 25px black;
+  margin-top:25px;
+}
+
+.login-wrap h2{
+  text-align: center;
+  font-size: 20px;
+  color: white;
+}
+
+.login-icon{
+  width: 17%;
+  margin: auto;
+  display: block;
+  margin-bottom: 30px;
+}
+
+.login-icon:hover{
+    transform: skew(-10deg);
+}
+
+.form {
+  padding-top: 20px;
+}
+  
+  input[type="text"],
+  input[type="password"],
+  button {
+    width: 100%;
+    margin-bottom: 25px;
+    height: 40px;
+    border-radius: 5px;
+    outline: 0;
+    margin-left: 30px;
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    border: 1px solid #bbb;
+    padding: 0 0 0 10px;
+    font-size: 14px;
+  
+  }
+
+.btn-sign{
+  width:50%;
+  margin: auto;
+  display: block;
+  margin-right: 50px;
+}
+.btn-sign:active {
+  border-style:inset;
+}
+
+.btn-sign:focus {
+  outline: -webkit-focus-ring-color auto 0px;
+}
+
+.forgot{
+  font-size: 15px;
+  color: black;
+  font-family: raleway;
+  margin-top: 15px;
+
 }
