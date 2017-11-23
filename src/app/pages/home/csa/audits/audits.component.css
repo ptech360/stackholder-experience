@@ -56,20 +56,74 @@ tbody td[rowspan] {
     text-align: initial;
 }
 
-.modal-content{
-    border-radius: 0px!important;
+.detail-content{
+    border-radius: 10px;
+    border: 4px solid #103a71;
+    box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
 }
+ 
 
 .modal-title{
     text-align: center;
    color:white;
 }
 .modal-header{
-    background:#145766;
+    background:#103a71; 
+    width:40%;
+    margin: auto;
+    border-radius: 10px;
+    margin-top: -20px;
 }
 
-.btn-success,.btn-default{
-    border-radius: 0px;
+.modal-title{
+    text-align: center;
+    color: white;
+    font-family: Raleway;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.modal-body{
+    padding: 15px;
+    font-family: Raleway;
+    font-size: 14px;
+  
+}
+
+.btn-submit{
+ color: #fff;
+ background-color: #103a71;
+ border-color: #ffffff;
+ border-radius:7px;
+}
+
+.btn-submit:hover {
+	background: rgba(0,0,0,0);
+	color: #103a71;
+	box-shadow: inset 0 0 0 3px #103a71;
+}
+.btn-submit:focus {
+    outline: -webkit-focus-ring-color auto 0px;
+}
+
+
+.btn-close{
+    color:white;
+    background-color:red;
+    border-color:red;
+    border-radius:8px;
+    font-family:Raleway;
+}
+
+.btn-close:hover{
+	background: white;
+	color: red;
+    box-shadow: inset 0 0 0 3px red;
+    font-family:Raleway;
+}
+
+.btn-close:focus {
+    outline: -webkit-focus-ring-color auto 0px;
 }
 
 .close{
