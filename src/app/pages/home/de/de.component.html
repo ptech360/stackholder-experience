@@ -123,8 +123,8 @@
               <label class="control-label col-sm-3">CATEGORY </label>
               <div class="col-sm-9">
                 <select class="form-control" formControlName="categoryId">
-                    <option *ngFor="let cat of categories;let c=index;" [value]="cat.id">{{cat.category}}</option>
-                  </select>
+                  <option *ngFor="let cat of categories;let c=index;" [value]="cat.id">{{cat.category}}</option>
+                </select>
               </div>
             </div>
             <div class="form-group">
@@ -151,22 +151,30 @@
               </div>
             </div>
             <div class="form-group" *ngIf="type == 'pankaj'">
+              <div class="col-sm-offset-3 col-sm-9">
+                <ul style="list-style:none;padding:0px;">
+                  <li *ngFor="let employee of selectedStaff;let e=index;">{{e+1}}) {{employee.firstName}} {{employee.lastName}}
+                    <button type="button" class="close" data-dismiss="modal" (click)="removeResponsibleStaffId(e)">&times;</button>
+                  </li>
+                </ul>
+              </div>
+
               <div class="col-sm-6">
                 <label class="control-label col-sm-offset-3 col-sm-3" for="unit">UNIT </label>
                 <div class="col-sm-6">
                   <select class="form-control" name="unit" [(ngModel)]="unitIdForEmp" [ngModelOptions]="{standalone: true}" (change)="getEmployees(unitIdForEmp)">
-                      <option *ngFor="let unit of units;let u = index;" [value]="unit.departmentId">{{unit.department}}</option>
-                    </select>
+                    <option *ngFor="let unit of units;let u = index;" [value]="unit.departmentId">{{unit.department}}</option>
+                  </select>
                 </div>
               </div>
               <div class="col-sm-6">
                 <label class="control-label col-sm-3">EMPLOYEE</label>
                 <div class="col-sm-9">
-                  <select class="form-control" formControlName="responsibleStaffIds" multiple>
-                      <option *ngFor="let emp of employees;let e=index;" [value]="emp.id">
-                        {{emp.firstName}} {{emp.lastName}}
-                      </option>
-                    </select>
+                  <select class="form-control" [(ngModel)]="responsibleStaff" [ngModelOptions]="{standalone: true}" multiple (change)="getResponsibleStaffIds()">
+                    <option *ngFor="let emp of employees;let e=index;" [value]="emp">
+                      {{emp.firstName}} {{emp.lastName}}
+                    </option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -174,7 +182,7 @@
             <div class="form-group" *ngIf="type == 'tushar'" formArrayName="responsibleRole">
               <div *ngFor="let resRole of findingForm.controls.responsibleRole['controls']; let r = index;" [formGroupName]="r">
                 <div class="col-sm-6">
-                  <label class="control-label col-sm-offset-3 col-sm-3" for="unit">UNIT </label>
+                  <label class="control-label col-sm-offset-3 col-sm-3" for="unit">Unit : </label>
                   <div class="col-sm-6">
                     <select class="form-control" name="unit" formControlName="departmentId" (ngModelChange)="getRoles($event,r)">
                       <option *ngFor="let unit of units;let u = index;" [value]="unit.departmentId">{{unit.department}}</option>
@@ -212,7 +220,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="type" class="btn btn-success btn-submit">SUBMIT</button>
+            <button type="submit" class="btn btn-success btn-submit">SUBMIT</button>
             <button type="button" class="btn btn-default btn-close" data-dismiss="modal">CLOSE</button>
           </div>
         </form>

@@ -1,0 +1,46 @@
+<div class="container">
+  <!-- <h3>Ranked Journey</h3> -->
+    <div class="form-group">
+      <label class="control-label col-sm-3">Choose Stakeholder</label>
+      <div class="col-sm-9">
+        <select class="form-control" [(ngModel)]="stakeholderId" (ngModelChange)="getRankingTable($event)">
+          <option *ngFor="let stackholder of stackholders;let s = index;" [value]="stackholder.stackholderId">{{stackholder.stackholder}}</option>
+        </select>
+      </div>
+    </div>
+    <br>
+    <div class="panel panel-default" *ngIf="stakeholderId">
+      <div class="panel-heading">
+        <b>Ranked Journey of Touchpoints</b>
+      </div>
+      <div class="panel-body">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>S.No.</th>
+              <th>Unit</th>
+              <th>Touch Point</th>
+              <th>Ranks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of tableData;let d=index;">
+              <th>{{d+1}}</th>
+              <th>{{data.department}}</th>
+              <th>{{data.touchpoint}}</th>
+              <th>
+                <span>{{data.rank}}</span>
+                <!-- <input type="number" [attr.id]="'rank' + d" style="width:40px;" (change)="validateRank($event,d)" [attr.min]="1" [attr.max]="tableData.length"> -->
+              </th>
+            </tr>
+          </tbody>
+          <!-- <tfoot>
+            <tr>
+              <td colspan="3"></td>
+              <td><button type="button" (click)="submitRank()" [disabled]="submitDisabled">Submit</button></td>
+            </tr>
+          </tfoot> -->
+        </table>
+      </div>
+    </div>
+  </div>

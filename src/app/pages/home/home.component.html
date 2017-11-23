@@ -63,7 +63,7 @@
 
 <nav class="navbar new-nav-bar container">
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <a class="navbar-brand" href="#"><img src="assets\images\HBMSU-home.jpg"></a>
             </div>
             <div class="col-lg-2 col-md-2 co-sm-4 col-xs-4" routerLinkActive="active" style="padding: 0px;" >
@@ -79,10 +79,15 @@
                 </div>
             </div>
             <div class="col-lg-2 col-md-2 co-sm-4 col-xs-4" routerLinkActive="active"  style="padding: 0px;" >
+                <div class="csa-detail" [routerLink]="['./rank']">
+                    <img src="assets\images\report.png" class="data-img"/>
+                    <h5 class="font-detail">Ranking</h5>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 co-sm-4 col-xs-4" routerLinkActive="active"  style="padding: 0px;" >
                 <div class="csa-detail" [routerLink]="['./report']">
                     <img src="assets\images\report.png" class="data-img"/>
                    <h5 class="font-detail">REPORTS</h5>
-
                 </div>
             </div>
        </div>

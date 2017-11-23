@@ -60,67 +60,94 @@ export class DEComponent{
       $(".panel-finding").removeClass("in"); // remove active class from all
       // add active class to clicked element
       }
-  addRole(){
-    const responsibleRole = this.findingForm.controls["responsibleRole"] as FormArray;
-    responsibleRole.push(this.initRoles());
-  }
-
-  removeRole(index:any){
-    const responsibleRole = this.findingForm.controls["responsibleRole"] as FormArray;
-    responsibleRole.removeAt(index);
-  }
-
-  initRoles(){
-    return this.fb.group({
-      departmentId:['',Validators.required],
-      roleId:['',Validators.required]
-    })
-  }
-
-  employees:any[];
-  getEmployees(unitId:any){
-    if(this.findingForm.contains('responsibleRole')){
-      this.findingForm.removeControl('responsibleRole');
-    }
-    this.findingForm.addControl('responsibleStaffIds',this.fb.array([this.initRoles()]))
-    console.log("log", unitId);
-    this.des.getEmployees(unitId).subscribe((response:any)=>{
-      if(response.status == 204){
-        this.employees = [];
-      }else{
-        this.employees = response;
+      addRole(form:any){
+        const responsibleRole = this.findingForm.controls["responsibleRole"] as FormArray;
+        responsibleRole.push(this.initRoles());
       }
-      
-    })
-  }
-
-  getRoles(unitId:any,index:any){
-        if(this.findingForm.contains('responsibleStaffIds')){
-      this.findingForm.removeControl('responsibleStaffIds');
-    }
-    this.findingForm.addControl('responsibleRole',new FormControl())
-    console.log("role",unitId);
-    this.des.getRoles(unitId).subscribe((response:any)=>{
-      if(response.status == 204){
-        this.roles[index] = [];
-      }else{
-        this.roles[index] = response;
-      }
-      
-    })
     
-  }
-
-
-  getAudits(){
-    this.des.getAudits().subscribe((response:any)=>{
-      if(response.status == 204){
-        this.audits = [];
-      }else{
-      this.audits = response;
-    }
-    })
-  }
+      removeRole(index:any){
+        const responsibleRole = this.findingForm.controls["responsibleRole"] as FormArray;
+        responsibleRole.removeAt(index);
+      }
+    
+      initRoles(){
+        return this.fb.group({
+          departmentId:['',Validators.required],
+          roleId:['',Validators.required]
+        })
+      }
+    
+    
+      type;
+      getEmployeeControl(){
+        this.type = "pankaj";
+        if(this.findingForm.contains('responsibleRole')){
+          this.findingForm.removeControl('responsibleRole');
+        }
+        this.findingForm.addControl('responsibleStaffIds',new FormControl());
+        
+      }
+    
+      getRoleControl(){
+        if(this.findingForm.contains('responsibleStaffIds')){
+          this.findingForm.removeControl('responsibleStaffIds');
+        }
+        this.findingForm.addControl('responsibleRole',this.fb.array([this.initRoles()]))
+      }
+    
+      employees:any[];
+      getEmployees(unitId:any){
+        console.log("log", unitId);
+        this.des.getEmployees(unitId).subscribe((response:any)=>{
+          if(response.status == 204){
+            this.employees = [];
+          }else{
+            this.employees = response;
+          }
+          
+        })
+      }
+    
+      getRoles(unitId:any,index:any){
+        console.log("role",unitId);
+        this.des.getRoles(unitId).subscribe((response:any)=>{
+          if(response.status == 204){
+            this.roles[index] = [];
+          }else{
+            this.roles[index] = response;
+          }
+          
+        })    
+      }
+    
+    
+      getAudits(){
+        this.des.getAudits().subscribe((response:any)=>{
+          if(response.status == 204){
+            this.audits = [];
+          }else{
+          this.audits = response;
+        }
+        })
+      }
+    
+      responsibleStaff:any[];
+      selectedStaff:any[]=[];
+      selectedStaffIds:any[]=[];
+      getResponsibleStaffIds(){
+        this.findingForm.value["responsibleStaffIds"] = [];
+        this.responsibleStaff.forEach(element => {
+          if(this.selectedStaffIds.indexOf(element.id)===-1){
+            this.selectedStaff.push(element);
+            this.selectedStaffIds.push(element.id);
+            }
+        });
+      }
+    
+      removeResponsibleStaffId(index:any){
+        this.selectedStaff.splice(index,1);
+        this.selectedStaffIds.splice(index,1);
+      }
 
   getRowSpan(array:any){
     var rowSpan = 1;
@@ -158,10 +185,12 @@ export class DEComponent{
   selectedTouchpoint:any;
   submitFinding(){
     this.findingForm.controls["touchpointId"].setValue(this.selectedTouchpoint);
+    if(this.findingForm.contains('responsibleStaffIds'))
+      this.findingForm.controls["responsibleStaffIds"].patchValue(this.selectedStaffIds);
     console.log(this.findingForm.value);
-    this.des.postFinding(this.findingForm.value).subscribe((response:any)=>{
-      console.log(response);
-      $('#myModal').modal('hide');
-    })
+    // this.des.postFinding(this.findingForm.value).subscribe((response:any)=>{
+    //   console.log(response);
+    //   $('#myModal').modal('hide');
+    // })
   }
 }
