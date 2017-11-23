@@ -10,26 +10,39 @@ declare let $:any;
   providers:[RankService]
 })
 export class ViewRankComponent{
+  stakeholderId: any;
   submitDisabled: boolean = true;
   stackholders: any;
-  tableData: any;
+  tableData: any[]=[];
   constructor(public rs: RankService) {
     this.getPrerequisite();
   }
   getRankingTable(event: any) {
     this.rs.getRankedJourney(event).subscribe((response: any) => {
-      this.tableData = response;
+      if(response.status == 204){
+        alert("there is not ranked any touchpoints corresponding to this stakeholder");
+        this.tableData = [];
+      }else{
+        this.tableData = response;
+        this.tableData.forEach((element:any,index:any) => {
+          this.checkValue[index]=element.rank;
+        });
+        }
     })
   }
 
   getPrerequisite() {
     this.rs.getPrerequisite().subscribe((response: any) => {
+      if(response.status == 204){
+        this.stackholders = [];
+      }else
       this.stackholders = response.stackholders;
     })
   }
 
   checkValue:any[]=[];
   validateRank(event:any,index:any): any {
+    console.log(this.checkValue);
     if(this.checkValue.indexOf(event.srcElement.value)===-1){
       $('#' + event.srcElement.id).css({ 'border': '1px solid black' });
     }else{
@@ -55,7 +68,20 @@ export class ViewRankComponent{
       this.submitDisabled = false;
     });
   }
-}
+
+  submitRank() {
+    var touchPointRank = [];
+    console.log(this.tableData);
+    this.tableData.forEach((element:any,index:any) => {
+      touchPointRank.push({
+        touchpointId:element.touchpointId,
+        rank:this.checkValue[index]
+      });
+    });
+    this.rs.saveRanking(this.stakeholderId,touchPointRank).subscribe((response:any)=>{
+      console.log(response);
+    })
+  }
 }
 
 

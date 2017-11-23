@@ -26,7 +26,7 @@
           <tr *ngFor="let data of tableData;let d=index;">
             <th>{{d+1}}</th>
             <th>{{data.department}}</th>
-            <th>{{data.touchPoint}}</th>
+            <th>{{data.touchpoint}}</th>
             <th>
               <input type="number" [attr.id]="'rank' + d" style="width:40px;" (change)="validateRank($event,d)" [attr.min]="1" [attr.max]="tableData.length">
             </th>
