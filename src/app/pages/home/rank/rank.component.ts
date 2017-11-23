@@ -12,13 +12,10 @@ declare let $: any;
   providers: [RankService]
 })
 export class RankComponent {
-  stakeholderId(arg0: any, arg1: any): any {
-    throw new Error("Method not implemented.");
-  }
+  stakeholderId:any;
   submitDisabled: boolean = true;
   tableData: any[] = [];
   stackholders: any[] = [];
-  check: any = {};
   constructor(public rs: RankService) {
     this.getPrerequisite();
   }
