@@ -28,7 +28,7 @@
           </tr>
         </thead>
         <tbody *ngFor="let data of tableData;let d=index;">
-          <tr>
+          <tr (click)="showFinding[d] = !showFinding[d]">
             <td rowspan="1">{{d+1}}</td>
             <td rowspan="1">{{data.department}}</td>
             <td rowspan="1">{{data.touchpoint}}</td>
@@ -48,11 +48,11 @@
             </td>
             <td rowspan="1">
               <span *ngIf="!edit">{{data.rank}}</span>
-              <input type="number" [attr.id]="'rank' + d" style="width:40px;" (change)="validateRank($event,d)" [attr.min]="1" [attr.max]="tableData.length"
+              <input type="number" [attr.id]="'rank' + d" style="width:40px;" [(ngModel)]="checkValue[d]" (change)="validateRank($event,d,inp)" #inp [attr.min]="1" [attr.max]="tableData.length"
                 *ngIf="edit">
             </td>
           </tr>
-          <tr *ngIf="data.findings.length">
+          <tr *ngIf="data.findings.length && showFinding[d]">
             <td></td>
             <td colspan="4">
               <div class="panel panel-default">
@@ -95,7 +95,7 @@
           <tr>
             <td colspan="5"></td>
             <td>
-              <button type="button" (click)="submitRank()" [disabled]="submitDisabled" *ngIf="edit">Submit</button>
+              <button type="button" (click)="submitRank()" class="btn btn-primary" [disabled]="isDisable()" *ngIf="edit">Submit</button>
             </td>
           </tr>
         </tfoot>

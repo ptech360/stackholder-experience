@@ -28,14 +28,14 @@
             <th>{{data.department}}</th>
             <th>{{data.touchpoint}}</th>
             <th>
-              <input type="number" [attr.id]="'rank' + d" style="width:40px;" (change)="validateRank($event,d)" [attr.min]="1" [attr.max]="tableData.length">
+              <input type="number" [attr.id]="'rank' + d" style="width:40px;" [(ngModel)]="checkValue[d]" (change)="validateRank($event,d,inp)" #inp [attr.min]="1" [attr.max]="tableData.length">
             </th>
           </tr>
         </tbody>
         <tfoot>
           <tr>
             <td colspan="3"></td>
-            <td><button type="button" (click)="submitRank()" [disabled]="submitDisabled">Submit</button></td>
+            <td><button type="button" (click)="submitRank()" class="btn btn-primary" [disabled]="isDisable()">Submit</button></td>
           </tr>
         </tfoot>
       </table>

@@ -42,7 +42,7 @@
             <div class="form-group">
               <label class="control-label col-sm-2" style="text-align:left">TOUCH POINT </label>
               <div class="col-sm-10">
-                <textarea class="form-control" formControlName="touchPoint"></textarea>
+                <textarea class="form-control" formControlName="touchpoint"></textarea>
               </div>
             </div>
             <div class="form-group">
@@ -55,18 +55,25 @@
             <div class="form-group">
               <label class="control-label col-sm-2" style="text-align:left">CHANNEL </label>
               <div class="col-sm-10">
-                  <label class="checkbox-inline" *ngFor="let channel of channels;let c = index;">
+                <ng-container *ngFor="let channel of channels;let c = index;">
+                  <label class="checkbox-inline" >
                       <input type="checkbox" name="channel" (change)="getChannels(tp,channel.id,$event.target.checked)">{{channel.channel}}
                   </label>
+                  <br *ngIf="c==channels.length/2  - 1">
+                  </ng-container>
+
               </div>
             </div>
 
             <div class="form-group">
               <label class="control-label col-sm-2" style="text-align:left">DATA SOURCE </label>
               <div class="col-sm-10">
-                  <label class="checkbox-inline" *ngFor="let dataSource of dataSources;let d = index;">
+                <ng-container *ngFor="let dataSource of dataSources;let d = index;">
+                  <label class="checkbox-inline" >
                       <input type="checkbox" name="dataSource" (change)="getdataSources(tp,dataSource.id,$event.target.checked)">{{dataSource.dataSource}}
                   </label>
+                  <br *ngIf="d==dataSources.length/2 - 1">
+                </ng-container>
               </div>
             </div>
           </div>

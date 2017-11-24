@@ -29,16 +29,16 @@ import { SharedModule } from "../shared/shared.module";
           },
           {
             path:'report',
-            loadChildren:'app/pages/home/reports/report.module#ReportModule'
-          },
-          {
-            path:'rank',
-            loadChildren:'app/pages/home/rank/rank.module#RankModule'
-          },
-          {
-            path:'view-rank',
             loadChildren:'app/pages/home/rank/view/view.rank.module#ViewRankModule'
-          }
+          },
+          // {
+          //   path:'rank',
+          //   loadChildren:'app/pages/home/rank/rank.module#RankModule'
+          // },
+          // {
+          //   path:'view-rank',
+          //   loadChildren:'app/pages/home/rank/view/view.rank.module#ViewRankModule'
+          // }
         ]
       }
     ])
