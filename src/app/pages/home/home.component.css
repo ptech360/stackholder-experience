@@ -199,6 +199,10 @@ top: 10px;
  display: block;
 }
 
+/* .data-detail:hover{
+  background: grey;
+} */
+
 
 .data-detail:focus{
       outline: -webkit-focus-ring-color auto 0px;
