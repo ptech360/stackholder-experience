@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { RankService } from './rank.service';
 import { resetFakeAsyncZone } from '@angular/core/testing';
-import { log } from 'util';
 
 declare let $: any;
 
@@ -55,7 +54,7 @@ export class RankComponent {
       $('#' + event.srcElement.id).css({ 'border': '1px solid red' });
     }
     this.checkValue[index]=event.srcElement.value;
-    this.isDisable();
+    this.isDisable();    
   }
   
 

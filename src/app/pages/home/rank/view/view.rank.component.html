@@ -1,46 +1,105 @@
 <div class="container">
   <!-- <h3>Ranked Journey</h3> -->
-    <div class="form-group">
-      <label class="control-label col-sm-3">Choose Stakeholder</label>
-      <div class="col-sm-9">
-        <select class="form-control" [(ngModel)]="stakeholderId" (ngModelChange)="getRankingTable($event)">
-          <option *ngFor="let stackholder of stackholders;let s = index;" [value]="stackholder.stackholderId">{{stackholder.stackholder}}</option>
-        </select>
-      </div>
-    </div>
-    <br>
-    <div class="panel panel-default" *ngIf="stakeholderId">
-      <div class="panel-heading">
-        <b>Ranked Journey of Touchpoints</b>
-      </div>
-      <div class="panel-body">
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>S.No.</th>
-              <th>Unit</th>
-              <th>Touch Point</th>
-              <th>Ranks</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let data of tableData;let d=index;">
-              <th>{{d+1}}</th>
-              <th>{{data.department}}</th>
-              <th>{{data.touchpoint}}</th>
-              <th>
-                <span>{{data.rank}}</span>
-                <!-- <input type="number" [attr.id]="'rank' + d" style="width:40px;" (change)="validateRank($event,d)" [attr.min]="1" [attr.max]="tableData.length"> -->
-              </th>
-            </tr>
-          </tbody>
-          <!-- <tfoot>
-            <tr>
-              <td colspan="3"></td>
-              <td><button type="button" (click)="submitRank()" [disabled]="submitDisabled">Submit</button></td>
-            </tr>
-          </tfoot> -->
-        </table>
-      </div>
+  <div class="form-group">
+    <label class="control-label col-sm-3">Choose Stakeholder</label>
+    <div class="col-sm-9">
+      <select class="form-control" [(ngModel)]="stakeholderId" (ngModelChange)="getRankingTable($event)" (click)="edit=false">
+        <option *ngFor="let stackholder of stackholders;let s = index;" [value]="stackholder.stackholderId">{{stackholder.stackholder}}</option>
+      </select>
     </div>
   </div>
+  <br>
+  <div class="panel panel-default" *ngIf="tableData.length">
+    <div class="panel-heading">
+      <b>Ranked Journey of Touchpoints</b>
+    </div>
+    <div class="panel-body">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>S.No.</th>
+            <th>Unit</th>
+            <th>Touch Point</th>
+            <th>Channels</th>
+            <th>Data Sources</th>
+            <th>Ranks
+              <button (click)="edit=true">Edit</button>
+            </th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let data of tableData;let d=index;">
+          <tr>
+            <td rowspan="1">{{d+1}}</td>
+            <td rowspan="1">{{data.department}}</td>
+            <td rowspan="1">{{data.touchpoint}}</td>
+            <td rowspan="1">
+              <ul class="list">
+                <li style="float:left" *ngFor="let channel of data.channels;let c = index;">{{channel.channel}}
+                  <span *ngIf="c!=data.channels.length-1">,</span>
+                </li>
+              </ul>
+            </td>
+            <td rowspan="1">
+              <ul class="list">
+                <li style="float:left" *ngFor="let dataSource of data.dataSources;let d = index;">{{dataSource.dataSource}}
+                  <span *ngIf="d!=data.dataSources.length-1">,</span>
+                </li>
+              </ul>
+            </td>
+            <td rowspan="1">
+              <span *ngIf="!edit">{{data.rank}}</span>
+              <input type="number" [attr.id]="'rank' + d" style="width:40px;" (change)="validateRank($event,d)" [attr.min]="1" [attr.max]="tableData.length"
+                *ngIf="edit">
+            </td>
+          </tr>
+          <tr *ngIf="data.findings.length">
+            <td></td>
+            <td colspan="4">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">Findings
+                  </h4>
+                </div>
+                <div class="panel-body">
+                  <ul style="list-style:none;padding:0px;">
+                    <li class="row" *ngFor="let find of data.findings;let f = index;" style="padding: 5px;
+                        border: 1px solid gainsboro;
+                        border-radius: 5px;
+                        margin: 0px;
+                        margin-bottom: 5px;">
+                      <div class="col-sm-6">
+                        <p>
+                          <b>Finding :</b>{{find.finding}}</p>
+                        <p>
+                          <b>Category :</b>{{find.category}}</p>
+                        <p>
+                          <b>Improvements :</b>{{find.improvements}}</p>
+                      </div>
+                      <div class="col-sm-6">
+                        <p>
+                          <b>Responsible Staff :</b>{{find.responsibleStaff}}</p>
+                        <p>
+                          <b>Root Cause :</b>{{find.rootCause}}</p>
+                        <p>
+                          <b>Source Required :</b>{{find.sourceRequired}}</p>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </td>
+            <td></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="5"></td>
+            <td>
+              <button type="button" (click)="submitRank()" [disabled]="submitDisabled" *ngIf="edit">Submit</button>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
