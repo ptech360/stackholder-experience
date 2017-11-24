@@ -48,7 +48,7 @@
             </td>
             <td rowspan="1">
               <span *ngIf="!edit">{{data.rank}}</span>
-              <input type="number" [attr.id]="'rank' + d" style="width:40px;" [(ngModel)]="checkValue[d]" (change)="validateRank($event,d,inp)" #inp [attr.min]="1" [attr.max]="tableData.length"
+              <input type="number" [attr.id]="'rank' + d" style="width:40px;" [(ngModel)]="checkValue[d]" (keyup)="validateRank($event,d,inp)" (click)="validateRank($event,d,inp)" #inp [attr.min]="1" [attr.max]="tableData.length"
                 *ngIf="edit">
             </td>
           </tr>
