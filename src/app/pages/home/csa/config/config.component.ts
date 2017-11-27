@@ -26,7 +26,7 @@ export class ConfigComponent{
       unitId: ['',Validators.required],
       stackholderId: ['',Validators.required],
       touchpoints: this.fb.array([this.fb.group({
-        touchPoint: ['',Validators.required],
+        touchpoint: ['',Validators.required],
         experience: ['',Validators.required],
         channelIds:this.fb.array([]),
         dataSourceIds:this.fb.array([])   
@@ -62,7 +62,7 @@ export class ConfigComponent{
 
   setTouchPoint(){
     return this.fb.group({
-      touchPoint: ['',Validators.required],
+      touchpoint: ['',Validators.required],
       experience: ['',Validators.required],
       channelIds:this.fb.array([]),
       dataSourceIds:this.fb.array([])        
