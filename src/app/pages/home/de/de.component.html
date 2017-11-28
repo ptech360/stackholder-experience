@@ -23,7 +23,7 @@
           <td [attr.rowspan]="stackholder.touchpoints.length + 3">{{stackholder.stackholder}}</td>
         </tr>
         <ng-template ngFor let-tp [ngForOf]="stackholder.touchpoints" let-t="index">
-          <tr>
+          <tr >
             <td>{{tp.touchpoint}}</td>
             <td>
               <ul class="list">
