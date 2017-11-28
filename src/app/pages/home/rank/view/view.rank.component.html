@@ -1,35 +1,36 @@
 <div class="container">
   <!-- <h3>Ranked Journey</h3> -->
   <div class="form-group">
-    <label class="control-label col-sm-3">Choose Stakeholder</label>
-    <div class="col-sm-9">
+    <label class="control-label col-sm-3 col-lg-3 col-md-3"> CHOOSE STAKEHOLDER </label>
+    <div class="col-sm-9 col-lg-9 col-md-9">
       <select class="form-control" [(ngModel)]="stakeholderId" (ngModelChange)="getRankingTable($event)" (click)="edit=false">
         <option *ngFor="let stackholder of stackholders;let s = index;" [value]="stackholder.stackholderId">{{stackholder.stackholder}}</option>
       </select>
     </div>
+
   </div>
   <br>
-  <div class="panel panel-default" *ngIf="tableData.length">
+  <div *ngIf="tableData.length">
     <div class="panel-heading">
-      <b>Ranked Journey of Touchpoints</b>
+      <b class="margin-top"> RANKED JOURNEY OF TOUCHPOINTS <i class="glyphicon glyphicon-arrow-down"></i> </b>
     </div>
     <div class="panel-body">
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>S.No.</th>
-            <th>Unit</th>
-            <th>Touch Point</th>
-            <th>Channels</th>
-            <th>Data Sources</th>
-            <th>Ranks
-              <button (click)="edit=true">Edit</button>
+            <!-- <th>S.No.</th> -->
+            <th>UNIT</th>
+            <th>TOUCH POINTS</th>
+            <th>CHANNELS</th>
+            <th>DATA SOURCE</th>
+            <th>RANK
+              <button (click)="edit=true" class="btn-edit"><i class="glyphicon glyphicon-pencil"></i></button>
             </th>
           </tr>
         </thead>
         <tbody *ngFor="let data of tableData;let d=index;">
           <tr (click)="showFinding[d] = !showFinding[d]">
-            <td rowspan="1">{{d+1}}</td>
+            <!-- <td rowspan="1">{{d+1}}</td> -->
             <td rowspan="1">{{data.department}}</td>
             <td rowspan="1">{{data.touchpoint}}</td>
             <td rowspan="1">
@@ -43,25 +44,46 @@
               <ul class="list">
                 <li style="float:left" *ngFor="let dataSource of data.dataSources;let d = index;">{{dataSource.dataSource}}
                   <span *ngIf="d!=data.dataSources.length-1">,</span>
+
                 </li>
               </ul>
             </td>
             <td rowspan="1">
               <span *ngIf="!edit">{{data.rank}}</span>
-              <input type="number" [attr.id]="'rank' + d" style="width:40px;" [(ngModel)]="checkValue[d]" (keyup)="validateRank($event,d,inp)" (click)="validateRank($event,d,inp)" #inp [attr.min]="1" [attr.max]="tableData.length"
-                *ngIf="edit">
+              <input type="number" [attr.id]="'rank' + d" style="width:40px;" [(ngModel)]="checkValue[d]" (keyup)="validateRank($event,d,inp)"
+                (click)="validateRank($event,d,inp)" #inp [attr.min]="1" [attr.max]="tableData.length" *ngIf="edit">
             </td>
           </tr>
           <tr *ngIf="data.findings.length && showFinding[d]">
             <td></td>
             <td colspan="4">
-              <div class="panel panel-default">
+
+              <div class="panel panel-default" *ngFor="let find of data.findings;let f = index;">
                 <div class="panel-heading">
-                  <h4 class="panel-title">Findings
-                  </h4>
-                </div>
-                <div class="panel-body">
-                  <ul style="list-style:none;padding:0px;">
+                  <div class="badge badge-numbering">{{(f+1)}}<br></div> {{find.finding}}</div>
+                <div class="panel-body no-gap">
+                  <div class="row"> 
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                      <table class="table table-finding table-bordered">
+                        <thead>
+                          <tr>
+                            <th width="10%">CATEGORY</th>
+                            <th width="10%">IMPROVEMENTS</th>
+                            <th width="10%">RESPONSIBLE STAFF</th>
+                            <th width="10%">ROOT CAUSE</th>
+                            <th width="10%">SOURCE REQUIRED</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>{{find.category}}</td>
+                            <td>{{find.improvements}}</td>
+                            <td>{{find.responsibleStaff}}</td>
+                            <td>{{find.rootCause}}</td>
+                            <td>{{find.sourceRequired}}</td>
+                          </tr>
+                        </tbody>
+                        <!-- <ul style="list-style:none;padding:0px;">
                     <li class="row" *ngFor="let find of data.findings;let f = index;" style="padding: 5px;
                         border: 1px solid gainsboro;
                         border-radius: 5px;
@@ -84,22 +106,18 @@
                           <b>Source Required :</b>{{find.sourceRequired}}</p>
                       </div>
                     </li>
-                  </ul>
+                  </ul> -->
+                      </table>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </td>
+              </td>           
             <td></td>
           </tr>
         </tbody>
-        <tfoot>
-          <tr>
-            <td colspan="5"></td>
-            <td>
-              <button type="button" (click)="submitRank()" class="btn btn-primary" [disabled]="isDisable()" *ngIf="edit">Submit</button>
-            </td>
-          </tr>
-        </tfoot>
       </table>
+      <button type="button" (click)="submitRank()" class="btn btn-primary btn-submit" [disabled]="isDisable()" *ngIf="edit">SUBMIT</button>
     </div>
+    <!-- </div> -->
   </div>
-</div>
