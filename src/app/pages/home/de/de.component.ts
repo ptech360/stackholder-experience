@@ -22,6 +22,7 @@ export class DEComponent{
   audits: any[];
   findingForm:FormGroup;
   selectedRoles:any[]=[];
+  selectedTouchpoint : any = {};
   constructor(public des: DEAuditService, 
               private fb:FormBuilder,
               private storage:StorageService) {
@@ -182,7 +183,7 @@ export class DEComponent{
       return tp.dataSources.length + 2;
   }
 
-  selectedTouchpoint:any;
+  // selectedTouchpoint:any;
   submitFinding(){
     this.findingForm.controls["touchpointId"].setValue(this.selectedTouchpoint);
     if(this.findingForm.contains('responsibleStaffIds'))
