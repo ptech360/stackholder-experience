@@ -10,6 +10,7 @@ declare let $:any;
   providers:[RankService]
 })
 export class ViewRankComponent{
+  edit: boolean;
   stakeholderId: any;
   submitDisabled: boolean = true;
   stackholders: any;
@@ -120,7 +121,12 @@ export class ViewRankComponent{
       });
     });
     this.rs.saveRanking(this.stakeholderId,touchPointRank).subscribe((response:any)=>{
-      console.log(response);
+      // console.log(response);
+      this.tableData = response;
+      this.tableData.forEach((element:any,index:any) => {
+        this.checkValue[index]=element.rank;
+      });
+      this.edit = false;
     })
   }
 }
