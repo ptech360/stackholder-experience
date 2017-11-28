@@ -12,7 +12,7 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label class="control-label">Unit</label>
+          <label class="control-label">UNIT</label>
           <select class="form-control" name="unit" [(ngModel)]="selectedunitId" (ngModelChange)="getEmployees($event)">
             <option *ngFor="let unit of units;let u = index;" [value]="unit.departmentId">{{unit.department}}</option>
           </select>
@@ -38,7 +38,7 @@
 
 <!-- new code -->
 
-<table class="table table-responsive  table-bordered">
+<table class="table table-responsive table-bordered">
    <thead class="thead-dark  ">
       <tr>
           <th>UNIT</th>
@@ -54,7 +54,7 @@
        <td colspan="6" class="table-gap"></td>
      </tr>
       <tr>
-        <td [attr.rowspan]="getRowSpanOfStakeholder(audit.stackholders)">{{audit.department}}<br>
+        <td class="width-smart" [attr.rowspan]="getRowSpanOfStakeholder(audit.stackholders)">{{audit.department}}<br>
           <!-- <button class="btn btn-link" data-toggle="modal" data-target="#myModal" (click)="selectedUnit = audit.departmentId">Assign</button><br> -->
           <span class="badge badge-secondary" data-toggle="modal" data-target="#myModal" (click)="selectedUnit = audit.departmentId">Assign<i class="glyphicon glyphicon-arrow-right"></i></span>
         
@@ -73,7 +73,7 @@
               </ul>
             </td>
             <td>{{tp.experience}}</td>
-            <td>
+            <td style="padding:18px!important;">
               <ul class="list">
                 <li style="float:left" *ngFor="let dataSource of tp.dataSources;let d = index;">{{dataSource.dataSource}}<span *ngIf="d!=tp.dataSources.length-1">,</span></li>
               </ul>

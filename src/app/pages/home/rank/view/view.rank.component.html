@@ -41,13 +41,13 @@
               </ul>
             </td>
             <td rowspan="1">
-              <ul class="list">
+              <ul class="two-list">
                 <li style="float:left" *ngFor="let dataSource of data.dataSources;let d = index;">{{dataSource.dataSource}}
                   <span *ngIf="d!=data.dataSources.length-1">,</span>
 
                 </li>
               </ul>
-              <span *ngIf="data.findings.length" class="glyphicon glyphicon-plus">
+              <span *ngIf="data.findings.length" class="glyphicon glyphicon-folder-open">
 
               </span>
             </td>
@@ -59,7 +59,7 @@
           </tr>
           <tr *ngIf="data.findings.length && showFinding[d]">
             <td></td>
-            <td colspan="4">
+            <td colspan="3">
 
               <div class="panel panel-default" *ngFor="let find of data.findings;let f = index;">
                 <div class="panel-heading">

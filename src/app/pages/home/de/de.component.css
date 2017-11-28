@@ -160,10 +160,11 @@ tbody td[rowspan] {
     z-index: 1;
     margin-top: -5px;
     margin-left: 10px;
-    font-size: 18px;
-    width: 24px;
-    height: 24px;
+    font-size: 14px;
+    width: 20px;
+    height: 20px;
     text-align: center;
+    margin-right: 4px;
 }
 
 /* new design */
@@ -287,4 +288,19 @@ tbody td[rowspan] {
 
 .btn-close:focus {
     outline: -webkit-focus-ring-color auto 0px;
+}
+
+.height{
+height: 55px;
+text-align: center;
+}
+
+.width-size{
+    width: 17%;
+}
+.text-middle tr td{
+    vertical-align: middle;
+}
+.padding-all{
+    padding: 18px;
 }

@@ -153,3 +153,9 @@ color: #ff5931;
 .table>tbody+tbody {
     border-top: 0px solid #ddd;
 }
+
+.width-smart{
+    width: 15%;
+    text-transform:capitaliz;
+   
+}

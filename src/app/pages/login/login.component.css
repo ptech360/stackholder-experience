@@ -218,6 +218,9 @@ input[type="submit"] {
 
 /* new code */
 
+
+
+
 .login-wrap{
   width: 45%;
   height: 400px;
@@ -226,7 +229,7 @@ input[type="submit"] {
   display: block;
   padding: 20px;
   box-shadow: 0 0 25px black;
-  margin-top:25px;
+  margin-top:35px;
 }
 
 .login-wrap h2{
@@ -285,8 +288,11 @@ input[type="submit"] {
 
 .forgot{
   font-size: 15px;
-  color: black;
+  color: #103a71;
   font-family: raleway;
   margin-top: 15px;
+}
 
+.forgot a{
+  color: white;
 }
