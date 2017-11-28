@@ -45,11 +45,15 @@
                   <span *ngIf="d!=data.dataSources.length-1">,</span>
                 </li>
               </ul>
+              <span *ngIf="data.findings.length" class="glyphicon glyphicon-plus">
+
+              </span>
             </td>
             <td rowspan="1">
               <span *ngIf="!edit">{{data.rank}}</span>
-              <input type="number" [attr.id]="'rank' + d" style="width:40px;" [(ngModel)]="checkValue[d]" (keyup)="validateRank($event,d,inp)" (click)="validateRank($event,d,inp)" #inp [attr.min]="1" [attr.max]="tableData.length"
-                *ngIf="edit">
+              <input type="number" [attr.id]="'rank' + d" style="width:40px;" [(ngModel)]="checkValue[d]" (keyup)="validateRank($event,d,inp)"
+                (click)="validateRank($event,d,inp)" #inp [attr.min]="1" [attr.max]="tableData.length" *ngIf="edit">
+
             </td>
           </tr>
           <tr *ngIf="data.findings.length && showFinding[d]">
