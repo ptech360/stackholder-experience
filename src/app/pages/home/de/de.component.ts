@@ -37,14 +37,14 @@ export class DEComponent{
       }
     })
     this.findingForm = this.fb.group({
-      "finding":["failure"],
+      "finding":[""],
       "categoryId":[1],
-      "rootCause":["need personal attention"],
-      "improvements":["assign 2 employees for the work"],
+      "rootCause":[""],
+      "improvements":[""],
       "responsibleRole":this.fb.array([this.initRoles()]),
       "responsibleStaffIds":[''],
       "deadline":["2017-11-20"],
-      "sourceRequired":["10 work hours for LD"],
+      "sourceRequired":[""],
       "touchpointId":[''],
       "createdBy":[this.userDetails.id]
   });

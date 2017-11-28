@@ -32,7 +32,7 @@ export class RankService{
   }
 
   public saveRanking(stakeholderId:any,data:any[]){
-    return this.http.post("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/stackholder/"+stakeholderId+"/journey",data)
+    return this.http.put("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/stackholder/"+stakeholderId+"/journey",data)
     .map(this.extractData)
     .catch(this.handleError);
   }
