@@ -39,10 +39,16 @@
     font-family: Raleway;
     border: 1px solid #103a71;
 }
-.btn-add:hover{
+.btn-clear{
+    background:red;
+    color: white;
+    font-family: Raleway;
+    border: 1px solid red;
+}
+.btn-clear:hover{
     background: rgba(0,0,0,0);
-	color: #103a71;
-	box-shadow: inset 0 0 0 3px #103a71;
+	color: red;
+	box-shadow: inset 0 0 0 3px red;
 }
 
 .btn-add[disabled]:hover{
@@ -58,7 +64,7 @@
 input[type=checkbox] {
     zoom: 1.5;
     margin: 0px 0 0;
-    margin-left: -16px;
+    margin-left: -13px;
     
 }
 
@@ -76,4 +82,8 @@ input[type="checkbox"]:after{
     font-family:Raleway;
     font-size: 12px;
     margin-left: 30px;
+}
+
+.checkbox-inline{
+    padding-left:45px;
 }
