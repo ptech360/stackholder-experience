@@ -19,8 +19,8 @@
         <thead>
           <tr>
             <!-- <th>S.No.</th> -->
-            <th>UNIT</th>
-            <th>TOUCH POINTS</th>
+            <th>TOUCHPOINTS</th>
+            <th>UNITS</th>
             <th>CHANNELS</th>
             <th>DATA SOURCE</th>
             <th>RANK
@@ -31,9 +31,9 @@
         <tbody *ngFor="let data of tableData;let d=index;">
           <tr (click)="showFinding[d] = !showFinding[d]">
             <!-- <td rowspan="1">{{d+1}}</td> -->
-            <td rowspan="1">{{data.department}}</td>
             <td rowspan="1">{{data.touchpoint}}</td>
-            <td rowspan="1">
+            <td rowspan="1">{{data.department}}</td>
+           <td rowspan="1">
               <ul class="list">
                 <li style="float:left" *ngFor="let channel of data.channels;let c = index;">{{channel.channel}}
                   <span *ngIf="c!=data.channels.length-1">,</span>
