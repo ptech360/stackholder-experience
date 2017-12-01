@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from "@angular/forms";
 import { ConfigService } from "./config.service";
 import { Location } from '@angular/common';
+declare let $ :any;
 @Component({
   selector:'config',
   templateUrl:'./config.component.html',
@@ -71,6 +72,9 @@ export class ConfigComponent{
 
   clearConfigForm(){
     this.configForm.reset();
+    $('.checkboxes').prop('checked',false);
+    // document.getElementById('checkboxes').checked = false;
+
   }
 
   getChannels(touchPoint:any,channel:any, isChecked: boolean){

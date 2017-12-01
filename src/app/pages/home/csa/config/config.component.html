@@ -57,7 +57,7 @@
               <div class="col-sm-10">
                 <ng-container *ngFor="let channel of channels;let c = index;">
                   <label class="checkbox-inline" >
-                      <input type="checkbox" name="channel" (change)="getChannels(tp,channel.id,$event.target.checked)">{{channel.channel}}
+                      <input class="checkboxes" type="checkbox" name="channel" (change)="getChannels(tp,channel.id,$event.target.checked)">{{channel.channel}}
                   </label>
                   <br *ngIf="c==channels.length/2  - 1">
                   </ng-container>
@@ -70,7 +70,7 @@
               <div class="col-sm-10">
                 <ng-container *ngFor="let dataSource of dataSources;let d = index;">
                   <label class="checkbox-inline" >
-                      <input type="checkbox" name="dataSource" (change)="getdataSources(tp,dataSource.id,$event.target.checked)">{{dataSource.dataSource}}
+                      <input class="checkboxes" type="checkbox" name="dataSource" (change)="getdataSources(tp,dataSource.id,$event.target.checked)">{{dataSource.dataSource}}
                   </label>
                   <br *ngIf="d==dataSources.length/2 - 1">
                 </ng-container>
