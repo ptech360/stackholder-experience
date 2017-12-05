@@ -90,7 +90,6 @@ tbody td[rowspan] {
 }
 .panel-finding{
     position: absolute;
-    width: 100%;
     z-index: 1;
     background: white;
 }
@@ -303,4 +302,98 @@ text-align: center;
 }
 .padding-all{
     padding: 18px;
+}
+
+.flex-box-audit {
+    display: flex;
+    align-content: stretch;
+    text-align: center;
+  }
+  
+  .unit {
+    background-color: white;
+    padding: 10px;
+    /* margin:2px 2px 0 0; */
+    outline: 2px solid #eaeaea;
+    width: 20%;
+    justify-content: center;
+  }
+  
+  .stackholder {
+    /* margin:2px 2px 0 0; */
+    outline: 2px solid #eaeaea;
+    width: 80%;
+    display: grid;
+  }
+  
+  .stackholder-1 {
+    background-color: white;
+    padding: 10px;
+    /* margin:0px 2px 2px 0; */
+    outline: 2px solid #eaeaea;
+    width: 20%;
+  }
+  
+  .stackholder-2 {
+    /* margin:2px 2px 0 0; */
+    outline: 2px solid #eaeaea;
+    width: 80%;
+    display: grid;
+  }
+  
+  .flex-col {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .item {
+    background-color: white;
+    padding: 10px;
+    /* margin:2px 2px 0 0; */
+    outline: 2px solid #eaeaea;
+    width: 20%;
+  }
+  
+  .flex-box-row {
+    display: flex;
+    align-content: stretch;
+    height: 100%;
+  }
+  
+  .table {
+    width: 100%;
+    height: 100%;
+    display: table;
+  }
+  
+  .table span {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  
+  .head .item, .head .stackholder-1, .head .unit{
+      background:#0f3a70;
+      color:white;
+      vertical-align: initial;
+  }
+  
+  .badge-secondary{
+      display: block;
+      width: 100px;
+      margin-left: 50%;
+      transform: translate(-50%);
+  }
+  .box-modal{
+    right: 535px;
+    position: absolute;
+    top: 0px;
+  }
+  .relative{
+      position:relative;
+  }
+  .bottom-highlight{
+      border-bottom:8px solid #2aaecc;
+  }
+  .badge-secondary{
+    background: #0f3a70;
 }

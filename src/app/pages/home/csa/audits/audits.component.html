@@ -1,13 +1,16 @@
-<button  class="btn btn-default pull-right btn-new" routerLink="/home/csa/config">ADD</button> 
+<div class="add-button">
+    <button  class="btn btn-default pull-right btn-new" routerLink="/home/csa/config">ADD</button>  
+</div>
+<!---->
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
     <div class="modal-content detail-content">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
       <div class="modal-header">
-       
+
         <h4 class="modal-title">ASSIGN UNIT</h4>
       </div>
       <div class="modal-body">
@@ -20,10 +23,10 @@
         <div class="form-group">
           <label class="control-label">EMPLOYEES</label>
           <select class="form-control" [(ngModel)]="selectedEmployees" multiple>
-              <option *ngFor="let emp of employees;let e=index;" [value]="emp.id">
-                {{emp.firstName}} {{emp.lastName}}
-              </option>
-            </select>
+            <option *ngFor="let emp of employees;let e=index;" [value]="emp.id">
+              {{emp.firstName}} {{emp.lastName}}
+            </option>
+          </select>
         </div>
       </div>
       <div class="modal-footer">
@@ -35,56 +38,81 @@
   </div>
 </div>
 
-
 <!-- new code -->
-
-<table class="table table-responsive table-bordered">
-   <thead class="thead-dark  ">
-      <tr>
-          <th>UNIT</th>
-          <th>STAKEHOLDER</th>
-          <th class="width-size">TOUCHPOINT</th>
-          <th>CHANNEL</th>
-          <th>EXPERIENCE</th>
-          <th>DATA SOURCE</th>
-        </tr>
-   </thead>
-   <tbody *ngFor="let audit of audits;let a=index;">
-     <tr>
-       <td colspan="6" class="table-gap"></td>
-     </tr>
-      <tr>
-        <td class="width-smart" [attr.rowspan]="getRowSpanOfStakeholder(audit.stackholders)">{{audit.department}}<br>
-          <!-- <button class="btn btn-link" data-toggle="modal" data-target="#myModal" (click)="selectedUnit = audit.departmentId">Assign</button><br> -->
-          <span class="badge badge-secondary" data-toggle="modal" data-target="#myModal" (click)="selectedUnit = audit.departmentId">Assign<i class="glyphicon glyphicon-arrow-right"></i></span>
-        
-        </td>
-      </tr>
-      <ng-template ngFor let-stackholder [ngForOf]="audit.stackholders" let-s="index">
-        <tr>
-          <td [attr.rowspan]="stackholder.touchpoints.length + 1">{{stackholder.stackholder}}</td>
-        </tr>
-        <ng-template ngFor let-tp [ngForOf]="stackholder.touchpoints" let-t="index">
-          <tr>
-            <td>{{tp.touchpoint}}</td>
-            <td>
+  <div class="flex-box-audit head bottom-highlight">
+    <div class="unit">
+      <div class="table">
+        <span>UNIT</span>
+      </div>
+    </div>
+    <div class="stackholder">
+      <div class="flex-box-audit">
+        <div class="stackholder-1">
+          Stackhokder
+        </div>
+        <div class="stackholder-2">
+          <div class="flex-box-row">
+            <div class="item">
+              TOUCHPOINT
+            </div>
+            <div class="item">
               <ul class="list">
-                <li style="float:left" *ngFor="let channel of tp.channels;let c = index;">{{channel.channel}}<span *ngIf="c!=tp.channels.length-1">,</span></li>
+                <li style="float:left">CHANNEL
+                </li>
               </ul>
-            </td>
-            <td>{{tp.experience}}</td>
-            <td style="padding:18px!important;">
+            </div>
+            <div class="item">
+              EXPERIENCE
+            </div>
+            <div class="item">
               <ul class="list">
-                <li style="float:left" *ngFor="let dataSource of tp.dataSources;let d = index;">{{dataSource.dataSource}}<span *ngIf="d!=tp.dataSources.length-1">,</span></li>
+                <li style="float:left">DATA SOURCE
+                </li>
               </ul>
-            </td>
-          </tr>
-        </ng-template>
-      </ng-template>      
-   </tbody>
-   <tbody>
-    <tr>
-      <td colspan="7" class="table-gap"></td>
-    </tr>
-  </tbody>
-  </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="flex-box-audit bottom-highlight" *ngFor="let audit of audits;let a=index;">
+  <div class="unit">
+    <div class="table">
+      <span>{{audit.department}}
+        <div class="badge badge-secondary" data-toggle="modal" data-target="#myModal" (click)="selectedUnit = audit.departmentId">Assign<i class="glyphicon glyphicon-arrow-right"></i></div>
+      </span>
+     
+    </div>
+  </div>
+  <div class="stackholder">
+    <div class="flex-box-audit" *ngFor="let stackholder of audit.stackholders; let s=index">
+      <div class="stackholder-1">
+        {{stackholder.stackholder}}
+      </div>
+      <div class="stackholder-2">
+        <div class="flex-box-row" *ngFor="let tp of stackholder.touchpoints; let t=index">
+          <div class="item">
+            {{tp.touchpoint}}
+          </div>
+          <div class="item">
+            <ul class="list">
+              <li style="float:left" *ngFor="let channel of tp.channels;let c = index;">{{channel.channel}}
+                <span *ngIf="c!=tp.channels.length-1">,</span>
+              </li>
+            </ul>
+          </div>
+          <div class="item">
+            {{tp.experience}}
+          </div>
+          <div class="item">
+            <ul class="list">
+              <li style="float:left" *ngFor="let dataSource of tp.dataSources;let d = index;">{{dataSource.dataSource}}
+                <span *ngIf="d!=tp.dataSources.length-1">,</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

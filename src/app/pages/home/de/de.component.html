@@ -1,5 +1,5 @@
 <div class="container">
-  <table class="table table-responsive  table-bordered" id="accordion">
+  <!-- <table class="table table-responsive  table-bordered" id="accordion">
     <thead class="thead-dark  ">
       <tr>
         <th>UNIT</th>
@@ -42,13 +42,15 @@
                 (click)="collapse('#findings' + a + s + t)">VIEW</button>
             </td>
           </tr>
+
+          <!-----------------------------------------------------------
           <tr>
             <td colspan="6" style="width: 100%;position: relative;padding: 0px;">
               <div class="panel panel-default panel-finding collapse" [attr.id]="'findings' + a + s + t">
                 <div class="panel-heading">
                   <h4 class="panel-title">{{audit.department}} : {{stackholder.stackholder}} : {{tp.touchpoint}} : FINDINGS
                     <i class="glyphicon glyphicon-plus-sign btn-add" data-toggle="modal" data-target="#myModal" (click)="selectedTouchpoint = tp.touchpointId"></i>
-                    <!-- <button class="pull-right btn-add" data-toggle="modal" data-target="#myModal" (click)="selectedTouchpoint = tp.touchpointId">Add More</button>--></h4>
+                  </h4>
                 </div>
                 <div class="panel-body finding-panel">
 
@@ -84,12 +86,13 @@
                       </div>
                     </div>
                   </div>
-                  <!--faliur-1-->
+          
                 </div>
-                <!--  panel-body end -->
+             
               </div>
             </td>
           </tr>
+          -----------------------------------------------------------
         </ng-template>
       </ng-template>
     </tbody>
@@ -98,7 +101,144 @@
         <td colspan="7" class="table-gap"></td>
       </tr>
     </tbody>
-  </table>
+  </table> -->
+  <div class="flex-box-audit head bottom-highlight">
+    <div class="unit">
+      <div class="table">
+        <span>UNIT</span>
+      </div>
+    </div>
+    <div class="stackholder">
+      <div class="flex-box-audit">
+        <div class="stackholder-1">
+          Stackhokder
+        </div>
+        <div class="stackholder-2">
+          <div class="flex-box-row">
+            <div class="item">
+              TOUCHPOINT
+            </div>
+            <div class="item">
+              <ul class="list">
+                <li style="float:left">CHANNEL
+                </li>
+              </ul>
+            </div>
+            <div class="item">
+              EXPERIENCE
+            </div>
+            <div class="item">
+              <ul class="list">
+                <li style="float:left">DATA SOURCE
+                </li>
+              </ul>
+            </div>
+            <div class="item">
+              FINDINGS
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="flex-box-audit bottom-highlight" *ngFor="let audit of audits;let a=index;">
+  <div class="unit">
+    <div class="table">
+      <span>{{audit.department}}
+        <div class="badge badge-secondary" data-toggle="modal" data-target="#myModal" (click)="selectedUnit = audit.departmentId">Assign<i class="glyphicon glyphicon-arrow-right"></i></div>
+      </span>
+     
+    </div>
+  </div>
+  <div class="stackholder">
+    <div class="flex-box-audit" *ngFor="let stackholder of audit.stackholders; let s=index">
+      <div class="stackholder-1">
+        {{stackholder.stackholder}}
+      </div>
+      <div class="stackholder-2">
+        <div class="flex-box-row" *ngFor="let tp of stackholder.touchpoints; let t=index">
+          <div class="item">
+            {{tp.touchpoint}}
+          </div>
+          <div class="item">
+            <ul class="list">
+              <li style="float:left" *ngFor="let channel of tp.channels;let c = index;">{{channel.channel}}
+                <span *ngIf="c!=tp.channels.length-1">,</span>
+              </li>
+            </ul>
+          </div>
+          <div class="item">
+            {{tp.experience}}
+          </div>
+          <div class="item">
+            <ul class="list">
+              <li style="float:left" *ngFor="let dataSource of tp.dataSources;let d = index;">{{dataSource.dataSource}}
+                <span *ngIf="d!=tp.dataSources.length-1">,</span>
+              </li>
+            </ul>
+          </div>
+          <div class="item relative">
+            <button *ngIf="!tp.findings.length" class="btn btn-link btn-finding" data-toggle="modal" data-target="#myModal" (click)="selectedTouchpoint = tp.touchpointId">FILL</button>
+            <button *ngIf="tp.findings.length" class="btn btn-link btn-finding" data-toggle="collapse" [attr.data-target]="'#findings' + a + s + t"
+              (click)="collapse('#findings' + a + s + t)">VIEW</button>
+          <div class="box-modal">
+          <table>
+              <tr>
+                  <td colspan="6" style="width: 100%;position: relative;padding: 0px;">
+                    <div class="panel panel-default panel-finding collapse" [attr.id]="'findings' + a + s + t">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">{{audit.department}} : {{stackholder.stackholder}} : {{tp.touchpoint}} : FINDINGS
+                          <i class="glyphicon glyphicon-plus-sign btn-add" data-toggle="modal" data-target="#myModal" (click)="selectedTouchpoint = tp.touchpointId"></i>
+                        </h4>
+                      </div>
+                      <div class="panel-body finding-panel">
+      
+                        <div class="panel panel-default" *ngFor="let find of tp.findings;let f = index;">
+                          <div class="panel-heading left-side">
+                            <div class="badge badge-numbering">{{(f+1)}}<br></div> {{find.finding}}</div>
+                          <div class="panel-body no-padding">
+                            <div class="row">
+                              <div class="col-lg-12 col-sm-12 col-md-12">
+                                <table class="table table-finding">
+                                  <thead>
+                                    <tr>
+                                      <th width="10%" class="cell1">CATEGORY</th>
+                                      <th width="10%">
+                                        IMPROVEMENTS
+                                      </th>
+                                      <th width="10%">RESPONSIBLE STAFF</th>
+                                      <th width="10%">ROOT CAUSE</th>
+                                      <th width="10%">SOURCE REQUIRED</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td>{{find.category}}</td>
+                                      <td>{{find.improvements}}</td>
+                                      <td>{{find.sourceRequired}}</td>
+                                      <td>{{find.rootCause}}</td>
+                                      <td>{{find.sourceRequired}}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                
+                      </div>
+                   
+                    </div>
+                  </td>
+                </tr>  
+          </table>  
+          </div>    
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
   <!-- Modal -->
   <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg">
