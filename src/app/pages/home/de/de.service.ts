@@ -9,7 +9,7 @@ import { CustomHttpService } from "../../shared/shared.service";
 
 @Injectable()
 export class DEAuditService{
-  constructor(public http: CustomHttpService){
+  constructor(public http: CustomHttpService,public htttp:Http){
   }
 
   public getPrerequisite(){
@@ -38,6 +38,17 @@ export class DEAuditService{
 
   public postFinding(data:any){
     return this.http.post("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/de/finding",data)
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
+  public postEvidence(findingId:any,data:any){
+    var options = new RequestOptions({
+      headers: new Headers({
+        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+      })
+    });
+    return this.htttp.post("https://hamdan-nxtlife.ind-cloud.everdata.com/api//employee/de/finding/"+findingId+"/evidance",data,options)
     .map(this.extractData)
     .catch(this.handleError);
   }

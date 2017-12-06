@@ -20,7 +20,7 @@
       </tr>
       <ng-template ngFor let-stackholder [ngForOf]="audit.stackholders" let-s="index">
         <tr>
-          <td [attr.rowspan]="stackholder.touchpoints.length + 3">{{stackholder.stackholder}}</td>
+          <td [attr.rowspan]="stackholder.touchpoints.length + 2">{{stackholder.stackholder}}</td>
         </tr>
         <ng-template ngFor let-tp [ngForOf]="stackholder.touchpoints" let-t="index">
           <tr >
@@ -48,13 +48,16 @@
                 <div class="panel-heading">
                   <h4 class="panel-title">{{audit.department}} : {{stackholder.stackholder}} : {{tp.touchpoint}} : FINDINGS
                     <i class="glyphicon glyphicon-plus-sign btn-add" data-toggle="modal" data-target="#myModal" (click)="selectedTouchpoint = tp.touchpointId"></i>
-                    <!-- <button class="pull-right btn-add" data-toggle="modal" data-target="#myModal" (click)="selectedTouchpoint = tp.touchpointId">Add More</button>--></h4>
+                    <!-- <button class="pull-right btn-add" data-toggle="modal" data-target="#myModal" (click)="selectedTouchpoint = tp.touchpointId">Add More</button>-->
+                  </h4>
                 </div>
                 <div class="panel-body finding-panel">
-
                   <div class="panel panel-default" *ngFor="let find of tp.findings;let f = index;">
                     <div class="panel-heading left-side">
-                      <div class="badge badge-numbering">{{(f+1)}}<br></div> {{find.finding}}</div>
+                      <div class="badge badge-numbering">{{(f+1)}}</div> {{find.finding}}
+                      <button class="pull-right" data-toggle="modal" data-target="#evidenceForm" (click)="showEvidenceForm(find.findingId)" style="color: buttontext;">Add Evidence</button>
+                      <button class="pull-right" style="color: buttontext;" data-toggle="modal" data-target="#myModal" (click)="editFinding(find)">Edit</button>
+                    </div>
                     <div class="panel-body no-padding">
                       <div class="row">
                         <div class="col-lg-12 col-sm-12 col-md-12">
@@ -62,12 +65,11 @@
                             <thead>
                               <tr>
                                 <th width="10%" class="cell1">CATEGORY</th>
-                                <th width="10%">
-                                  IMPROVEMENTS
-                                </th>
+                                <th width="10%">IMPROVEMENTS</th>
                                 <th width="10%">RESPONSIBLE STAFF</th>
                                 <th width="10%">ROOT CAUSE</th>
                                 <th width="10%">SOURCE REQUIRED</th>
+                                <th width="10%">Evidences</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -77,6 +79,12 @@
                                 <td>{{find.sourceRequired}}</td>
                                 <td>{{find.rootCause}}</td>
                                 <td>{{find.sourceRequired}}</td>
+                                <td>
+                                  <ul style="list-style:none;padding:0px;">
+                                    <li *ngFor="let evidance of find.evidances;let e=index;"><b>{{e+1}}</b>)<a [attr.href]="evidance.url" (click)="stopPropagation($event)"> file {{e+1}}</a></li>
+                                    <li *ngIf="!find.evidances.length">None</li>
+                                  </ul>
+                                </td>
                               </tr>
                             </tbody>
                           </table>
@@ -99,6 +107,7 @@
       </tr>
     </tbody>
   </table>
+
   <!-- Modal -->
   <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -143,11 +152,11 @@
               <label class="control-label col-sm-3">ASSIGNED BY </label>
               <div class="col-sm-9">
                 <label class="radio-inline">
-                    <input type="radio" name="type" [(ngModel)]="type" [ngModelOptions]="{standalone: true}" value="pankaj" > EMPLOYEE  NAME
-                  </label>
+                  <input type="radio" name="type" [(ngModel)]="type" [ngModelOptions]="{standalone: true}" value="pankaj" (click)="getEmployeeControl()"> EMPLOYEE  NAME
+                </label>
                 <label class="radio-inline">
-                    <input type="radio" name="type" [(ngModel)]="type" [ngModelOptions]="{standalone: true}" value="tushar"> EMPLOYEE  ROLE
-                  </label>
+                  <input type="radio" name="type" [(ngModel)]="type" [ngModelOptions]="{standalone: true}" value="tushar" (click)="getRoleControl()"> EMPLOYEE  ROLE
+                </label>
               </div>
             </div>
             <div class="form-group" *ngIf="type == 'pankaj'">
@@ -218,6 +227,19 @@
                 <textarea class="form-control" formControlName="sourceRequired"></textarea>
               </div>
             </div>
+            <div class="form-group"> 
+              <label class="control-label col-sm-3">Link to </label>
+              <div class="col-sm-9">
+                <div class="checkbox">
+                  <label><input type="checkbox" formControlName="risk"> Risk Register</label>
+                </div>
+              </div>
+              <div class="col-sm-offset-3 col-sm-9">
+                <div class="checkbox">
+                  <label><input type="checkbox" formControlName="strategicPlanner"> Strategic Planning</label>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-success btn-submit">SUBMIT</button>
@@ -227,6 +249,42 @@
 
       </div>
 
+    </div>
+  </div>
+  <!--Evidence Form-->
+  <div class="modal fade" id="evidenceForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+        </button>
+          <h4 class="modal-title" id="myModalLabel">Attach Evidence</h4>
+        </div>
+        <!-- Modal Body -->
+        <form [formGroup]="evidencForm" (submit)="onEvidenceSubmit()">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="title">Title</label> <input type="text" class="form-control" id="title" formControlName="title"
+              />
+            </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea type="text" class="form-control" id="description" formControlName="description"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputFile">Attachment</label> <input type="file" class="form-control-file" id="exampleInputFile" formControlName="file" (change)="getFile($event)" aria-describedby="fileHelp"> 
+              <!-- <small id="fileHelp" class="form-text text-muted"></small> -->
+            </div>
+          </div>
+          <!-- Modal Footer -->
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>

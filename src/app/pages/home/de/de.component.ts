@@ -21,6 +21,7 @@ export class DEComponent{
   categories: any[];
   audits: any[];
   findingForm:FormGroup;
+  evidencForm:FormGroup;
   selectedRoles:any[]=[];
   selectedTouchpoint : any = {};
   constructor(public des: DEAuditService, 
@@ -45,16 +46,24 @@ export class DEComponent{
       "responsibleStaffIds":[''],
       "deadline":["2017-11-20"],
       "sourceRequired":[""],
+      "risk":[false],
+      "strategicPlanner":[false],
       "touchpointId":[''],
       "createdBy":[this.userDetails.id]
-  });
+    });
+    this.evidencForm = new FormGroup({
+      title:new FormControl('',[Validators.required]),
+      description:new FormControl('',Validators.required),
+      file:new FormControl('',[Validators.required])
+    });
+  
   }
 
   ngAfterViewInit(){
-    $(window).click(function() {
-    $(".panel-finding").removeClass("in");
+    $('body').click(function() {
+      $(".panel-finding").removeClass("in");
     });
-    }
+  }
 
     collapse(id){
       $(id).collapse('toggle'); 
@@ -75,7 +84,7 @@ export class DEComponent{
         return this.fb.group({
           departmentId:['',Validators.required],
           roleId:['',Validators.required]
-        })
+        });
       }
     
     
@@ -183,15 +192,75 @@ export class DEComponent{
       return tp.dataSources.length + 2;
   }
 
+  selectedFindingId;
+  showEvidenceForm(e){
+    this.selectedFindingId = e;
+    // $('#evidenceForm').modal('show');
+  }
+
+  file:any;
+  getFile(event:any) {
+    this.file = event.srcElement.files[0];
+  }
+
+  stopPropagation(e){
+    e.stopPropagation();
+    console.log("asdf");
+  }
+
+  onEvidenceSubmit(){
+    let formData = new FormData();
+    formData.append('title',this.evidencForm.value['title']);
+    formData.append('description',this.evidencForm.value['description']);
+    formData.append('file',this.file);
+    this.des.postEvidence(this.selectedFindingId,formData).subscribe((response:any)=>{
+      console.log(response);
+      $('#evidenceForm').modal('hide');
+    })
+  }
+
+  editFinding(finding:any){
+    console.log(finding);
+    this.findingForm.patchValue(finding);
+    if(finding.responsibleRole.length){
+      this.type = 'tushar';
+      const responsibleRoles = this.findingForm.controls["responsibleRole"] as FormArray;
+      finding.responsibleRole.forEach((element:any,index:any) => {
+        this.des.getRoles(element.departmentId).subscribe((response:any)=>{
+          if(response.status == 204){
+            this.roles[index] = [];
+          }else{
+            this.roles[index] = response;
+          }
+        })
+        if(!index){
+          responsibleRoles[index]=this.fb.group({
+            departmentId:[element.departmentId,Validators.required],
+            roleId:[element.roleId,Validators.required]
+          })
+        }else{
+          responsibleRoles.push(this.fb.group({
+            departmentId:[element.departmentId,Validators.required],
+            roleId:[element.roleId,Validators.required]
+          }));
+        }
+      });
+    }else if(finding.responsibleStaff.length){
+      this.type = 'pankaj';
+
+    }
+  }
+
   // selectedTouchpoint:any;
   submitFinding(){
     this.findingForm.controls["touchpointId"].setValue(this.selectedTouchpoint);
     if(this.findingForm.contains('responsibleStaffIds'))
       this.findingForm.controls["responsibleStaffIds"].patchValue(this.selectedStaffIds);
     console.log(this.findingForm.value);
-    // this.des.postFinding(this.findingForm.value).subscribe((response:any)=>{
-    //   console.log(response);
-    //   $('#myModal').modal('hide');
-    // })
+    this.des.postFinding(this.findingForm.value).subscribe((response:any)=>{
+      console.log(response);
+      $('#myModal').modal('hide');
+      this.findingForm.reset();
+    });
   }
 }
