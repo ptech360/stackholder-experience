@@ -15,6 +15,7 @@ export class ConfigComponent{
   stackholders:any[]=[];
   channels:any[]=[];
   dataSources:any[]=[];
+  surveyDataSource:boolean=false;
   selectedChannel:any={};
   selectedDs:any={};
   checkedChannels:any[]=[];
@@ -90,10 +91,19 @@ export class ConfigComponent{
 
   getdataSources(touchPoint:any,dataSource:any, isChecked: boolean){
     const formArray = <FormArray>touchPoint.controls.dataSourceIds;
-    
+    const touchPointControl = <FormGroup>touchPoint;
       if(isChecked) {
         formArray.push(new FormControl(dataSource));
+        if(dataSource == 3){
+          touchPointControl.addControl('surveyTitle',new FormControl(''));
+          this.surveyDataSource = true;
+        }
       } else {
+        if(dataSource == 3){
+          if(touchPointControl.contains('surveyTitle'))
+            touchPointControl.removeControl('surveyTitle');
+          this.surveyDataSource = false;
+        }
         let index = formArray.controls.findIndex(x => x.value == dataSource)
         formArray.removeAt(index);
       } 

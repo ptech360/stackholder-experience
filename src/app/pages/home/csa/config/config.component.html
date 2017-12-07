@@ -1,91 +1,106 @@
-<div class="container"><br><br><br><br><br>
+<div class="container">
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
   <!-- <div class="row">
     <div class="col-sm-offset-2 col-sm-10"> -->
-    <!-- </div>
+  <!-- </div>
   </div> -->
   <fieldset class="the-fieldset">
-    <legend class="the-legend">CONFIGURATION<span class="icon-congif"><i class="glyphicon glyphicon-screenshot"></i></span></legend>
+    <legend class="the-legend">CONFIGURATION
+      <span class="icon-congif">
+        <i class="glyphicon glyphicon-screenshot"></i>
+      </span>
+    </legend>
 
 
-  <form class="form-horizontal" [formGroup]="configForm" (submit)="submitConfig()">
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="unit">UNIT </label>
-      <div class="col-sm-10">
-        <select class="form-control" name="unit" formControlName="unitId" (ngModelChange)="getStakeholder($event)">
-          <option *ngFor="let unit of units;let u = index;" [value]="unit.departmentId">{{unit.department}}</option>
-        </select>
+    <form class="form-horizontal" [formGroup]="configForm" (submit)="submitConfig()">
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="unit">UNIT </label>
+        <div class="col-sm-10">
+          <select class="form-control" name="unit" formControlName="unitId" (ngModelChange)="getStakeholder($event)">
+            <option *ngFor="let unit of units;let u = index;" [value]="unit.departmentId">{{unit.department}}</option>
+          </select>
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="stachholder">STAKEHOLDER: </label>
-      <div class="col-sm-10">
-        <select class="form-control" name="stackholder" formControlName="stackholderId">
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="stachholder">STAKEHOLDER: </label>
+        <div class="col-sm-10">
+          <select class="form-control" name="stackholder" formControlName="stackholderId">
             <option *ngFor="let stackholder of stackholders;let s = index;" [value]="stackholder.stackholderId">{{stackholder.stackholder}}</option>
           </select>
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2">TOUCHPOINT</label>
-      <div class="col-sm-10" formArrayName="touchpoints">
-        <ul class="nav nav-tabs">
-          <li [ngClass]="{'active': tab == configForm.controls.touchpoints['controls'].length - 1}" *ngFor="let tp of configForm.controls.touchpoints['controls'];let tab=index;">
-            <a data-toggle="tab" [attr.data-target]="'#tab'+tab">TouchPoint {{tab+1}} 
+      <div class="form-group">
+        <label class="control-label col-sm-2">TOUCHPOINT</label>
+        <div class="col-sm-10" formArrayName="touchpoints">
+          <ul class="nav nav-tabs">
+            <li [ngClass]="{'active': tab == configForm.controls.touchpoints['controls'].length - 1}" *ngFor="let tp of configForm.controls.touchpoints['controls'];let tab=index;">
+              <a data-toggle="tab" [attr.data-target]="'#tab'+tab">TouchPoint {{tab+1}}
                 <button type="button" class="close" style="padding-left:5px;" (click)="removeTouchPoint(tab)">&times;</button>
               </a>
-          </li>
-          <li><button type="button" class="btn btn-default btn-add" (click)="addTouchPoint()" [disabled]="configForm.controls.touchpoints.invalid">ADD</button></li>
-        </ul>
-        <div class="tab-content" style="padding: 20px 10px 0px 10px;">
-          <div [attr.id]="'tab'+t" class="tab-pane fade" 
-          [ngClass]="{'in active': t == configForm.controls.touchpoints['controls'].length - 1}"
-          *ngFor="let tp of configForm.controls.touchpoints['controls'];let t=index;" [formGroupName]="t">
-            <div class="form-group">
-              <label class="control-label col-sm-2" style="text-align:left">TOUCHPOINT </label>
-              <div class="col-sm-10">
-                <textarea class="form-control" formControlName="touchpoint"></textarea>
+            </li>
+            <li>
+              <button type="button" class="btn btn-default btn-add" (click)="addTouchPoint()" [disabled]="configForm.controls.touchpoints.invalid">ADD</button>
+            </li>
+          </ul>
+          <div class="tab-content" style="padding: 20px 10px 0px 10px;">
+            <div [attr.id]="'tab'+t" class="tab-pane fade" [ngClass]="{'in active': t == configForm.controls.touchpoints['controls'].length - 1}"
+              *ngFor="let tp of configForm.controls.touchpoints['controls'];let t=index;" [formGroupName]="t">
+              <div class="form-group">
+                <label class="control-label col-sm-2" style="text-align:left">TOUCHPOINT </label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" formControlName="touchpoint"></textarea>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-sm-2" style="text-align:left">EXPERIENCE </label>
-              <div class="col-sm-10">
-                <textarea class="form-control" formControlName="experience"></textarea>
+              <div class="form-group">
+                <label class="control-label col-sm-2" style="text-align:left">EXPERIENCE </label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" formControlName="experience"></textarea>
+                </div>
               </div>
-            </div>
 
-            <div class="form-group" style="margin-bottom:25px;">
-              <label class="control-label col-sm-2" style="text-align:left">CHANNEL </label>
-              <div class="col-sm-10">
-                <ng-container *ngFor="let channel of channels;let c = index;">
-                  <label class="checkbox-inline" >
+              <div class="form-group" style="margin-bottom:25px;">
+                <label class="control-label col-sm-2" style="text-align:left">CHANNEL </label>
+                <div class="col-sm-10">
+                  <ng-container *ngFor="let channel of channels;let c = index;">
+                    <label class="checkbox-inline">
                       <input class="checkboxes" type="checkbox" name="channel" (change)="getChannels(tp,channel.id,$event.target.checked)">{{channel.channel}}
-                  </label>
-                  <br *ngIf="c==channels.length/2  - 1">
+                    </label>
+                    <br *ngIf="c==channels.length/2  - 1">
                   </ng-container>
-
+                </div>
               </div>
-            </div>
 
-            <div class="form-group">
-              <label class="control-label col-sm-2" style="text-align:left">DATA SOURCE </label>
-              <div class="col-sm-10">
-                <ng-container *ngFor="let dataSource of dataSources;let d = index;">
-                  <label class="checkbox-inline" >
+              <div class="form-group">
+                <label class="control-label col-sm-2" style="text-align:left">DATA SOURCE </label>
+                <div class="col-sm-10">
+                  <ng-container *ngFor="let dataSource of dataSources;let d = index;">
+                    <label class="checkbox-inline">
                       <input class="checkboxes" type="checkbox" name="dataSource" (change)="getdataSources(tp,dataSource.id,$event.target.checked)">{{dataSource.dataSource}}
-                  </label>
-                  <br *ngIf="d==dataSources.length/2 - 1">
-                </ng-container>
+                    </label>
+                    <br *ngIf="d==dataSources.length/2 - 1">
+                  </ng-container>
+                </div>
+              </div>
+              <div class="form-group" *ngIf="surveyDataSource">
+                <label class="control-label col-sm-2" style="text-align:left">Survey Title</label>
+                <div class="col-sm-10">
+                  <input class="form-control" type="text" formControlName="surveyTitle">
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div> 
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-8">
-        <button type="submit" class="btn btn-default btn-add" [disabled]="configForm.invalid">SUBMIT</button>
-        <button type="button" class="btn btn-default btn-clear" (click)="clearConfigForm()">CLEAR</button>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-8">
+          <button type="submit" class="btn btn-default btn-add" [disabled]="configForm.invalid">SUBMIT</button>
+          <button type="button" class="btn btn-default btn-clear" (click)="clearConfigForm()">CLEAR</button>
+        </div>
       </div>
-    </div>
-  </form>
-</fieldset>
+    </form>
+  </fieldset>
 </div>
