@@ -37,7 +37,17 @@ export class DEComponent{
       this.units = response.units;
       }
     })
-    this.findingForm = this.fb.group({
+    this.findingForm = this.resetFindingForm();
+    this.evidencForm = new FormGroup({
+      title:new FormControl('',[Validators.required]),
+      description:new FormControl('',Validators.required),
+      file:new FormControl('',[Validators.required])
+    });
+  
+  }
+
+  resetFindingForm(){
+    return this.fb.group({
       "finding":[""],
       "categoryId":[1],
       "rootCause":[""],
@@ -51,12 +61,6 @@ export class DEComponent{
       "touchpointId":[''],
       "createdBy":[this.userDetails.id]
     });
-    this.evidencForm = new FormGroup({
-      title:new FormControl('',[Validators.required]),
-      description:new FormControl('',Validators.required),
-      file:new FormControl('',[Validators.required])
-    });
-  
   }
 
   ngAfterViewInit(){
@@ -99,6 +103,7 @@ export class DEComponent{
       }
     
       getRoleControl(){
+        this.type = "tushar";
         if(this.findingForm.contains('responsibleStaffIds')){
           this.findingForm.removeControl('responsibleStaffIds');
         }
@@ -221,46 +226,71 @@ export class DEComponent{
 
   editFinding(finding:any){
     console.log(finding);
+    this.isFindingUpdate = true;
+    this.selectedFindingId = finding.findingId;
+    this.findingForm = this.resetFindingForm();
     this.findingForm.patchValue(finding);
-    if(finding.responsibleRole.length){
-      this.type = 'tushar';
-      const responsibleRoles = this.findingForm.controls["responsibleRole"] as FormArray;
-      finding.responsibleRole.forEach((element:any,index:any) => {
-        this.des.getRoles(element.departmentId).subscribe((response:any)=>{
-          if(response.status == 204){
-            this.roles[index] = [];
-          }else{
-            this.roles[index] = response;
-          }
-        })
-        if(!index){
-          responsibleRoles[index]=this.fb.group({
-            departmentId:[element.departmentId,Validators.required],
-            roleId:[element.roleId,Validators.required]
-          })
-        }else{
-          responsibleRoles.push(this.fb.group({
-            departmentId:[element.departmentId,Validators.required],
-            roleId:[element.roleId,Validators.required]
-          }));
-        }
-      });
-    }else if(finding.responsibleStaff.length){
-      this.type = 'pankaj';
-
+    if(this.findingForm.contains('responsibleRole')){
+      this.findingForm.removeControl('responsibleRole');
     }
+    if(this.findingForm.contains('responsibleStaffIds')){
+      this.findingForm.removeControl('responsibleStaffIds');
+    }
+    // if(finding.responsibleRole.length){
+    //   this.getRoleControl();
+    //   const responsibleRoles = this.findingForm.controls["responsibleRole"] as FormArray;
+    //   finding.responsibleRole.forEach((element:any,index:any) => {
+    //     this.des.getRoles(element.departmentId).subscribe((response:any)=>{
+    //       if(response.status == 204){
+    //         this.roles[index] = [];
+    //       }else{
+    //         this.roles[index] = response;
+    //       }
+    //     })
+    //     if(!index){
+    //       responsibleRoles[index]=this.fb.group({
+    //         departmentId:[element.departmentId,Validators.required],
+    //         roleId:[element.roleId,Validators.required]
+    //       })
+    //     }else{
+    //       responsibleRoles.push(this.fb.group({
+    //         departmentId:[element.departmentId,Validators.required],
+    //         roleId:[element.roleId,Validators.required]
+    //       }));
+    //     }
+    //   });
+    // }else if(finding.responsibleStaff.length){
+    //   this.getEmployeeControl();
+    //   finding.responsibleStaff.forEach(element => {
+    //     this.selectedStaff.push(element);
+    //     this.selectedStaffIds.push(element.id);
+    //   });
+    // }
   }
 
   // selectedTouchpoint:any;
+  isFindingUpdate:boolean = false;
   submitFinding(){
     this.findingForm.controls["touchpointId"].setValue(this.selectedTouchpoint);
     if(this.findingForm.contains('responsibleStaffIds'))
       this.findingForm.controls["responsibleStaffIds"].patchValue(this.selectedStaffIds);
-    console.log(this.findingForm.value);
-    this.des.postFinding(this.findingForm.value).subscribe((response:any)=>{
-      console.log(response);
-      $('#myModal').modal('hide');
-      this.findingForm.reset();
-    });
+      
+    if(!this.isFindingUpdate)
+      this.des.postFinding(this.findingForm.value).subscribe((response:any)=>{
+        $('#myModal').modal('hide');
+        this.findingForm = this.resetFindingForm();
+      });
+    else{
+      delete this.findingForm.value["createdBy"];
+      delete this.findingForm.value["touchpointId"];
+      delete this.findingForm.value["risk"];
+      delete this.findingForm.value["strategicPlanner"];
+      this.des.updateFinding(this.selectedFindingId,this.findingForm.value).subscribe((response:any)=>{
+        if(confirm("You have updated selected finding")){
+          $('#myModal').modal('hide');
+          this.findingForm = this.resetFindingForm();
+        }
+      })
+    }
   }
 }

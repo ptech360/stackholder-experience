@@ -42,6 +42,12 @@ export class DEAuditService{
     .catch(this.handleError);
   }
 
+  public updateFinding(findingId:any,data:any){
+    return this.http.put("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/de/finding/"+findingId,data)
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
   public postEvidence(findingId:any,data:any){
     var options = new RequestOptions({
       headers: new Headers({

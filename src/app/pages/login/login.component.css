@@ -218,6 +218,9 @@ input[type="submit"] {
 
 /* new code */
 
+
+
+
 .login-wrap{
   width: 45%;
   height: 400px;
@@ -226,7 +229,7 @@ input[type="submit"] {
   display: block;
   padding: 20px;
   box-shadow: 0 0 25px black;
-  margin-top:25px;
+  margin-top:35px;
 }
 
 .login-wrap h2{
@@ -236,15 +239,74 @@ input[type="submit"] {
 }
 
 .login-icon{
-  width: 17%;
+  width: 19%;
   margin: auto;
   display: block;
-  margin-bottom: 30px;
+  -webkit-animation: breathing 7s ease-out infinite normal;
+  animation: breathing 4s ease-out infinite normal;
+  -webkit-font-smoothing: antialiased;
+  /* margin-bottom: 30px; */
 }
 
-.login-icon:hover{
-    transform: skew(-10deg);
+@-webkit-keyframes breathing {
+  0% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+
+  25% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+
+  60% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+
+  100% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
 }
+
+@keyframes breathing {
+  0% {
+    -webkit-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+
+  25% {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+
+  60% {
+    -webkit-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+
+  100% {
+    -webkit-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+}
+
+
+.login-icon ,h5{
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 27px;
+  font-family: Raleway;
+  font-weight: 700;
+  color: #2b4b7b;
+  text-decoration: underline;
+}
+
 
 .form {
   padding-top: 20px;
@@ -285,8 +347,11 @@ input[type="submit"] {
 
 .forgot{
   font-size: 15px;
-  color: black;
+  color: #103a71;
   font-family: raleway;
   margin-top: 15px;
+}
 
+.forgot a{
+  color: white;
 }
