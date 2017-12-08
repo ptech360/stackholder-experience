@@ -1,33 +1,44 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { DEAuditService } from "./de.service";
+import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl } from "@angular/forms";
-import { StorageService } from "../../shared/common.service";
-import { log } from 'util';
 import { FormArray } from '@angular/forms/src/model';
 import { Validators } from '@angular/forms';
+import { DEAuditService } from '../de.service';
+import { StorageService } from '../../../shared/common.service';
 
 declare let $: any;
 
 @Component({
-  selector: 'de',
-  templateUrl: './de.component.html',
-  styleUrls: ['./de.component.css'],
-  providers: [DEAuditService, StorageService]
+  selector: 'finding',
+  templateUrl: './finding.component.html',
+  styleUrls: ['./finding.component.css', './../de.component.css'],
+  providers: [DEAuditService]
 })
-export class DEComponent {
+export class FindingComponent {
+  public data: any;
   roles: any[] = [[]];
   units: any[];
   userDetails: any = this.storage.getData("userDetails");
   categories: any[];
-  audits: any[];
   findingForm: FormGroup;
   evidencForm: FormGroup;
   selectedRoles: any[] = [];
   selectedTouchpoint: any = {};
-  constructor(public des: DEAuditService,
-    private fb: FormBuilder,
+  selectedFindingId;
+  selectedFinding:any;
+  file: any;
+  constructor(public des: DEAuditService, public route: ActivatedRoute, private fb: FormBuilder,
     private storage: StorageService) {
-    this.getAudits();
+    this.route.params.subscribe((param: any) => {
+      this.selectedTouchpoint = param['touchpointId'];
+      this.des.getFindings(param['touchpointId']).subscribe((response: any) => {
+        if (response.status == 204)
+          this.data = {};
+        else
+          this.data = response;
+      })
+    });
+
     this.des.getPrerequisite().subscribe((response: any) => {
       if (response.status == 204) {
         this.categories = [];
@@ -38,13 +49,27 @@ export class DEComponent {
       }
     })
     this.findingForm = this.resetFindingForm();
-    this.evidencForm = new FormGroup({
+    this.evidencForm = this.resetEvidenceForm();
+  }
+
+  newFinding() {
+    this.isFindingUpdate = false;
+    this.findingForm = this.resetFindingForm();
+  }
+
+  newEvidence(findingId: any) {
+    this.selectedFindingId = findingId;
+    this.evidencForm = this.resetEvidenceForm();
+  }
+
+  resetEvidenceForm() {
+    return new FormGroup({
       title: new FormControl('', [Validators.required]),
       description: new FormControl('', Validators.required),
       file: new FormControl('', [Validators.required])
     });
-
   }
+
 
   resetFindingForm() {
     return this.fb.group({
@@ -63,17 +88,63 @@ export class DEComponent {
     });
   }
 
-  ngAfterViewInit() {
-    $('body').click(function () {
-      $(".panel-finding").removeClass("in");
+  responsibleStaff: any[];
+  selectedStaff: any[] = [];
+  selectedStaffIds: any[] = [];
+  getResponsibleStaffIds() {
+    this.findingForm.value["responsibleStaffIds"] = [];
+    this.responsibleStaff.forEach(element => {
+      if (this.selectedStaffIds.indexOf(element.id) === -1) {
+        this.selectedStaff.push(element);
+        this.selectedStaffIds.push(element.id);
+      }
     });
   }
 
-  collapse(id) {
-    $(id).collapse('toggle');
-    $(".panel-finding").removeClass("in"); // remove active class from all
-    // add active class to clicked element
+  removeResponsibleStaffId(index: any) {
+    this.selectedStaff.splice(index, 1);
+    this.selectedStaffIds.splice(index, 1);
   }
+
+  isCollapse(event, button) {
+    if (event.srcElement.className == 'collapsed') {
+      $('.bttn-group').hide();
+      $(button).show();
+    } else {
+      $(button).hide();
+    }
+  }
+
+  getFile(event: any) {
+    this.file = event.srcElement.files[0];
+  }
+
+  onEvidenceSubmit() {
+    let formData = new FormData();
+    formData.append('title', this.evidencForm.value['title']);
+    formData.append('description', this.evidencForm.value['description']);
+    formData.append('file', this.file);
+    this.des.postEvidence(this.selectedFindingId, formData).subscribe((response: any) => {
+      console.log(response);
+      $('#evidenceForm').modal('hide');
+    })
+  }
+
+  editFinding(finding: any) {
+    this.selectedFinding = finding;
+    console.log(finding);
+    this.isFindingUpdate = true;
+    this.selectedFindingId = finding.findingId;
+    this.findingForm = this.resetFindingForm();
+    this.findingForm.patchValue(finding);
+    if (this.findingForm.contains('responsibleRole')) {
+      this.findingForm.removeControl('responsibleRole');
+    }
+    if (this.findingForm.contains('responsibleStaffIds')) {
+      this.findingForm.removeControl('responsibleStaffIds');
+    }
+  }
+
   addRole(form: any) {
     const responsibleRole = this.findingForm.controls["responsibleRole"] as FormArray;
     responsibleRole.push(this.initRoles());
@@ -135,50 +206,28 @@ export class DEComponent {
     })
   }
 
-
-  getAudits() {
-    this.des.getAudits().subscribe((response: any) => {
-      if (response.status == 204) {
-        this.audits = [];
-      } else {
-        this.audits = response;
-      }
-    })
-  }
-
-  responsibleStaff: any[];
-  selectedStaff: any[] = [];
-  selectedStaffIds: any[] = [];
-  getResponsibleStaffIds() {
-    this.findingForm.value["responsibleStaffIds"] = [];
-    this.responsibleStaff.forEach(element => {
-      if (this.selectedStaffIds.indexOf(element.id) === -1) {
-        this.selectedStaff.push(element);
-        this.selectedStaffIds.push(element.id);
-      }
-    });
-  }
-
-  removeResponsibleStaffId(index: any) {
-    this.selectedStaff.splice(index, 1);
-    this.selectedStaffIds.splice(index, 1);
-  }
-
-  stopPropagation(e) {
-    e.stopPropagation();
-    console.log("asdf");
-  }
-
   // selectedTouchpoint:any;
   isFindingUpdate: boolean = false;
   submitFinding() {
     this.findingForm.controls["touchpointId"].setValue(this.selectedTouchpoint);
     if (this.findingForm.contains('responsibleStaffIds'))
       this.findingForm.controls["responsibleStaffIds"].patchValue(this.selectedStaffIds);
+
+    if (!this.isFindingUpdate)
       this.des.postFinding(this.findingForm.value).subscribe((response: any) => {
+        this.data.touchpoints.findings.push(response);
         $('#myModal').modal('hide');
         this.findingForm = this.resetFindingForm();
       });
-      
+    else {
+      delete this.findingForm.value["createdBy"];
+      delete this.findingForm.value["touchpointId"];
+      delete this.findingForm.value["risk"];
+      delete this.findingForm.value["strategicPlanner"];
+      this.des.updateFinding(this.selectedFindingId, this.findingForm.value).subscribe((response: any) => {
+          $('#myModal').modal('hide');
+          this.findingForm = this.resetFindingForm();
+          })
     }
+  }
 }

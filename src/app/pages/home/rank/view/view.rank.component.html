@@ -1,5 +1,4 @@
 <div class="container">
-  <!-- <h3>Ranked Journey</h3> -->
   <div class="form-group">
     <label class="control-label col-sm-3 col-lg-3 col-md-3"> CHOOSE STAKEHOLDER </label>
     <div class="col-sm-9 col-lg-9 col-md-9">
@@ -10,117 +9,119 @@
 
   </div>
   <br>
-  <div *ngIf="tableData.length">
-    <div class="panel-heading">
-      <b class="margin-top"> RANKED JOURNEY OF TOUCHPOINTS <i class="glyphicon glyphicon-arrow-down"></i> </b>
-    </div>
-    <div class="panel-body">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <!-- <th>S.No.</th> -->
-            <th>TOUCHPOINTS</th>
-            <th>UNITS</th>
-            <th>CHANNELS</th>
-            <th>DATA SOURCE</th>
-            <th>RANK
-              <button (click)="edit=true" class="btn-edit"><i class="glyphicon glyphicon-pencil"></i></button>
-            </th>
-          </tr>
-        </thead>
-        <tbody *ngFor="let data of tableData;let d=index;">
-          <tr (click)="showFinding[d] = !showFinding[d]">
-            <!-- <td rowspan="1">{{d+1}}</td> -->
-            <td rowspan="1">{{data.touchpoint}}</td>
-            <td rowspan="1">{{data.department}}</td>
-           <td rowspan="1">
-              <ul class="list">
-                <li style="float:left" *ngFor="let channel of data.channels;let c = index;">{{channel.channel}}
-                  <span *ngIf="c!=data.channels.length-1">,</span>
-                </li>
-              </ul>
-            </td>
-            <td rowspan="1">
-              <ul class="two-list">
-                <li style="float:left" *ngFor="let dataSource of data.dataSources;let d = index;">{{dataSource.dataSource}}
-                  <span *ngIf="d!=data.dataSources.length-1">,</span>
 
-                </li>
-              </ul>
-              <span *ngIf="data.findings.length" class="glyphicon glyphicon-folder-open">
+<div *ngIf="stakeholderId">
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#menu1">Ranked Journey</a></li>
+    <li><a data-toggle="tab" href="#menu2">Risk</a></li>
+    <li><a data-toggle="tab" href="#menu3">Stretegic Planner</a></li>
+  </ul>
 
-              </span>
-            </td>
-            <td rowspan="1">
-              <span *ngIf="!edit">{{data.rank}}</span>
-              <input type="number" [attr.id]="'rank' + d" style="width:40px;" [(ngModel)]="checkValue[d]" (keyup)="validateRank($event,d,inp)"
-                (click)="validateRank($event,d,inp)" #inp [attr.min]="1" [attr.max]="tableData.length" *ngIf="edit">
-            </td>
-          </tr>
-          <tr *ngIf="data.findings.length && showFinding[d]">
-            <td></td>
-            <td colspan="3">
-
-              <div class="panel panel-default" *ngFor="let find of data.findings;let f = index;">
-                <div class="panel-heading">
-                  <div class="badge badge-numbering">{{(f+1)}}<br></div> {{find.finding}}</div>
-                <div class="panel-body no-gap">
-                  <div class="row"> 
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                      <table class="table table-finding table-bordered">
-                        <thead>
-                          <tr>
-                            <th width="10%">CATEGORY</th>
-                            <th width="10%">IMPROVEMENTS</th>
-                            <th width="10%">RESPONSIBLE STAFF</th>
-                            <th width="10%">ROOT CAUSE</th>
-                            <th width="10%">SOURCE REQUIRED</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>{{find.category}}</td>
-                            <td>{{find.improvements}}</td>
-                            <td>{{find.responsibleStaff}}</td>
-                            <td>{{find.rootCause}}</td>
-                            <td>{{find.sourceRequired}}</td>
-                          </tr>
-                        </tbody>
-                        <!-- <ul style="list-style:none;padding:0px;">
-                    <li class="row" *ngFor="let find of data.findings;let f = index;" style="padding: 5px;
-                        border: 1px solid gainsboro;
-                        border-radius: 5px;
-                        margin: 0px;
-                        margin-bottom: 5px;">
-                      <div class="col-sm-6">
-                        <p>
-                          <b>Finding :</b>{{find.finding}}</p>
-                        <p>
-                          <b>Category :</b>{{find.category}}</p>
-                        <p>
-                          <b>Improvements :</b>{{find.improvements}}</p>
-                      </div>
-                      <div class="col-sm-6">
-                        <p>
-                          <b>Responsible Staff :</b>{{find.responsibleStaff}}</p>
-                        <p>
-                          <b>Root Cause :</b>{{find.rootCause}}</p>
-                        <p>
-                          <b>Source Required :</b>{{find.sourceRequired}}</p>
-                      </div>
+  <div class="tab-content">
+    <div id="menu1" class="tab-pane fade in active">
+      <h3>Ranked Journey Of Touchpoints</h3>
+      <div *ngIf="tableData.length">
+        <!-- <div class="panel-heading">
+          <b class="margin-top"> RANKED JOURNEY OF TOUCHPOINTS
+            <i class="glyphicon glyphicon-arrow-down"></i>
+          </b>
+        </div> -->
+        <div class="panel-body">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>TOUCHPOINTS</th>
+                <th>UNITS</th>
+                <th>CHANNELS</th>
+                <th>DATA SOURCE</th>
+                <th>RANK
+                  <button (click)="edit=true" class="btn-edit">
+                    <i class="glyphicon glyphicon-pencil"></i>
+                  </button>
+                </th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let data of tableData;let d=index;">
+              <tr (click)="showFinding[d] = !showFinding[d]">
+                <td rowspan="1">{{data.touchpoint}}</td>
+                <td rowspan="1">{{data.department}}</td>
+                <td rowspan="1">
+                  <ul class="list">
+                    <li style="float:left" *ngFor="let channel of data.channels;let c = index;">{{channel.channel}}
+                      <span *ngIf="c!=data.channels.length-1">,</span>
                     </li>
-                  </ul> -->
-                      </table>
+                  </ul>
+                </td>
+                <td rowspan="1">
+                  <ul class="two-list">
+                    <li style="float:left" *ngFor="let dataSource of data.dataSources;let d = index;">{{dataSource.dataSource}}
+                      <span *ngIf="d!=data.dataSources.length-1">,</span>
+    
+                    </li>
+                  </ul>
+                  <span *ngIf="data.findings.length" class="glyphicon glyphicon-folder-open">
+    
+                  </span>
+                </td>
+                <td rowspan="1">
+                  <span *ngIf="!edit">{{data.rank}}</span>
+                  <input type="number" [attr.id]="'rank' + d" style="width:40px;" [(ngModel)]="checkValue[d]" (keyup)="validateRank($event,d,inp)"
+                    (click)="validateRank($event,d,inp)" #inp [attr.min]="1" [attr.max]="tableData.length" *ngIf="edit">
+                </td>
+              </tr>
+              <tr *ngIf="data.findings.length && showFinding[d]">
+                <td></td>
+                <td colspan="3">
+    
+                  <div class="panel panel-default" *ngFor="let find of data.findings;let f = index;">
+                    <div class="panel-heading">
+                      <div class="badge badge-numbering">{{(f+1)}}
+                        <br>
+                      </div> {{find.finding}}</div>
+                    <div class="panel-body no-gap">
+                      <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                          <table class="table table-finding table-bordered">
+                            <thead>
+                              <tr>
+                                <th width="10%">CATEGORY</th>
+                                <th width="10%">IMPROVEMENTS</th>
+                                <th width="10%">RESPONSIBLE STAFF</th>
+                                <th width="10%">ROOT CAUSE</th>
+                                <th width="10%">SOURCE REQUIRED</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>{{find.category}}</td>
+                                <td>{{find.improvements}}</td>
+                                <td>{{find.responsibleStaff}}</td>
+                                <td>{{find.rootCause}}</td>
+                                <td>{{find.sourceRequired}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-              </td>           
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-      <button type="button" (click)="submitRank()" class="btn btn-primary btn-submit" [disabled]="isDisable()" *ngIf="edit">SUBMIT</button>
+                </td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <button type="button" (click)="submitRank()" class="btn btn-primary btn-submit" [disabled]="isDisable()" *ngIf="edit">SUBMIT</button>
+        </div>
+      </div>
     </div>
-    <!-- </div> -->
+    <div id="menu2" class="tab-pane fade">
+      <h3>Risk Report</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <h3>Strategic Planner</h3>
+      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    </div>
   </div>
+</div>
+</div>

@@ -1,0 +1,241 @@
+<div class="container">
+  <h2>Related Findings
+    <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#myModal" (click)="newFinding();">
+      <span class="glyphicon glyphicon-plus"></span> New Finding
+    </button>
+  </h2>
+
+  <p>
+    <strong>Note:</strong> The
+    <strong>data-parent</strong> attribute makes sure that all collapsible elements under the specified parent will be closed when
+    one of the collapsible item is shown.</p>
+  <div class="panel-group" id="accordion" *ngIf="data">
+    <div class="panel panel-default" *ngFor="let find of data.touchpoints.findings;let f = index;">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a (click)="isCollapse($event,'#btn'+f)" data-toggle="collapse" data-parent="#accordion" [attr.data-target]="'#collapse'+f">{{f+1}}) {{data.department}} : {{data.stackholder}} : {{data.touchpoints.touchpoint}} : {{find.finding}}</a>
+          <div class="bttn-group pull-right" [attr.id]="'btn'+f" [style.display]="f?'none':'inherit'">
+            <button class="btn-danger" data-toggle="modal" data-target="#myModal" (click)="editFinding(find)">Edit</button>
+            <button class="btn-default" data-toggle="modal" data-target="#evidenceForm" (click)="newEvidence(find.findingId)">Add Evidence</button>
+          </div>
+        </h4>
+      </div>
+      <div [attr.id]="'collapse'+f" class="panel-collapse collapse" [ngClass]="{'in':!f}">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-4">
+              <label>Category :</label> {{find.category}}
+            </div>
+            <div class="col-sm-4">
+              <label>Source Required :</label> {{find.sourceRequired}}
+            </div>
+            <div class="col-sm-4">
+              <label>Responsible Staff :</label> MIs Department
+            </div>
+            <div class="col-sm-12">
+              <label>Improvements :</label> {{find.improvements}}
+            </div>
+            <div class="col-sm-12">
+              <label>Root Cause :</label> {{find.rootCause}}
+            </div>
+            <div class="col-sm-12">
+              <label>Evidences :</label>
+              <span *ngFor="let evidence of find.evidances;let e = index;">
+                <a [attr.href]="evidence.url">File {{e+1}}</a>
+                <span *ngIf="e!=find.evidances.length - 1">,</span>
+              </span>
+              <span *ngIf="!find.evidances.length">None</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content detail-content">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <div class="modal-header">
+        <h4 class="modal-title">
+          <span *ngIf="!isFindingUpdate">FILL</span>
+          <span *ngIf="isFindingUpdate">Update</span>
+          FINDING {{selectedTouchpoint}}
+        </h4>
+      </div>
+      <form class="form-horizontal" [formGroup]="findingForm" (submit)="submitFinding()">
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label class="control-label col-sm-3">FINDING</label>
+            <div class="col-sm-9">
+              <textarea class="form-control" formControlName="finding"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3">CATEGORY </label>
+            <div class="col-sm-9">
+              <select class="form-control" formControlName="categoryId">
+                <option *ngFor="let cat of categories;let c=index;" [value]="cat.id">{{cat.category}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3">ROOT-CAUSE</label>
+            <div class="col-sm-9">
+              <textarea class="form-control" formControlName="rootCause"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3">IMPROVEMENTS </label>
+            <div class="col-sm-9">
+              <textarea class="form-control" formControlName="improvements"></textarea>
+            </div>
+          </div>
+          <div class="form-group" *ngIf="!isFindingUpdate">
+            <label class="control-label col-sm-3">ASSIGNED BY </label>
+            <div class="col-sm-9">
+              <label class="radio-inline">
+                <input type="radio" name="type" [(ngModel)]="type" [ngModelOptions]="{standalone: true}" value="pankaj" (click)="getEmployeeControl()"> EMPLOYEE NAME
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="type" [(ngModel)]="type" [ngModelOptions]="{standalone: true}" value="tushar" (click)="getRoleControl()"> EMPLOYEE ROLE
+              </label>
+            </div>
+          </div>
+          <div class="form-group" *ngIf="type == 'pankaj'">
+            <div class="col-sm-offset-3 col-sm-9">
+              <ul style="list-style:none;padding:0px;">
+                <li *ngFor="let employee of selectedStaff;let e=index;">{{e+1}}) {{employee.firstName}} {{employee.lastName}}
+                  <button type="button" class="close" data-dismiss="modal" (click)="removeResponsibleStaffId(e)">&times;</button>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-sm-6">
+              <label class="control-label col-sm-offset-3 col-sm-3" for="unit">UNIT </label>
+              <div class="col-sm-6">
+                <select class="form-control" name="unit" [(ngModel)]="unitIdForEmp" [ngModelOptions]="{standalone: true}" (change)="getEmployees(unitIdForEmp)">
+                  <option *ngFor="let unit of units;let u = index;" [value]="unit.departmentId">{{unit.department}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label class="control-label col-sm-3">EMPLOYEE</label>
+              <div class="col-sm-9">
+                <select class="form-control height" [(ngModel)]="responsibleStaff" [ngModelOptions]="{standalone: true}" multiple (change)="getResponsibleStaffIds()">
+                  <option *ngFor="let emp of employees;let e=index;" [value]="emp">
+                    {{emp.firstName}} {{emp.lastName}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" *ngIf="type == 'tushar'" formArrayName="responsibleRole">
+            <div *ngFor="let resRole of findingForm.controls.responsibleRole['controls']; let r = index;" [formGroupName]="r">
+              <div class="col-sm-6">
+                <label class="control-label col-sm-offset-3 col-sm-3" for="unit">Unit : </label>
+                <div class="col-sm-6">
+                  <select class="form-control" name="unit" formControlName="departmentId" (ngModelChange)="getRoles($event,r)">
+                    <option *ngFor="let unit of units;let u = index;" [value]="unit.departmentId">{{unit.department}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <label class="control-label col-sm-3">ROLES</label>
+                <div class="col-sm-9">
+                  <select class="form-control " formControlName="roleId">
+                    <option *ngFor="let role of roles[r];let r=index;" [value]="role.roleId">
+                      {{role.role}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <button (click)="addRole()" *ngIf="resRole.valid && r == findingForm.controls.responsibleRole['controls'].length - 1">ADD</button>
+                <button (click)="removeRole(r)" *ngIf="findingForm.controls.responsibleRole['controls'].length!=1">REMOVE</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-sm-3">DEADLINE</label>
+            <div class="col-sm-9">
+              <input type="date" class="form-control" formControlName="deadline">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3">SOURCE REQUIRED </label>
+            <div class="col-sm-9">
+              <textarea class="form-control" formControlName="sourceRequired"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3">Link to </label>
+            <div class="col-sm-3">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" formControlName="risk"> Risk Register</label>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" formControlName="strategicPlanner"> Strategic Planner</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success btn-submit">SUBMIT</button>
+          <button type="button" class="btn btn-default btn-close" data-dismiss="modal">CLOSE</button>
+        </div>
+      </form>
+
+    </div>
+
+  </div>
+</div>
+<!--Evidence Form-->
+<div class="modal fade" id="evidenceForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Attach Evidence</h4>
+      </div>
+      <!-- Modal Body -->
+      <form [formGroup]="evidencForm" (submit)="onEvidenceSubmit()">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" formControlName="title" />
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea type="text" class="form-control" id="description" formControlName="description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputFile">Attachment</label>
+            <input type="file" class="form-control-file" id="exampleInputFile" formControlName="file" (change)="getFile($event)" aria-describedby="fileHelp">
+            <!-- <small id="fileHelp" class="form-text text-muted"></small> -->
+          </div>
+        </div>
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-default">Submit</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
