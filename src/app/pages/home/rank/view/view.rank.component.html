@@ -9,17 +9,31 @@
 
   </div>
   <br>
+  <!-- new code -->
+  <div *ngIf="stakeholderId"> 
+ <div id="cssmenu"  class="align-center">
+    <ul>
+        <li class='active'><a data-toggle="tab" href="#menu1">Ranked Journey</a></li>
+         <li><a data-toggle="tab" href="#menu2">Risk</a></li>
+         <li><a data-toggle="tab" href="#menu3">Stretegic Planner</a></li>
+     </ul>
 
-<div *ngIf="stakeholderId">
-  <ul class="nav nav-tabs">
+ </div>
+
+
+
+  <!-- new code -->
+
+<!-- <div *ngIf="stakeholderId"> -->
+  <!-- <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#menu1">Ranked Journey</a></li>
     <li><a data-toggle="tab" href="#menu2">Risk</a></li>
     <li><a data-toggle="tab" href="#menu3">Stretegic Planner</a></li>
-  </ul>
+  </ul> -->
 
   <div class="tab-content">
     <div id="menu1" class="tab-pane fade in active">
-      <h3>Ranked Journey Of Touchpoints</h3>
+      <h3 class="text-head">Ranked Journey Of Touchpoints</h3>
       <div *ngIf="tableData.length">
         <!-- <div class="panel-heading">
           <b class="margin-top"> RANKED JOURNEY OF TOUCHPOINTS
@@ -115,12 +129,12 @@
       </div>
     </div>
     <div id="menu2" class="tab-pane fade">
-      <h3>Risk Report</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+      <h3 class="text-head">Risk Report</h3>
+      <p class="text-head">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
     </div>
     <div id="menu3" class="tab-pane fade">
-      <h3>Strategic Planner</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+      <h3 class="text-head">Strategic Planner</h3>
+      <p class="text-head">Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
     </div>
   </div>
 </div>

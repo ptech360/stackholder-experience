@@ -78,11 +78,20 @@
   border-left: 1px solid #ebebeb;
   /* border-right: 1px solid #ebebeb; */
   color:#ff5931;
-  margin-left: 10px;
-  margin-right: 10px;
+  /* margin-left: 10px;
+  margin-right: 10px; */
   cursor: pointer;
   transition: 0.5s color;
 }
+.csa-detail:active{
+  border-bottom: 2px solid red;
+}
+
+
+.csa-detail:visited{
+  border-bottom: 2px solid red;
+}
+
 .csa-detail:focus{
     outline: -webkit-focus-ring-color auto 0px;
     outline-color: -webkit-focus-ring-color;
