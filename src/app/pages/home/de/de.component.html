@@ -8,30 +8,37 @@
     <div class="stackholder">
       <div class="flex-box-audit">
         <div class="stackholder-1">
-          Stackhokder
+          <div class="table">
+            <span>STAKEHOLDER</span>
+          </div>
+
         </div>
         <div class="stackholder-2">
           <div class="flex-box-row">
             <div class="item">
-              TOUCHPOINT
+              <div class="table">
+                <span>TOUCHPOINT</span>
+              </div>
             </div>
             <div class="item">
-              <ul class="list">
-                <li style="float:left">CHANNEL
-                </li>
-              </ul>
+              <div class="table">
+                <span>CHANNEL</span>
+              </div>
             </div>
             <div class="item">
-              EXPERIENCE
+              <div class="table">
+                <span>EXPERIENCE</span>
+              </div>
             </div>
             <div class="item">
-              <ul class="list">
-                <li style="float:left">DATA SOURCE
-                </li>
-              </ul>
+              <div class="table">
+                <span>DATA SOURCE</span>
+              </div>
             </div>
             <div class="item">
-              FINDINGS
+              <div class="table">
+                <span>FINDINGS</span>
+              </div>
             </div>
           </div>
         </div>
@@ -131,7 +138,7 @@
                                           <li *ngFor="let evidance of find.evidances;let e=index;">
                                             <b>{{e+1}}</b>)
                                             <a [attr.href]="evidance.url" (click)="stopPropagation($event)">
-                                            file {{e+1}}</a>
+                                              file {{e+1}}</a>
                                           </li>
                                           <li *ngIf="!find.evidances.length">None</li>
                                         </ul>
