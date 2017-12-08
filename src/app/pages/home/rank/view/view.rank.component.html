@@ -14,7 +14,7 @@
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#menu1">Ranked Journey</a></li>
     <li><a data-toggle="tab" href="#menu2">Risk</a></li>
-    <li><a data-toggle="tab" href="#menu3">Stretegic Planner</a></li>
+    <li><a data-toggle="tab" href="#menu3">Strategic Planner</a></li>
   </ul>
 
   <div class="tab-content">
@@ -37,6 +37,9 @@
                 <th>RANK
                   <button (click)="edit=true" class="btn-edit">
                     <i class="glyphicon glyphicon-pencil"></i>
+                  </button>
+                  <button *ngIf="edit" (click)="edit=false" class="btn-edit">
+                    <i class="glyphicon glyphicon-close"></i>
                   </button>
                 </th>
               </tr>

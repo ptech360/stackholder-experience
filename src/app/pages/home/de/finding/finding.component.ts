@@ -57,8 +57,9 @@ export class FindingComponent {
     this.findingForm = this.resetFindingForm();
   }
 
-  newEvidence(findingId: any) {
-    this.selectedFindingId = findingId;
+  newEvidence(finding: any) {
+    this.selectedFindingId = finding.findingId;
+    this.selectedFinding = finding;
     this.evidencForm = this.resetEvidenceForm();
   }
 
@@ -113,21 +114,6 @@ export class FindingComponent {
     } else {
       $(button).hide();
     }
-  }
-
-  getFile(event: any) {
-    this.file = event.srcElement.files[0];
-  }
-
-  onEvidenceSubmit() {
-    let formData = new FormData();
-    formData.append('title', this.evidencForm.value['title']);
-    formData.append('description', this.evidencForm.value['description']);
-    formData.append('file', this.file);
-    this.des.postEvidence(this.selectedFindingId, formData).subscribe((response: any) => {
-      console.log(response);
-      $('#evidenceForm').modal('hide');
-    })
   }
 
   editFinding(finding: any) {
@@ -206,6 +192,21 @@ export class FindingComponent {
     })
   }
 
+  getFile(event: any) {
+    this.file = event.srcElement.files[0];
+  }
+
+  onEvidenceSubmit() {
+    let formData = new FormData();
+    formData.append('title', this.evidencForm.value['title']);
+    formData.append('description', this.evidencForm.value['description']);
+    formData.append('file', this.file);
+    this.des.postEvidence(this.selectedFindingId, formData).subscribe((response: any) => {
+      this.selectedFinding.evidances.push(response);
+      $('#evidenceForm').modal('hide');
+    })
+  }
+
   // selectedTouchpoint:any;
   isFindingUpdate: boolean = false;
   submitFinding() {
@@ -225,6 +226,7 @@ export class FindingComponent {
       delete this.findingForm.value["risk"];
       delete this.findingForm.value["strategicPlanner"];
       this.des.updateFinding(this.selectedFindingId, this.findingForm.value).subscribe((response: any) => {
+        this.selectedFinding = this.findingForm.value;
           $('#myModal').modal('hide');
           this.findingForm = this.resetFindingForm();
           })

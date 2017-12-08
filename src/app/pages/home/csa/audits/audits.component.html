@@ -80,8 +80,7 @@
     <div class="table">
       <span>{{audit.department}}
         <div class="badge badge-secondary" data-toggle="modal" data-target="#myModal" (click)="selectedUnit = audit.departmentId">Assign<i class="glyphicon glyphicon-arrow-right"></i></div>
-      </span>
-     
+      </span>     
     </div>
   </div>
   <div class="stackholder">
@@ -107,6 +106,7 @@
           <div class="item">
             <ul class="list">
               <li style="float:left" *ngFor="let dataSource of tp.dataSources;let d = index;">{{dataSource.dataSource}}
+                <span *ngIf="dataSource.dataSourceId==3">:{{tp.surveyTitle}}</span>
                 <span *ngIf="d!=tp.dataSources.length-1">,</span>
               </li>
             </ul>
