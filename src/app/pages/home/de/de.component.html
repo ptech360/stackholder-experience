@@ -1,116 +1,4 @@
 <div class="container">
-  <!-- <table class="table table-responsive  table-bordered" id="accordion">
-    <thead class="thead-dark  ">
-      <tr>
-        <th>UNIT</th>
-        <th>STAKEHOLDER</th>
-        <th>TOUCHPOINT</th>
-        <th>CHANNEL</th>
-        <th>EXPERIENCE</th>
-        <th>DATA SOURCE</th>
-        <th>FINDINGS</th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let audit of audits;let a=index;" class="text-middle">
-      <tr>
-        <td colspan="7" class="table-gap"></td>
-      </tr>
-      <tr>
-        <td class="padding-all" [attr.rowspan]="getRowSpanOfStakeholder(audit.stackholders)">{{audit.department}}</td>
-      </tr>
-      <ng-template ngFor let-stackholder [ngForOf]="audit.stackholders" let-s="index">
-        <tr>
-          <td [attr.rowspan]="stackholder.touchpoints.length + 2">{{stackholder.stackholder}}</td>
-        </tr>
-        <ng-template ngFor let-tp [ngForOf]="stackholder.touchpoints" let-t="index">
-          <tr >
-            <td>{{tp.touchpoint}}</td>
-            <td class="text-middle">
-              <ul class="list">
-                <li style="float:left" *ngFor="let channel of tp.channels;let c = index;">{{channel.channel}}<span *ngIf="c!=tp.channels.length -1">,</span></li>
-              </ul>
-            </td>
-            <td>{{tp.experience}}</td>
-            <td>
-              <ul class="list">
-                <li style="float:left" *ngFor="let dataSource of tp.dataSources;let d = index;">{{dataSource.dataSource}}<span *ngIf="d!=tp.dataSources.length -1">,</span></li>
-              </ul>
-            </td>
-            <td>
-              <button *ngIf="!tp.findings.length" class="btn btn-link btn-finding" data-toggle="modal" data-target="#myModal" (click)="selectedTouchpoint = tp.touchpointId">FILL</button>
-              <button *ngIf="tp.findings.length" class="btn btn-link btn-finding" data-toggle="collapse" [attr.data-target]="'#findings' + a + s + t"
-                (click)="collapse('#findings' + a + s + t)">VIEW</button>
-            </td>
-          </tr>
-
-          <!-----------------------------------------------------------
-          <tr>
-            <td colspan="6" style="width: 100%;position: relative;padding: 0px;">
-              <div class="panel panel-default panel-finding collapse" [attr.id]="'findings' + a + s + t">
-                <div class="panel-heading">
-                  <h4 class="panel-title">{{audit.department}} : {{stackholder.stackholder}} : {{tp.touchpoint}} : FINDINGS
-                    <i class="glyphicon glyphicon-plus-sign btn-add" data-toggle="modal" data-target="#myModal" (click)="selectedTouchpoint = tp.touchpointId"></i>
-                    <button class="pull-right btn-add" data-toggle="modal" data-target="#myModal" (click)="selectedTouchpoint = tp.touchpointId">Add More</button>
-                  </h4>
-                </div>
-                <div class="panel-body finding-panel">
-                  <div class="panel panel-default" *ngFor="let find of tp.findings;let f = index;">
-                    <div class="panel-heading left-side">
-                      <div class="badge badge-numbering">{{(f+1)}}</div> {{find.finding}}
-                      <button class="pull-right" data-toggle="modal" data-target="#evidenceForm" (click)="showEvidenceForm(find.findingId)" style="color: buttontext;">Add Evidence</button>
-                      <button class="pull-right" style="color: buttontext;" data-toggle="modal" data-target="#myModal" (click)="editFinding(find)">Edit</button>
-                    </div>
-                    <div class="panel-body no-padding">
-                      <div class="row">
-                        <div class="col-lg-12 col-sm-12 col-md-12">
-                          <table class="table table-finding">
-                            <thead>
-                              <tr>
-                                <th width="10%" class="cell1">CATEGORY</th>
-                                <th width="10%">IMPROVEMENTS</th>
-                                <th width="10%">RESPONSIBLE STAFF</th>
-                                <th width="10%">ROOT CAUSE</th>
-                                <th width="10%">SOURCE REQUIRED</th>
-                                <th width="10%">Evidences</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td>{{find.category}}</td>
-                                <td>{{find.improvements}}</td>
-                                <td>{{find.sourceRequired}}</td>
-                                <td>{{find.rootCause}}</td>
-                                <td>{{find.sourceRequired}}</td>
-                                <td>
-                                  <ul style="list-style:none;padding:0px;">
-                                    <li *ngFor="let evidance of find.evidances;let e=index;"><b>{{e+1}}</b>)<a [attr.href]="evidance.url" (click)="stopPropagation($event)"> file {{e+1}}</a></li>
-                                    <li *ngIf="!find.evidances.length">None</li>
-                                  </ul>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-          
-                </div>
-             
-              </div>
-            </td>
-          </tr>
-          -----------------------------------------------------------
-        </ng-template>
-      </ng-template>
-    </tbody>
-    <tbody>
-      <tr>
-        <td colspan="7" class="table-gap"></td>
-      </tr>
-    </tbody>
-  </table> -->
-
   <div class="flex-box-audit head bottom-highlight">
     <div class="unit">
       <div class="table">
@@ -120,30 +8,37 @@
     <div class="stackholder">
       <div class="flex-box-audit">
         <div class="stackholder-1">
-          Stackhokder
+          <div class="table">
+            <span>STAKEHOLDER</span>
+          </div>
+
         </div>
         <div class="stackholder-2">
           <div class="flex-box-row">
             <div class="item">
-              TOUCHPOINT
+              <div class="table">
+                <span>TOUCHPOINT</span>
+              </div>
             </div>
             <div class="item">
-              <ul class="list">
-                <li style="float:left">CHANNEL
-                </li>
-              </ul>
+              <div class="table">
+                <span>CHANNEL</span>
+              </div>
             </div>
             <div class="item">
-              EXPERIENCE
+              <div class="table">
+                <span>EXPERIENCE</span>
+              </div>
             </div>
             <div class="item">
-              <ul class="list">
-                <li style="float:left">DATA SOURCE
-                </li>
-              </ul>
+              <div class="table">
+                <span>DATA SOURCE</span>
+              </div>
             </div>
             <div class="item">
-              FINDINGS
+              <div class="table">
+                <span>FINDINGS</span>
+              </div>
             </div>
           </div>
         </div>
@@ -185,6 +80,7 @@
               <div class="item">
                 <ul class="list">
                   <li style="float:left" *ngFor="let dataSource of tp.dataSources;let d = index;">{{dataSource.dataSource}}
+                    <span *ngIf="dataSource.dataSourceId==3">:{{tp.surveyTitle}}</span>
                     <span *ngIf="d!=tp.dataSources.length-1">,</span>
                   </li>
                 </ul>
@@ -242,7 +138,7 @@
                                           <li *ngFor="let evidance of find.evidances;let e=index;">
                                             <b>{{e+1}}</b>)
                                             <a [attr.href]="evidance.url" (click)="stopPropagation($event)">
-                                            file {{e+1}}</a>
+                                              file {{e+1}}</a>
                                           </li>
                                           <li *ngIf="!find.evidances.length">None</li>
                                         </ul>

@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Related Findings
+  <h2 *ngIf="data">{{data.department}} > {{data.stackholder}} > {{data.touchpoints.touchpoint}} > Findings
     <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#myModal" (click)="newFinding();">
       <span class="glyphicon glyphicon-plus"></span> New Finding
     </button>
@@ -13,10 +13,10 @@
     <div class="panel panel-default" *ngFor="let find of data.touchpoints.findings;let f = index;">
       <div class="panel-heading">
         <h4 class="panel-title">
-          <a (click)="isCollapse($event,'#btn'+f)" data-toggle="collapse" data-parent="#accordion" [attr.data-target]="'#collapse'+f">{{f+1}}) {{data.department}} : {{data.stackholder}} : {{data.touchpoints.touchpoint}} : {{find.finding}}</a>
+          <a (click)="isCollapse($event,'#btn'+f)" data-toggle="collapse" data-parent="#accordion" [attr.data-target]="'#collapse'+f">{{f+1}}) {{find.finding}}</a>
           <div class="bttn-group pull-right" [attr.id]="'btn'+f" [style.display]="f?'none':'inherit'">
             <button class="btn-danger" data-toggle="modal" data-target="#myModal" (click)="editFinding(find)">Edit</button>
-            <button class="btn-default" data-toggle="modal" data-target="#evidenceForm" (click)="newEvidence(find.findingId)">Add Evidence</button>
+            <button class="btn-default" data-toggle="modal" data-target="#evidenceForm" (click)="newEvidence(find)">Add Evidence</button>
           </div>
         </h4>
       </div>
@@ -47,6 +47,7 @@
               <span *ngIf="!find.evidances.length">None</span>
             </div>
           </div>
+          <span class="pull-right"><b>Deadline :</b>{{find.deadline}}</span>
         </div>
       </div>
     </div>

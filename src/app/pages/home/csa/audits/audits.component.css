@@ -282,6 +282,7 @@ tbody td[rowspan] {
     width: 100%;
     height: 100%;
     display: table;
+    margin-bottom: 0px!important;
   }
   
   .table span {
