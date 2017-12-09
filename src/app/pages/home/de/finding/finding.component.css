@@ -1,0 +1,125 @@
+.header-text{
+    font-family: Raleway!important;
+    color:#103a71!important;
+    font-size: 21px!important;
+    text-decoration: underline;
+}
+.header-text i{
+    padding-left: 8px;
+    padding-right: 8px;
+    color: red;
+}
+
+.container .header-text:hover{
+    
+    color:#103a71!important; 
+}
+.btn-new {
+    position: relative;
+    width: 90%;
+    display: block;
+    margin: 30px auto;
+    padding: 7px 25px;
+    font-size: 15px;
+    overflow: hidden;
+    padding-right: 21px;
+    border-width: 0;
+    outline: none;
+    border-radius: 0px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+    background-color: #103a71;
+    color: white;
+  }
+  
+  .btn-new:before {
+    font-family: FontAwesome;
+    content: "\f067";
+    position: absolute;
+    top: 7px;
+    left: -35px;
+    transition: all 200ms ease;
+  }
+  
+  .btn-new:hover:before {
+    left: 12px;
+  }
+  
+  .btn-new.active.focus,
+  .btn-new.active:focus,
+  .btn-new.active:hover,
+  .btn-new:active.focus,
+  .btn-new:active:focus,
+  .btn-new:active:hover {
+    color: white;
+    background-color: #103a71;
+    border-color: #103a71;
+  }
+  
+  .btn-new:active:focus,
+  .btn-new:focus {
+    outline: 0px auto -webkit-focus-ring-color;
+    outline-offset: 0px;
+  }
+
+  #accordion .panel-heading{
+      background:#103a71; 
+  }
+
+.note-text{
+      color:red;
+      font-family: Raleway;
+      margin-top:15px;
+  }
+
+  .btn-edit{
+      background: #29aecc!important;
+      border-color: #29aecc!important;
+      color:white;
+  }
+
+ .panel-body label{
+     font-family: Raleway;
+ }
+ .pull-left{
+     color:red;
+ }
+
+ #evidenceForm .modal-body{
+  font-family: Raleway;
+ }
+
+ .btn-submit{
+    color: #fff;
+    background-color: #103a71;
+    border-color: #ffffff;
+    border-radius:7px;
+   }
+   
+   .btn-submit:hover {
+       background: rgba(0,0,0,0);
+       color: #103a71;
+       box-shadow: inset 0 0 0 3px #103a71;
+   }
+   .btn-submit:focus {
+       outline: -webkit-focus-ring-color auto 0px;
+   }
+   
+   
+   .btn-close{
+       color:white;
+       background-color:red;
+       border-color:red;
+       border-radius:8px;
+       font-family:Raleway;
+   }
+   
+   .btn-close:hover{
+       background: white;
+       color: red;
+       box-shadow: inset 0 0 0 3px red;
+       font-family:Raleway;
+   }
+   
+   .btn-close:focus {
+       outline: -webkit-focus-ring-color auto 0px;
+   }
