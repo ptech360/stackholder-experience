@@ -39,6 +39,11 @@ tbody td[rowspan] {
     text-align: center;
   }
 
+  .list{
+    list-style: none;
+    padding: 0px;
+  }
+
   .list li{
     list-style: none;
     text-align: initial;
@@ -240,7 +245,7 @@ tbody td[rowspan] {
  
 .modal-header{
     background:#103a71; 
-    width:40%;
+    width:80%;
     margin: auto;
     border-radius: 10px;
     margin-top: -20px;

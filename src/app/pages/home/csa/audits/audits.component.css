@@ -112,6 +112,11 @@ tbody td[rowspan] {
   padding-bottom: 4px
 }
 
+.list{
+  list-style: none;
+  padding: 0px;
+}
+
 .list li {
   list-style: none;
   text-align: initial;
@@ -320,5 +325,5 @@ tbody td[rowspan] {
 
   .add-button .btn{
     position: absolute;
-    right:0;
+    right:15px;
   }
