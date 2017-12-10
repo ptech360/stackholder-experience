@@ -40,7 +40,7 @@
 
 <!-- new code -->
 <div class="container-fluid">
-<div class="flex-box-audit head bottom-highlight">
+<div class="flex-box-audit head bottom-highlight text-center">
   <div class="unit">
     <div class="table">
       <span>UNIT</span>
@@ -65,7 +65,7 @@
               <span>CHANNEL</span>
             </div>                
           </div>
-          <div class="item">
+          <div class="item-l">
             <div class="table">
               <span>EXPERIENCE</span>
             </div>              
@@ -82,10 +82,9 @@
 </div>
 <div class="flex-box-audit bottom-highlight" *ngFor="let audit of audits;let a=index;">
   <div class="unit">
-    <div class="table">
-      <span>{{audit.department}}
-        <div class="badge badge-secondary" data-toggle="modal" data-target="#myModal" (click)="selectedUnit = audit.departmentId">Assign<i class="glyphicon glyphicon-arrow-right"></i></div>
-      </span>     
+    <div class="table  text-center">
+      {{audit.department}}
+        <div class="badge badge-secondary" data-toggle="modal" data-target="#myModal" (click)="selectedUnit = audit.departmentId">Assign<i class="glyphicon glyphicon-arrow-right"></i></div>    
     </div>
   </div>
   <div class="stackholder">
@@ -105,7 +104,7 @@
               </li>
             </ul>
           </div>
-          <div class="item">
+          <div class="item-l">
             {{tp.experience}}
           </div>
           <div class="item">
