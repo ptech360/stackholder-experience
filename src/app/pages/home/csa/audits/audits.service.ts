@@ -19,6 +19,12 @@ export class AuditService{
     .catch(this.handleError);
   }
 
+  public getAuditsByUnit(unitId){
+    return this.http.get("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/csa/unit/"+unitId+"/audits")
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
   public getEmployees(unitId:any){
     return this.http.get("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/unit/"+unitId+"/employees")
     .map(this.extractData)
@@ -33,7 +39,21 @@ export class AuditService{
 
   public assignUnit(unitId:any,employeeIds:any){
     return this.http.post("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/csa/assign/unit/"+unitId+"/de",{de:employeeIds})
+    .map(this.extractData)
+    .catch(this.handleError);
   }
+
+  updateTouchPoint(tpId:any,data:any){
+    return this.http.put("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/csa/touchpoint/"+tpId,data)
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
+  deleteTouchPoint(tpId:any){
+    return this.http.delete("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/csa/touchpoint/"+tpId)
+    .map(this.extractData)
+    .catch(this.handleError);
+  }  
 
   private extractData(res: Response) {
     if (res.status === 204) { return res; }

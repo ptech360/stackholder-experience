@@ -133,7 +133,7 @@ tbody td[rowspan] {
 
 .modal-header {
   background: #103a71;
-  width: 32%;
+  width: 80%;
   margin: auto;
   border-radius: 10px;
   margin-top: -20px;
@@ -243,7 +243,7 @@ tbody td[rowspan] {
   .stackholder {
     /* margin:2px 2px 0 0; */
     outline: 2px solid #eaeaea;
-    width: 80%;
+    width: 100%;
     display: grid;
   }
   
@@ -279,7 +279,14 @@ tbody td[rowspan] {
     padding: 10px;
     /* margin:2px 2px 0 0; */
     outline: 2px solid #eaeaea;
-    width: 40%;
+    width: 35%;
+  }
+  .item-s{
+    background-color: white;
+    padding: 10px;
+    /* margin:2px 2px 0 0; */
+    outline: 2px solid #eaeaea;
+    width: 5%;
   }
   .flex-box-row {
     display: flex;
@@ -299,7 +306,7 @@ tbody td[rowspan] {
     vertical-align: middle;
   }
   
-  .head .item, .head .stackholder-1, .head .unit, .head .item-l{
+  .head .item, .head .stackholder-1, .head .unit, .head .item-l, .head .item-s{
       background:#0f3a70;
       color:white;
       vertical-align: initial;

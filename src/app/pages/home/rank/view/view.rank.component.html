@@ -1,36 +1,45 @@
 <div class="container">
-  <div class="form-group">
-    <label class="control-label col-sm-3 col-lg-3 col-md-3"> CHOOSE STAKEHOLDER </label>
-    <div class="col-sm-9 col-lg-9 col-md-9">
-      <select class="form-control" [(ngModel)]="stakeholderId" (ngModelChange)="getRankingTable($event)" (click)="edit=false">
-        <option *ngFor="let stackholder of stackholders;let s = index;" [value]="stackholder.stackholderId">{{stackholder.stackholder}}</option>
-      </select>
-    </div>
-
-  </div>
-  <br>
-
-
-
   <!-- new code -->
-
-  <div *ngIf="stakeholderId">
+  <div>
     <div id="cssmenu" class="align-center">
       <ul>
         <li class="active">
-          <a data-toggle="tab" href="#menu1">Ranked Journey</a>
-        </li>
-        <li>
           <a data-toggle="tab" href="#menu2">Risk</a>
         </li>
         <li>
           <a data-toggle="tab" href="#menu3">Strategic Planner</a>
         </li>
+        <li>
+          <a data-toggle="tab" href="#menu4">Findings</a>
+        </li>
+        <li>
+          <a data-toggle="tab" href="#menu1">Ranked Journey</a>
+        </li>
       </ul>
     </div>
     <div class="tab-content">
-      <div id="menu1" class="tab-pane fade in active">
+      <div id="menu2" class="tab-pane fade in active">
+        <h3 class="text-head">Risk Report</h3>
+        <p class="text-head">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+      </div>
+      <div id="menu3" class="tab-pane fade">
+        <h3 class="text-head">Strategic Planner</h3>
+        <p class="text-head">Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+      </div>
+      <div id="menu4" class="tab-pane fade">
+        <h3 class="text-head">Findings Report</h3>
+        <p class="text-head">Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+      </div>
+      <div id="menu1" class="tab-pane fade">
         <h3 class="text-head">Ranked Journey Of Touchpoints</h3>
+        <div class="form-group">
+          <label class="control-label col-sm-3 col-lg-3 col-md-3"> CHOOSE STAKEHOLDER </label>
+          <div class="col-sm-9 col-lg-9 col-md-9">
+            <select class="form-control" [(ngModel)]="stakeholderId" (ngModelChange)="getRankingTable($event)" (click)="edit=false">
+              <option *ngFor="let stackholder of stackholders;let s = index;" [value]="stackholder.stackholderId">{{stackholder.stackholder}}</option>
+            </select>
+          </div>        
+        </div>
         <div *ngIf="tableData.length">
           <!-- <div class="panel-heading">
             <b class="margin-top"> RANKED JOURNEY OF TOUCHPOINTS
@@ -129,14 +138,6 @@
             <button type="button" (click)="submitRank()" class="btn btn-primary btn-submit" [disabled]="isDisable()" *ngIf="edit">SUBMIT</button>
           </div>
         </div>
-      </div>
-      <div id="menu2" class="tab-pane fade">
-        <h3 class="text-head">Risk Report</h3>
-        <p class="text-head">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-      </div>
-      <div id="menu3" class="tab-pane fade">
-        <h3 class="text-head">Strategic Planner</h3>
-        <p class="text-head">Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
       </div>
     </div>
   </div>
