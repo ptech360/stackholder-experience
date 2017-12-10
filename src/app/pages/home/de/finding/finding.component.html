@@ -11,17 +11,14 @@
     <div class="col-lg-10 col-md-10 col-sm-12">
       <p class="note-text">
         <strong>Note:</strong> The
-        <strong>data-parent</strong> attribute makes sure that all collapsible elements under the specified parent will be
-        closed when one of the collapsible item is shown.</p>
-    </div>
-     
+        <strong>data-parent</strong> attribute makes sure that all collapsible elements under the specified parent will be closed when
+        one of the collapsible item is shown.</p>
+    </div>  
     <div class="col-lg-2 col-md-2 col-sm-2">
-    <button type="button" class="btn btn-info pull-right btn-new" data-toggle="modal" data-target="#myModal" (click)="newFinding();">
-       New Finding
-    </button>
-
-  </div>
-
+      <button type="button" class="btn btn-info pull-right btn-new" data-toggle="modal" data-target="#myModal" (click)="newFinding();">
+        New Finding
+      </button>  
+    </div>  
   </div>
 
   <div class="panel-group" id="accordion" *ngIf="data">
@@ -31,7 +28,7 @@
           <a (click)="isCollapse($event,'#btn'+f)" data-toggle="collapse" data-parent="#accordion" [attr.data-target]="'#collapse'+f">{{f+1}}) {{find.finding}}</a>
           <div class="bttn-group pull-right" [attr.id]="'btn'+f" [style.display]="f?'none':'inherit'">
             <button class="btn-danger btn-edit" data-toggle="modal" data-target="#myModal" (click)="editFinding(find)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-            <button class="btn-default btn-edit" data-toggle="modal" data-target="#evidenceForm" (click)="newEvidence(find)">Add Evidence</button>
+            <button class="btn-default btn-edit" data-toggle="modal" data-target="#evidenceForm" (click)="newEvidence(find)"><i class="fa fa-paperclip" aria-hidden="true"></i></button>
           </div>
         </h4>
       </div>

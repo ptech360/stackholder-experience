@@ -2,6 +2,12 @@
   list-style: none;
   text-align: initial;
 }
+
+.list{
+  list-style: none;
+  padding: 0px;
+}
+
 .two-list{
   list-style: none;
   text-align: initial;

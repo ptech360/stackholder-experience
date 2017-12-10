@@ -32,11 +32,11 @@
       <div id="menu1" class="tab-pane fade in active">
         <h3 class="text-head">Ranked Journey Of Touchpoints</h3>
         <div *ngIf="tableData.length">
-          <div class="panel-heading">
+          <!-- <div class="panel-heading">
             <b class="margin-top"> RANKED JOURNEY OF TOUCHPOINTS
               <i class="glyphicon glyphicon-arrow-down"></i>
             </b>
-          </div>
+          </div> -->
           <div class="panel-body">
             <table class="table table-bordered">
               <thead>
@@ -45,6 +45,7 @@
                   <th>UNITS</th>
                   <th>CHANNELS</th>
                   <th>DATA SOURCE</th>
+                  <th>EXPERIENCE</th>
                   <th>RANK
                     <button (click)="edit=true" class="btn-edit">
                       <i class="glyphicon glyphicon-pencil"></i>
@@ -67,16 +68,17 @@
                     </ul>
                   </td>
                   <td rowspan="1">
-                    <ul class="two-list">
+                    <ul class="list">
                       <li style="float:left" *ngFor="let dataSource of data.dataSources;let d = index;">{{dataSource.dataSource}}
                         <span *ngIf="d!=data.dataSources.length-1">,</span>
-
                       </li>
+                      <li *ngIf="!data.dataSources.length">None</li>
                     </ul>
                     <span *ngIf="data.findings.length" class="glyphicon glyphicon-folder-open">
 
                     </span>
                   </td>
+                  <td>{{data.experience}}</td>
                   <td rowspan="1">
                     <span *ngIf="!edit">{{data.rank}}</span>
                     <input type="number" [attr.id]="'rank' + d" style="width:40px;" [(ngModel)]="checkValue[d]" (keyup)="validateRank($event,d,inp)"

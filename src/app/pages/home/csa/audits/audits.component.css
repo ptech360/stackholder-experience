@@ -12,7 +12,6 @@ h1 {
 
 .btn-new {
   position: relative;
-  width: 8%;
   display: block;
   margin: 30px auto;
   padding: 7px 10px;
@@ -37,7 +36,7 @@ h1 {
 }
 
 .btn-new:hover:before {
-  left: 62px;
+  left: 152px;
 }
 
 .btn-new.active.focus,

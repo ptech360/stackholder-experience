@@ -81,16 +81,17 @@
                     <span *ngIf="dataSource.dataSourceId==3">:{{tp.surveyTitle}}</span>
                     <span *ngIf="d!=tp.dataSources.length-1">,</span>
                   </li>
+                  <li *ngIf="!tp.dataSources.length">None</li>
                 </ul>
               </div>
               <div class="item">
-                <button *ngIf="!tp.findings.length" class="btn btn-link btn-finding" data-toggle="modal" data-target="#myModal" (click)="selectedTouchpoint = tp.touchpointId;isFindingUpdate = false;">FILL</button>
+                <button *ngIf="!tp.findings.length" class="btn btn-link btn-finding" data-toggle="modal" data-target="#myModal" (click)="selectedTouchpoint = tp.touchpointId;isFindingUpdate = false;">Add</button>
                 <!-- <button *ngIf="tp.findings.length" class="btn btn-link btn-finding" data-toggle="collapse" [attr.data-target]="'#findings' + a + s + t"
                 (click)="collapse('#findings' + a + s + t)">VIEW</button> -->
-                <button *ngIf="tp.findings.length" class="btn btn-link btn-finding" [routerLink]="['./finding/',tp.touchpointId]">VIEW</button>
+                <button *ngIf="tp.findings.length" class="btn btn-link btn-finding" [routerLink]="['./finding/',tp.touchpointId]">View/Edit</button>
               </div>
             </div>
-            <div class="relative">
+            <!-- <div class="relative">
               <table>
                 <tr>
                   <td>
@@ -155,7 +156,7 @@
                   </td>
                 </tr>
               </table>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
