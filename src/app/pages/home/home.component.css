@@ -229,5 +229,8 @@ top: 10px;
   font-weight: 600px;
 }
 
-
- 
+.activeComponent{
+  padding: 0px;
+  background: #2aaecc;
+  transition:0.3s ease-in;
+}
