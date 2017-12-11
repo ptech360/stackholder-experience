@@ -37,6 +37,24 @@ export class RankService{
     .catch(this.handleError);
   }
 
+  public getRiskReport(){
+    return this.http.get("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/report/risk")
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
+  public getPlannerReport(){
+    return this.http.get("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/report/planner")
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
+  public getFindingsReport(){
+    return this.http.get("https://hamdan-nxtlife.ind-cloud.everdata.com/api/employee/report/findings")
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
   private extractData(res: Response) {
     if (res.status === 204) { return res; }
     let body = res.json();

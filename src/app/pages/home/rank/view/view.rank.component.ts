@@ -16,9 +16,32 @@ export class ViewRankComponent{
   stackholders: any;
   tableData: any[]=[];
   showFinding : boolean[] = [];
+  reports:any[]=[];
   constructor(public rs: RankService) {
     this.getPrerequisite();
+    this.getRiskReport();
   }
+
+  getRiskReport(){
+    this.rs.getRiskReport().subscribe((response:any)=>{
+      this.reports = response;
+    })
+  }
+
+  getFindinsReport(){
+    this.rs.getFindingsReport().subscribe((response:any)=>{
+      this.reports = response;
+    })
+  }
+
+  getPlannerReport(){
+    this.rs.getPlannerReport().subscribe((response:any)=>{
+      this.reports = response;
+    })
+  }
+
+
+
   getRankingTable(event: any) {
     this.rs.getRankedJourney(event).subscribe((response: any) => {
       console.log(this.tableData.length);
