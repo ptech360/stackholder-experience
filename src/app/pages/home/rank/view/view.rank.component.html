@@ -48,8 +48,8 @@
                 <label>Deadline :</label> {{report.deadline}}
                 <br>
                 <label>Responsible Staff :</label>
-                <span *ngFor="let rsr of report.responsibleRole;let st=index;">{{st+1}}.{{rsr.department}}:{{rsr.role}}</span>
-                <span *ngFor="let staff of report.responsibleStaff;let em = index;">{{em+1}}.{{staff.firstName}} {{staff.lastName}}</span>
+                <span *ngFor="let rsr of report.responsibleRole;let st=index;">{{st+1}}.{{rsr.department}}:{{rsr.role}}<br></span>
+                <span *ngFor="let staff of report.responsibleStaff;let em = index;">{{em+1}}.{{staff.firstName}} {{staff.lastName}}<br></span>
               </td>
             </tr>
           </tbody>
@@ -73,7 +73,7 @@
               <td>{{report.stackholder}}</td>
               <td>{{report.touchpoint}}</td>
               <td>{{report.experience}}</td>
-              <td>
+              <td style="text-align:left;">
                 <label>Finding :</label> {{report.finding}}
                 <br>
                 <label>Category :</label> {{report.category}}
@@ -85,8 +85,8 @@
                 <label>Deadline :</label> {{report.deadline}}
                 <br>
                 <label>Responsible Staff :</label>
-                <span *ngFor="let rsr of report.responsibleRole;let st=index;">{{st+1}}.{{rsr.department}}:{{rsr.role}}</span>
-                <span *ngFor="let staff of report.responsibleStaff;let em = index;">{{em+1}}.{{staff.firstName}} {{staff.lastName}}</span>
+                <span *ngFor="let rsr of report.responsibleRole;let st=index;">{{st+1}}.{{rsr.department}}:{{rsr.role}}<br></span>
+                <span *ngFor="let staff of report.responsibleStaff;let em = index;">{{em+1}}.{{staff.firstName}} {{staff.lastName}}<br></span>
               </td>
             </tr>
           </tbody>
@@ -110,7 +110,7 @@
               <td>{{report.stackholder}}</td>
               <td>{{report.touchpoint}}</td>
               <td>{{report.experience}}</td>
-              <td>
+              <td style="text-align:left;">
                 <label>Finding :</label> {{report.finding}}
                 <br>
                 <label>Category :</label> {{report.category}}
@@ -122,8 +122,8 @@
                 <label>Deadline :</label> {{report.deadline}}
                 <br>
                 <label>Responsible Staff :</label>
-                <span *ngFor="let rsr of report.responsibleRole;let st=index;">{{st+1}}.{{rsr.department}}:{{rsr.role}}</span>
-                <span *ngFor="let staff of report.responsibleStaff;let em = index;">{{em+1}}.{{staff.firstName}} {{staff.lastName}}</span>
+                <span *ngFor="let rsr of report.responsibleRole;let st=index;">{{st+1}}.{{rsr.department}}:{{rsr.role}}<br></span>
+                <span *ngFor="let staff of report.responsibleStaff;let em = index;">{{em+1}}.{{staff.firstName}} {{staff.lastName}}<br></span>
               </td>
             </tr>
           </tbody>
