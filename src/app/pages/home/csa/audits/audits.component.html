@@ -8,8 +8,8 @@
           <option *ngFor="let department of units;let s = index;" [value]="department.departmentId">{{department.department}}</option>
         </select>
       </div>
-      <div class="col-sm-4" >
-        <button class=" btn btn-primary" data-toggle="modal" data-target="#myModal" (click)="selectedUnit = unitId" *ngIf="unitId">ASSIGN DE</button>
+      <div class="col-sm-4 col-lg-4 col-md-4" >
+        <button class=" btn btn-primary btn-assign" data-toggle="modal" data-target="#myModal" (click)="selectedUnit = unitId" *ngIf="unitId">ASSIGN DE</button>
         <button  class="btn btn-primary btn-tp" routerLink="/home/csa/config"> TOUCH POINT</button>
       </div>
     </div>

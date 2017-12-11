@@ -385,3 +385,11 @@ tbody td[rowspan] {
     outline: 0px auto -webkit-focus-ring-color;
     outline-offset: 0px;
   }
+
+  .btn-assign{
+    color: white;
+    background-color: #103a71;
+    border-color: #103a71;
+    border-radius: 0px!important;
+    margin-bottom: 10px;
+  }
