@@ -83,9 +83,7 @@
   cursor: pointer;
   transition: 0.5s color;
 }
-.csa-detail:active{
-  border-bottom: 2px solid red;
-}
+
 
 
 /* .csa-detail:visited{
