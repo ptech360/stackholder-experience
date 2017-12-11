@@ -12,7 +12,6 @@ h1 {
 
 .btn-new {
   position: relative;
-  width: 8%;
   display: block;
   margin: 30px auto;
   padding: 7px 10px;
@@ -37,7 +36,7 @@ h1 {
 }
 
 .btn-new:hover:before {
-  left: 62px;
+  left: 152px;
 }
 
 .btn-new.active.focus,
@@ -89,7 +88,6 @@ h1 {
 }
 
 tbody td {
-  text-align: center;
   vertical-align: middle;
 }
 
@@ -112,6 +110,11 @@ tbody td[rowspan] {
   padding-bottom: 4px
 }
 
+.list{
+  list-style: none;
+  padding: 0px;
+}
+
 .list li {
   list-style: none;
   text-align: initial;
@@ -130,7 +133,7 @@ tbody td[rowspan] {
 
 .modal-header {
   background: #103a71;
-  width: 32%;
+  width: 80%;
   margin: auto;
   border-radius: 10px;
   margin-top: -20px;
@@ -225,7 +228,7 @@ tbody td[rowspan] {
 .flex-box-audit {
     display: flex;
     align-content: stretch;
-    text-align: center;
+    /* text-align: center; */
   }
   
   .unit {
@@ -240,7 +243,7 @@ tbody td[rowspan] {
   .stackholder {
     /* margin:2px 2px 0 0; */
     outline: 2px solid #eaeaea;
-    width: 80%;
+    width: 100%;
     display: grid;
   }
   
@@ -269,9 +272,22 @@ tbody td[rowspan] {
     padding: 10px;
     /* margin:2px 2px 0 0; */
     outline: 2px solid #eaeaea;
-    width: 25%;
+    width: 20%;
   }
-  
+  .item-l {
+    background-color: white;
+    padding: 10px;
+    /* margin:2px 2px 0 0; */
+    outline: 2px solid #eaeaea;
+    width: 35%;
+  }
+  .item-s{
+    background-color: white;
+    padding: 10px;
+    /* margin:2px 2px 0 0; */
+    outline: 2px solid #eaeaea;
+    width: 5%;
+  }
   .flex-box-row {
     display: flex;
     align-content: stretch;
@@ -281,16 +297,16 @@ tbody td[rowspan] {
   .table {
     width: 100%;
     height: 100%;
-    display: table;
+    /* display: table; */
     margin-bottom: 0px!important;
   }
   
   .table span {
-    display: table-cell;
+    /* display: table-cell; */
     vertical-align: middle;
   }
   
-  .head .item, .head .stackholder-1, .head .unit{
+  .head .item, .head .stackholder-1, .head .unit, .head .item-l, .head .item-s{
       background:#0f3a70;
       color:white;
       vertical-align: initial;
@@ -320,5 +336,5 @@ tbody td[rowspan] {
 
   .add-button .btn{
     position: absolute;
-    right:0;
+    right:15px;
   }

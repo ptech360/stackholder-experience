@@ -48,8 +48,14 @@
             <div class="col-sm-4">
               <label>Responsible Staff :</label> MIs Department
             </div>
-            <div class="col-sm-12">
+            <div class="col-sm-8">
               <label>Improvements :</label> {{find.improvements}}
+            </div>
+            <div class="col-sm-4" *ngIf="find.risk||find.strategicPlanner">
+              <label>Linked to :</label> 
+              <span *ngIf="find.risk">Risk Register</span>
+              <span *ngIf="find.strategicPlanner">,</span>
+              <span *ngIf="find.strategicPlanner">Strategic Planner</span>
             </div>
             <div class="col-sm-12">
               <label>Root Cause :</label> {{find.rootCause}}
@@ -80,7 +86,8 @@
       <div class="modal-header">
         <h4 class="modal-title">
           <span *ngIf="!isFindingUpdate">FILL</span>
-          <span *ngIf="isFindingUpdate">Update</span> FINDING {{selectedTouchpoint}}
+          <span *ngIf="isFindingUpdate">Update</span> 
+          <span *ngIf="data">{{data.department}} > {{data.stackholder}} >FINDING</span>
         </h4>
       </div>
       <form class="form-horizontal" [formGroup]="findingForm" (submit)="submitFinding()">

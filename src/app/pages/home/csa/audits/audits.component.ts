@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import { AuditService } from "./audits.service";
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 declare let $:any;
 
@@ -14,13 +15,58 @@ export class AuditsComponent{
   audits:any[]=[]; 
   selectedEmployees:any;
   selectedUnit:any; 
-  constructor(public as:AuditService){
+  editForm:FormGroup;
+  constructor(public as:AuditService,public fb:FormBuilder){
+    this.editForm = this.loadEditForm();
     this.getAudits();
     this.getPrerequisite();
   }
 
+  loadEditForm(){
+    return this.fb.group({
+      touchpoint:['',Validators.required],
+      experience:['',Validators.required]
+    });
+  }
+
+  loadEditFormData(data:any,touchpoints:any[],index:any){
+    this.selectedTouchpoint = data;
+    this.selectedTouchPoints = touchpoints;
+    this.selectedTouchpointIndex = index;
+    this.editForm.controls["touchpoint"].patchValue(data.touchpoint);
+    this.editForm.controls["experience"].patchValue(data.experience);
+  }
+  
+  selectedTouchPoints:any[];
+  selectedTouchpoint:any;
+  selectedTouchpointIndex:any;
+  submitEditForm(){
+    this.as.updateTouchPoint(this.selectedTouchpoint.touchpointId,this.editForm.value).subscribe((response:any)=>{
+      this.selectedTouchpoint.touchpoint = this.editForm.controls["touchpoint"].value;
+      this.selectedTouchpoint.experience = this.editForm.controls["experience"].value;
+      $('#editModal').modal('hide');
+    })
+  }
+
+  deleteTouchpoint(){
+    if(confirm("Are You Sure you want to Delete this touch point???"))
+      this.as.deleteTouchPoint(this.selectedTouchpoint.touchpointId).subscribe((response:any)=>{
+        this.selectedTouchPoints.splice(this.selectedTouchpointIndex,1);
+      })
+  }
+
   getAudits(){
     this.as.getAudits().subscribe((response:any)=>{
+      if(response.status == 204){
+        this.audits = [];
+      }else{
+      this.audits = response;
+    }
+    })
+  }
+
+  getAuditsByUnit(unitId){
+    this.as.getAuditsByUnit(unitId).subscribe((response:any)=>{
       if(response.status == 204){
         this.audits = [];
       }else{

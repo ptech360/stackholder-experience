@@ -2,6 +2,12 @@
   list-style: none;
   text-align: initial;
 }
+
+.list{
+  list-style: none;
+  padding: 0px;
+}
+
 .two-list{
   list-style: none;
   text-align: initial;
@@ -244,5 +250,5 @@ color:red;
 #cssmenu > ul > li.active > a:after,
 #cssmenu > ul > li:hover > a:after,
 #cssmenu > ul > li > a:hover:after {
-  background: #103a71;
+  background-color: #103a71;
 }

@@ -1,7 +1,112 @@
-<div class="add-button">
-    <button  class="btn btn-default pull-right btn-new" routerLink="/home/csa/config">ADD</button>  
+<!-- new code -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="form-group">
+      <label class="control-label col-sm-4" style="text-align: right;"> CHOOSE UNIT </label>
+      <div class="col-sm-4">
+        <select class="form-control" [(ngModel)]="unitId" (ngModelChange)="getAuditsByUnit($event)">
+          <option *ngFor="let department of units;let s = index;" [value]="department.departmentId">{{department.department}}</option>
+        </select>
+      </div>
+      <div class="col-sm-4" >
+        <button class=" btn btn-primary" data-toggle="modal" data-target="#myModal" (click)="selectedUnit = unitId" *ngIf="unitId">ASSIGN DE</button>
+        <button  class="btn btn-primary" routerLink="/home/csa/config">ADD TOUCH POINT</button>
+      </div>
+    </div>
+    <!-- <div class="add-button">
+        <button  class="btn btn-default pull-right btn-new" routerLink="/home/csa/config">ADD TOUCH POINT</button>  
+    </div> -->
+  </div>
+  <div class="flex-box-audit head bottom-highlight text-center" style="margin-top: 10px;">
+    <!-- <div class="unit">
+      <div class="table">
+        <span>UNIT</span>
+      </div>
+    </div> -->
+    <div class="stackholder">
+      <div class="flex-box-audit">
+        <div class="stackholder-1">
+          <div class="table">
+            <span>STAKEHOLDER</span>
+          </div>        
+        </div>
+        <div class="stackholder-2">
+          <div class="flex-box-row">
+            <div class="item">
+              <div class="table">
+                <span>TOUCHPOINT</span>
+              </div>              
+            </div>
+            <div class="item">
+              <div class="table">
+                <span>CHANNEL</span>
+              </div>                
+            </div>
+            <div class="item-l">
+              <div class="table">
+                <span>EXPERIENCE</span>
+              </div>              
+            </div>
+            <div class="item">
+              <div class="table">
+                <span>DATA SOURCE</span>
+              </div>                
+            </div>
+            <div class="item-s">
+              <div class="table">
+                <span>EDIT</span>
+              </div>                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex-box-audit bottom-highlight" *ngFor="let audit of audits;let a=index;">
+    <!-- <div class="unit">
+      <div class="table  text-center">
+        {{audit.department}}
+          <div class="badge badge-secondary" data-toggle="modal" data-target="#myModal" (click)="selectedUnit = audit.departmentId">Assign<i class="glyphicon glyphicon-arrow-right"></i></div>    
+      </div>
+    </div> -->
+    <div class="stackholder">
+      <div class="flex-box-audit" *ngFor="let stackholder of audit.stackholders; let s=index">
+        <div class="stackholder-1">
+          {{stackholder.stackholder}}
+        </div>
+        <div class="stackholder-2">
+          <div class="flex-box-row" *ngFor="let tp of stackholder.touchpoints; let t=index">
+            <div class="item">
+              {{tp.touchpoint}}
+            </div>
+            <div class="item">
+              <ul class="list">
+                <li style="float:left" *ngFor="let channel of tp.channels;let c = index;">{{channel.channel}}
+                  <span *ngIf="c!=tp.channels.length-1">,</span>
+                </li>
+              </ul>
+            </div>
+            <div class="item-l">
+              {{tp.experience}}
+            </div>
+            <div class="item">
+              <ul class="list">
+                <li style="float:left" *ngFor="let dataSource of tp.dataSources;let d = index;">{{dataSource.dataSource}}
+                  <span *ngIf="dataSource.dataSourceId==3">:{{tp.surveyTitle}}</span>
+                  <span *ngIf="d!=tp.dataSources.length-1">,</span>
+                </li>
+                <li *ngIf="!tp.dataSources.length">None</li>
+              </ul>
+            </div>
+            <div class="item-s">
+              <button class="btn-link" data-toggle="modal" data-target="#editModal" (click)="loadEditFormData(tp,stackholder.touchpoints,d)"><i class="glyphicon glyphicon-edit"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<!---->
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -10,7 +115,6 @@
     <div class="modal-content detail-content">
       <button type="button" class="close" data-dismiss="modal">&times;</button>
       <div class="modal-header">
-
         <h4 class="modal-title">ASSIGN UNIT</h4>
       </div>
       <div class="modal-body">
@@ -34,89 +138,39 @@
         <button type="button" class="btn btn-default btn-close" data-dismiss="modal">CLOSE</button>
       </div>
     </div>
-
   </div>
 </div>
 
-<!-- new code -->
-  <div class="flex-box-audit head bottom-highlight">
-    <div class="unit">
-      <div class="table">
-        <span>UNIT</span>
-      </div>
-    </div>
-    <div class="stackholder">
-      <div class="flex-box-audit">
-        <div class="stackholder-1">
-          <div class="table">
-            <span>STAKEHOLDER</span>
-          </div>        
+<div id="editModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">EDIT TOUCHPOINT</h4>
         </div>
-        <div class="stackholder-2">
-          <div class="flex-box-row">
-            <div class="item">
-              <div class="table">
-                <span>TOUCHPOINT</span>
-              </div>              
+        <form class="form-horizontal" [formGroup]="editForm" (submit)="submitEditForm()">
+          <div class="modal-body">
+            <div class="form-group">
+              <label class="control-label col-sm-3">Touchpoint</label>
+              <div class="col-sm-9">
+                <textarea class="form-control" formControlName="touchpoint"></textarea>
+              </div>
             </div>
-            <div class="item">
-              <div class="table">
-                <span>CHANNEL</span>
-              </div>                
-            </div>
-            <div class="item">
-              <div class="table">
-                <span>EXPERIENCE</span>
-              </div>              
-            </div>
-            <div class="item">
-              <div class="table">
-                <span>DATA SOURCE</span>
-              </div>                
+            <div class="form-group">
+              <label class="control-label col-sm-3">Experience</label>
+              <div class="col-sm-9">
+                <textarea class="form-control" formControlName="experience"></textarea>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-danger" (click)="deleteTouchpoint()">Delete</button>              
+            <button type="submit" class="btn btn-success" >Update</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>  
     </div>
   </div>
-<div class="flex-box-audit bottom-highlight" *ngFor="let audit of audits;let a=index;">
-  <div class="unit">
-    <div class="table">
-      <span>{{audit.department}}
-        <div class="badge badge-secondary" data-toggle="modal" data-target="#myModal" (click)="selectedUnit = audit.departmentId">Assign<i class="glyphicon glyphicon-arrow-right"></i></div>
-      </span>     
-    </div>
-  </div>
-  <div class="stackholder">
-    <div class="flex-box-audit" *ngFor="let stackholder of audit.stackholders; let s=index">
-      <div class="stackholder-1">
-        {{stackholder.stackholder}}
-      </div>
-      <div class="stackholder-2">
-        <div class="flex-box-row" *ngFor="let tp of stackholder.touchpoints; let t=index">
-          <div class="item">
-            {{tp.touchpoint}}
-          </div>
-          <div class="item">
-            <ul class="list">
-              <li style="float:left" *ngFor="let channel of tp.channels;let c = index;">{{channel.channel}}
-                <span *ngIf="c!=tp.channels.length-1">,</span>
-              </li>
-            </ul>
-          </div>
-          <div class="item">
-            {{tp.experience}}
-          </div>
-          <div class="item">
-            <ul class="list">
-              <li style="float:left" *ngFor="let dataSource of tp.dataSources;let d = index;">{{dataSource.dataSource}}
-                <span *ngIf="dataSource.dataSourceId==3">:{{tp.surveyTitle}}</span>
-                <span *ngIf="d!=tp.dataSources.length-1">,</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>

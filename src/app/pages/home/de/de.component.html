@@ -1,5 +1,5 @@
-<div class="container">
-  <div class="flex-box-audit head bottom-highlight">
+<div class="container-fluid">
+  <div class="flex-box-audit head bottom-highlight text-center">
     <div class="unit">
       <div class="table">
         <span>UNIT</span>
@@ -25,7 +25,7 @@
                 <span>CHANNEL</span>
               </div>
             </div>
-            <div class="item">
+            <div class="item-l">
               <div class="table">
                 <span>EXPERIENCE</span>
               </div>
@@ -47,13 +47,8 @@
   </div>
   <div class="flex-box-audit bottom-highlight" *ngFor="let audit of audits;let a=index;">
     <div class="unit">
-      <div class="table">
-        <span>{{audit.department}}
-          <div class="badge badge-secondary" data-toggle="modal" data-target="#myModal" (click)="selectedUnit = audit.departmentId">Assign
-            <i class="glyphicon glyphicon-arrow-right"></i>
-          </div>
-        </span>
-
+      <div class="table text-center">
+        {{audit.department}}
       </div>
     </div>
     <div class="stackholder">
@@ -74,7 +69,7 @@
                   </li>
                 </ul>
               </div>
-              <div class="item">
+              <div class="item-l">
                 {{tp.experience}}
               </div>
               <div class="item">
@@ -83,16 +78,17 @@
                     <span *ngIf="dataSource.dataSourceId==3">:{{tp.surveyTitle}}</span>
                     <span *ngIf="d!=tp.dataSources.length-1">,</span>
                   </li>
+                  <li *ngIf="!tp.dataSources.length">None</li>
                 </ul>
               </div>
               <div class="item">
                 <button *ngIf="!tp.findings.length" class="btn btn-link btn-finding" data-toggle="modal" data-target="#myModal" (click)="selectedTouchpoint = tp.touchpointId;isFindingUpdate = false;">ADD</button>
                 <!-- <button *ngIf="tp.findings.length" class="btn btn-link btn-finding" data-toggle="collapse" [attr.data-target]="'#findings' + a + s + t"
                 (click)="collapse('#findings' + a + s + t)">VIEW</button> -->
-                <button *ngIf="tp.findings.length" class="btn btn-link btn-finding" [routerLink]="['./finding/',tp.touchpointId]">VIEW</button>
+                <button *ngIf="tp.findings.length" class="btn btn-link btn-finding" [routerLink]="['./finding/',tp.touchpointId]">View/Edit</button>
               </div>
             </div>
-            <div class="relative">
+            <!-- <div class="relative">
               <table>
                 <tr>
                   <td>
@@ -157,7 +153,7 @@
                   </td>
                 </tr>
               </table>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
