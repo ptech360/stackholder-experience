@@ -11,12 +11,18 @@ import { Router } from "@angular/router";
 })
 export class HomeComponent{
   userDetails:any;
+  activeComponent:string;
   constructor(public storage:StorageService,private router: Router){
     this.userDetails = this.storage.getData('userDetails');
+    this.activeComponent = 'csa';
   }
 
   logout(){
     localStorage.clear();
     this.router.navigate(['/login']);
+  }
+
+  activateComponent(activeComponent){
+    this.activeComponent = activeComponent;
   }
 }

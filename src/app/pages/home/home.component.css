@@ -88,9 +88,9 @@
 }
 
 
-.csa-detail:visited{
+/* .csa-detail:visited{
   border-bottom: 2px solid red;
-}
+} */
 
 .csa-detail:focus{
     outline: -webkit-focus-ring-color auto 0px;
@@ -229,5 +229,8 @@ top: 10px;
   font-weight: 600px;
 }
 
-
- 
+.activeComponent{
+  padding: 0px;
+  border-bottom: 2px solid red;
+  transition:0.3s ease-in;
+}

@@ -66,14 +66,14 @@
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <a class="navbar-brand" href="#"><img src="assets\images\HBMSU-home.jpg"></a>
                 </div>
-                <div class="col-lg-2 col-md-2 co-sm-4 col-xs-4" routerLinkActive="active" style="padding: 0px;" >
-                    <div class="csa-detail"  [routerLink]="['./csa']">
+                <div class="col-lg-2 col-md-2 co-sm-4 col-xs-4" [ngClass]="{'activeComponent': activeComponent=='csa'}" routerLinkActive="active" style="padding: 0px;" >
+                    <div class="csa-detail"  [routerLink]="['./csa']" (click)="activateComponent('csa')">
                         <img src="assets\images\data.png" class="data-img"/>
                         <h5 class="font-detail">CSA</h5>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-2 co-sm-4 col-xs-4" routerLinkActive="active"  style="padding: 0px;" >
-                    <div class="csa-detail" [routerLink]="['./de']">
+                <div class="col-lg-2 col-md-2 co-sm-4 col-xs-4 " [ngClass]="{'activeComponent': activeComponent=='de'}" routerLinkActive="active"  style="padding: 0px;" >
+                    <div class="csa-detail" [routerLink]="['./de']" (click)="activateComponent('de')">
                         <img src="assets\images\data1.png" class="data-img"/>
                         <h5 class="font-detail">DATA ENTRY</h5>
                     </div>
@@ -84,8 +84,8 @@
                         <h5 class="font-detail">Ranking</h5>
                     </div>
                 </div> -->
-                <div class="col-lg-2 col-md-2 co-sm-4 col-xs-4" routerLinkActive="active"  style="padding: 0px;" >
-                    <div class="csa-detail" [routerLink]="['./report']">
+                <div class="col-lg-2 col-md-2 co-sm-4 col-xs-4" [ngClass]="{'activeComponent': activeComponent=='reports'}" routerLinkActive="active"  style="padding: 0px;" >
+                    <div class="csa-detail" [routerLink]="['./report']" (click)="activateComponent('reports')">
                         <img src="assets\images\report.png" class="data-img"/>
                        <h5 class="font-detail">REPORTS</h5>
                     </div>
