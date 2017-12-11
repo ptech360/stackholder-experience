@@ -4,31 +4,130 @@
     <div id="cssmenu" class="align-center">
       <ul>
         <li class="active">
-          <a data-toggle="tab" href="#menu2">Risk</a>
+          <a data-toggle="tab" href="#menu2" click="getRiskReport()">RISK REGISTER</a>
         </li>
         <li>
-          <a data-toggle="tab" href="#menu3">Strategic Planner</a>
+          <a data-toggle="tab" href="#menu3" (click)="getPlannerReport()">STRATEGIC PLANNING</a>
         </li>
         <li>
-          <a data-toggle="tab" href="#menu4">Findings</a>
+          <a data-toggle="tab" href="#menu4" (click)="getFindinsReport()">ALL FINDINGS</a>
         </li>
         <li>
-          <a data-toggle="tab" href="#menu1">Ranked Journey</a>
+          <a data-toggle="tab" href="#menu1">RANKED JOURNEY</a>
         </li>
       </ul>
     </div>
     <div class="tab-content">
       <div id="menu2" class="tab-pane fade in active">
-        <h3 class="text-head">Risk Report</h3>
-        <p class="text-head">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+        <br>
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <td>UNIT</td>
+              <td>STAKEHOLDER</td>
+              <td>TOUCHPOINT</td>
+              <td>EXPERIENCE</td>
+              <td>FINDING</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let report of reports;let r = index;">
+              <td>{{report.department}}</td>
+              <td>{{report.stackholder}}</td>
+              <td>{{report.touchpoint}}</td>
+              <td>{{report.experience}}</td>
+              <td style="text-align:left;">
+                <label>Finding :</label> {{report.finding}}
+                <br>
+                <label>Category :</label> {{report.category}}
+                <br>
+                <label>Source Required :</label> {{report.sourceRequired}}
+                <br>
+                <label>Improvements :</label> {{report.improvements}}
+                <br>
+                <label>Deadline :</label> {{report.deadline}}
+                <br>
+                <label>Responsible Staff :</label>
+                <span *ngFor="let rsr of report.responsibleRole;let st=index;">{{st+1}}.{{rsr.department}}:{{rsr.role}}</span>
+                <span *ngFor="let staff of report.responsibleStaff;let em = index;">{{em+1}}.{{staff.firstName}} {{staff.lastName}}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div id="menu3" class="tab-pane fade">
-        <h3 class="text-head">Strategic Planner</h3>
-        <p class="text-head">Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+        <br>
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <td>UNIT</td>
+              <td>STAKEHOLDER</td>
+              <td>TOUCHPOINT</td>
+              <td>EXPERIENCE</td>
+              <td>FINDING</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let report of reports;let r = index;">
+              <td>{{report.department}}</td>
+              <td>{{report.stackholder}}</td>
+              <td>{{report.touchpoint}}</td>
+              <td>{{report.experience}}</td>
+              <td>
+                <label>Finding :</label> {{report.finding}}
+                <br>
+                <label>Category :</label> {{report.category}}
+                <br>
+                <label>Source Required :</label> {{report.sourceRequired}}
+                <br>
+                <label>Improvements :</label> {{report.improvements}}
+                <br>
+                <label>Deadline :</label> {{report.deadline}}
+                <br>
+                <label>Responsible Staff :</label>
+                <span *ngFor="let rsr of report.responsibleRole;let st=index;">{{st+1}}.{{rsr.department}}:{{rsr.role}}</span>
+                <span *ngFor="let staff of report.responsibleStaff;let em = index;">{{em+1}}.{{staff.firstName}} {{staff.lastName}}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div id="menu4" class="tab-pane fade">
-        <h3 class="text-head">Findings Report</h3>
-        <p class="text-head">Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+        <br>
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <td>UNIT</td>
+              <td>STAKEHOLDER</td>
+              <td>TOUCHPOINT</td>
+              <td>EXPERIENCE</td>
+              <td>FINDINGS</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let report of reports;let r = index;">
+              <td>{{report.department}}</td>
+              <td>{{report.stackholder}}</td>
+              <td>{{report.touchpoint}}</td>
+              <td>{{report.experience}}</td>
+              <td>
+                <label>Finding :</label> {{report.finding}}
+                <br>
+                <label>Category :</label> {{report.category}}
+                <br>
+                <label>Source Required :</label> {{report.sourceRequired}}
+                <br>
+                <label>Improvements :</label> {{report.improvements}}
+                <br>
+                <label>Deadline :</label> {{report.deadline}}
+                <br>
+                <label>Responsible Staff :</label>
+                <span *ngFor="let rsr of report.responsibleRole;let st=index;">{{st+1}}.{{rsr.department}}:{{rsr.role}}</span>
+                <span *ngFor="let staff of report.responsibleStaff;let em = index;">{{em+1}}.{{staff.firstName}} {{staff.lastName}}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div id="menu1" class="tab-pane fade">
         <h3 class="text-head">Ranked Journey Of Touchpoints</h3>
@@ -38,35 +137,30 @@
             <select class="form-control" [(ngModel)]="stakeholderId" (ngModelChange)="getRankingTable($event)" (click)="edit=false">
               <option *ngFor="let stackholder of stackholders;let s = index;" [value]="stackholder.stackholderId">{{stackholder.stackholder}}</option>
             </select>
-          </div>        
+          </div>
         </div>
         <div *ngIf="tableData.length">
-          <!-- <div class="panel-heading">
-            <b class="margin-top"> RANKED JOURNEY OF TOUCHPOINTS
-              <i class="glyphicon glyphicon-arrow-down"></i>
-            </b>
-          </div> -->
           <div class="panel-body">
             <table class="table table-bordered">
               <thead>
                 <tr>
                   <th>TOUCHPOINTS</th>
                   <th>UNITS</th>
-                  <th>CHANNELS</th>
-                  <th>DATA SOURCE</th>
+                  <th>CHANNELS</th>                  
                   <th>EXPERIENCE</th>
+                  <th>DATA SOURCE</th>
                   <th>RANK
                     <button (click)="edit=true" class="btn-edit">
                       <i class="glyphicon glyphicon-pencil"></i>
                     </button>
                     <button *ngIf="edit" (click)="edit=false" class="btn-edit">
-                      <i class="glyphicon glyphicon-close"></i>
+                      <i class="glyphicon glyphicon-remove"></i>
                     </button>
                   </th>
                 </tr>
               </thead>
               <tbody *ngFor="let data of tableData;let d=index;">
-                <tr (click)="showFinding[d] = !showFinding[d]">
+                <tr>
                   <td rowspan="1">{{data.touchpoint}}</td>
                   <td rowspan="1">{{data.department}}</td>
                   <td rowspan="1">
@@ -76,18 +170,18 @@
                       </li>
                     </ul>
                   </td>
+                  <td rowspan="1">{{data.experience}}</td>
                   <td rowspan="1">
                     <ul class="list">
                       <li style="float:left" *ngFor="let dataSource of data.dataSources;let d = index;">{{dataSource.dataSource}}
                         <span *ngIf="d!=data.dataSources.length-1">,</span>
                       </li>
                       <li *ngIf="!data.dataSources.length">None</li>
-                    </ul>
-                    <span *ngIf="data.findings.length" class="glyphicon glyphicon-folder-open">
+                    </ul><br>
+                    <span style="cursor:pointer;" *ngIf="data.findings.length" class="glyphicon glyphicon-folder-open" (click)="showFinding[d] = !showFinding[d]">
 
                     </span>
                   </td>
-                  <td>{{data.experience}}</td>
                   <td rowspan="1">
                     <span *ngIf="!edit">{{data.rank}}</span>
                     <input type="number" [attr.id]="'rank' + d" style="width:40px;" [(ngModel)]="checkValue[d]" (keyup)="validateRank($event,d,inp)"
@@ -96,9 +190,8 @@
                 </tr>
                 <tr *ngIf="data.findings.length && showFinding[d]">
                   <td></td>
-                  <td colspan="3">
-
-                    <div class="panel panel-default" *ngFor="let find of data.findings;let f = index;">
+                  <td colspan="4">
+                    <div class="panel panel-default" *ngFor="let find of data.findings;let f =index;">
                       <div class="panel-heading">
                         <div class="badge badge-numbering">{{(f+1)}}
                           <br>
@@ -120,7 +213,10 @@
                                 <tr>
                                   <td>{{find.category}}</td>
                                   <td>{{find.improvements}}</td>
-                                  <td>{{find.responsibleStaff}}</td>
+                                  <td>
+                                    <span *ngFor="let rsr of find.responsibleRole;let st=index;">{{rsr.department}}:{{rsr.role}}</span>
+                                    <span *ngFor="let staff of find.responsibleStaff;let em = index;">{{staff.firstName}} {{staff.lastName}}</span>
+                                  </td>
                                   <td>{{find.rootCause}}</td>
                                   <td>{{find.sourceRequired}}</td>
                                 </tr>
