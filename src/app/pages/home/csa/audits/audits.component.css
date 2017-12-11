@@ -338,3 +338,50 @@ tbody td[rowspan] {
     position: absolute;
     right:15px;
   }
+
+  .btn-tp{
+    position: relative;
+    width: 41%;
+    display: block;
+    /* margin: 30px auto; */
+    padding: 7px 25px;
+    font-size: 15px;
+    overflow: hidden;
+    padding-right: 21px;
+    border-width: 0;
+    outline: none;
+    border-radius: 0px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+    background-color: #103a71;
+    color: white;
+  }
+  
+  .btn-tp:before {
+    font-family: FontAwesome;
+    content: "\f067";
+    position: absolute;
+    top: 7px;
+    left: -35px;
+    transition: all 200ms ease;
+  }
+  
+  .btn-tp:hover:before {
+    left: 12px;
+  }
+  
+  .btn-tp.active.focus,
+  .btn-tp.active:focus,
+  .btn-tp.active:hover,
+  .btn-tp:active.focus,
+  .btn-tp:active:focus,
+  .btn-tp:active:hover {
+    color: white;
+    background-color: #103a71;
+    border-color: #103a71;
+  }
+  
+  .btn-tp:active:focus,
+  .btn-tp:focus {
+    outline: 0px auto -webkit-focus-ring-color;
+    outline-offset: 0px;
+  }
