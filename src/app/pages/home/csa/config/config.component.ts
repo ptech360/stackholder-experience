@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from "@angular/forms";
 import { ConfigService } from "./config.service";
 import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 declare let $ :any;
 @Component({
   selector:'config',
@@ -9,7 +10,7 @@ declare let $ :any;
   styleUrls:['./config.component.css'],
   providers:[ConfigService]
 })
-export class ConfigComponent{
+export class ConfigComponent implements OnInit{
   configForm:FormGroup;
   units:any[]=[];
   stackholders:any[]=[];
@@ -23,9 +24,13 @@ export class ConfigComponent{
   constructor(
     private fb: FormBuilder,
     public cs: ConfigService,
-    public _location:Location) {
+    public _location:Location,
+    private route: ActivatedRoute) {}
+
+  ngOnInit(){
+    const id = +this.route.snapshot.paramMap.get('unitId');
     this.configForm = this.fb.group({
-      unitId: ['',Validators.required],
+      unitId: [id,Validators.required],
       stackholderId: ['',Validators.required],
       touchpoints: this.fb.array([this.fb.group({
         touchpoint: ['',Validators.required],
@@ -36,7 +41,6 @@ export class ConfigComponent{
     });
     this.getPrerequisite();
   }
-
   getPrerequisite(){
     this.cs.getPrerequisite().subscribe((response:any)=>{
       this.units = response.units;

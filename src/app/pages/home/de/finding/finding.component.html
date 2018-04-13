@@ -36,7 +36,8 @@
               <label>Source Required :</label> {{find.sourceRequired}}
             </div>
             <div class="col-sm-4">
-              <label>Responsible Staff :</label> MIs Department
+              <label>Responsible Staff :</label> <span *ngFor="let rsr of find.responsibleRole;let st=index;">{{rsr.department}}:{{rsr.role}}<br></span>
+              <span *ngFor="let staff of find.responsibleStaff;let em = index;">{{staff.firstName}} {{staff.lastName}}<br></span>
             </div>
             <div class="col-sm-8">
               <label>Improvements :</label> {{find.improvements}}

@@ -169,9 +169,10 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <div class="modal-header">
           <h4 class="modal-title">
-            <span *ngIf="!isFindingUpdate">FILL</span>
+            <span *ngIf="!isFindingUpdate">ADD</span>
             <span *ngIf="isFindingUpdate">Update</span>
-            FINDING {{selectedTouchpoint}}
+            FINDING
+
           </h4>
         </div>
         <form class="form-horizontal" [formGroup]="findingForm" (submit)="submitFinding()">
@@ -204,7 +205,7 @@
               </div>
             </div>
             <div class="form-group" *ngIf="!isFindingUpdate">
-              <label class="control-label col-sm-3">ASSIGNED BY </label>
+              <label class="control-label col-sm-3">ASSIGNED TO </label>
               <div class="col-sm-9">
                 <label class="radio-inline">
                   <input type="radio" name="type" [(ngModel)]="type" [ngModelOptions]="{standalone: true}" value="pankaj" (click)="getEmployeeControl()"> EMPLOYEE NAME

@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { RankService } from '../rank.service';
-
+import * as alertify from 'alertifyjs';
 declare let $:any;
 
 @Component({
@@ -49,7 +49,7 @@ export class ViewRankComponent{
         this.showFinding[i] = false;
       }
       if(response.status == 204){
-        alert("there is not ranked any touchpoints corresponding to this stakeholder");
+        alertify.alert("there is not ranked any touchpoints corresponding to this stakeholder").setHeader("Alert Message");
         this.tableData = [];
       }else{
 
@@ -151,6 +151,14 @@ export class ViewRankComponent{
       });
       this.edit = false;
     })
+  }
+
+  getRowSpan(stackholders:any[]){
+    var length = stackholders.length;
+    stackholders.forEach((stackholder:any) => {
+      length += stackholder.touchpoints.length;
+    });
+    return length;
   }
 }
 
