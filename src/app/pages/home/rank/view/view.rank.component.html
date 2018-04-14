@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
   <!-- new code -->
   <div>
     <div id="cssmenu" class="align-center">
@@ -7,10 +7,10 @@
           <a data-toggle="tab" href="#menu2" click="getRiskReport()">RISK REGISTER</a>
         </li>
         <li>
-          <a data-toggle="tab" href="#menu3" (click)="getPlannerReport()">STRATEGIC PLANNING</a>
+          <a data-toggle="tab" href="#menu2" (click)="getPlannerReport()">STRATEGIC PLANNING</a>
         </li>
         <li>
-          <a data-toggle="tab" href="#menu4" (click)="getFindinsReport()">ALL FINDINGS</a>
+          <a data-toggle="tab" href="#menu2" (click)="getFindinsReport()">ALL FINDINGS</a>
         </li>
         <li>
           <a data-toggle="tab" href="#menu1">RANKED JOURNEY</a>
@@ -26,10 +26,12 @@
               <td>UNIT</td>
               <td>STAKEHOLDER</td>
               <td>TOUCHPOINT</td>
-              <td>Channels</td>
-              <td>Data Sources</td>
-              <td>EXPERIENCE</td>
-              <td>FINDING</td>
+              <td>Findings</td>
+              <th width="10%">CATEGORY</th>
+              <th width="10%">IMPROVEMENTS</th>
+              <th width="10%">RESPONSIBLE STAFF</th>
+              <th width="10%">ROOT CAUSE</th>
+              <th width="10%">SOURCE REQUIRED</th>
             </tr>
           </thead>
           <tbody>
@@ -39,31 +41,22 @@
               </tr>
               <ng-container *ngFor="let stackholder of report.stackholders;let s = index;">
                 <tr>
-                  <td [attr.rowspan]="stackholder.touchpoints.length + 1">{{stackholder.stackholder}}</td>
+                  <td [attr.rowspan]="getRowSpan2(stackholder.touchpoints) + 1">{{stackholder.stackholder}}</td>
                 </tr>
                 <ng-container *ngFor="let touchPoint of stackholder.touchpoints;let s = index;">
                   <tr>
-                    <td>{{touchPoint.touchpoint}}</td>
+                    <td [attr.rowspan]="touchPoint.findings.length + 1">{{touchPoint.touchpoint}}</td>
+                  </tr>
+                  <tr #ele class="tr-height" *ngFor="let find of touchPoint.findings;let f =index;" [style.height]="getHeight(ele)">
+                    <td>{{find.finding}}</td>
+                    <td>{{find.category}}</td>
+                    <td>{{find.improvements}}</td>
                     <td>
-                      <ul class="list">
-                        <li style="float:left" *ngFor="let channel of touchPoint.touchpointChannels;let c = index;">{{channel.channel}}
-                          <span *ngIf="c!=touchPoint.touchpointChannels.length-1">,</span>
-                        </li>
-                      </ul>
+                      <span *ngFor="let rsr of find.responsibleRole;let st=index;">{{rsr.department}}:{{rsr.role}}<br></span>
+                      <span *ngFor="let staff of find.responsibleStaff;let em = index;">{{staff.firstName}} {{staff.lastName}}<br></span>
                     </td>
-                    <td>
-                      <ul class="list">
-                        <li style="float:left" *ngFor="let dataSource of touchPoint.touchpointDatasource;let d = index;">{{dataSource.dataSource}}
-                          <span *ngIf="dataSource.dataSourceId==3">:{{touchPoint.surveyTitle}}</span>
-                          <span *ngIf="d!=touchPoint.touchpointDatasource.length-1">,</span>
-                        </li>
-                        <li *ngIf="!touchPoint.touchpointDatasource.length">None</li>
-                      </ul>
-                    </td>
-                    <td>{{touchPoint.experience}}</td>
-                    <td>
-                      <button *ngIf="touchPoint.findings.length" class="btn btn-link btn-finding" [routerLink]="['../../de/finding/',touchPoint.touchpointId]">findings {{touchPoint.findings.length}}</button>
-                    </td>
+                    <td>{{find.rootCause}}</td>
+                    <td>{{find.sourceRequired}}</td>
                   </tr>
                 </ng-container>
               </ng-container>
@@ -71,7 +64,7 @@
           </tbody>
         </table>
       </div>
-      <div id="menu3" class="tab-pane fade">
+      <!-- <div id="menu3" class="tab-pane fade">
         <br>
         <table class="table table-bordered table-hover">
             <thead>
@@ -176,7 +169,7 @@
               </ng-container>            
             </tbody>
         </table>
-      </div>
+      </div> -->
       <div id="menu1" class="tab-pane fade">
         <h3 class="text-head">Ranked Journey Of Touchpoints</h3>
         <div class="form-group">
@@ -227,7 +220,6 @@
                       <li *ngIf="!data.dataSources.length">None</li>
                     </ul><br>
                     <span style="cursor:pointer;" *ngIf="data.findings.length" class="glyphicon glyphicon-folder-open" (click)="showFinding[d] = !showFinding[d]">
-
                     </span>
                   </td>
                   <td rowspan="1">

@@ -26,6 +26,10 @@ import { HttpModule } from "@angular/http";
             loadChildren:'app/pages/home/csa/audits/audits.module#AuditsModule'
           },
           {
+            path:'data-entry',
+            loadChildren:'app/pages/home/csa/data-entry/de.module#DataEntryModule'
+          },
+          {
             path:'config',
             loadChildren:'app/pages/home/csa/config/config.module#ConfigModule'
           },

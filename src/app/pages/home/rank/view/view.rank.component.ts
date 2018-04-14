@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, AfterViewInit, AfterViewChecked} from '@angular/core';
 import { RankService } from '../rank.service';
 import * as alertify from 'alertifyjs';
 declare let $:any;
@@ -9,7 +9,7 @@ declare let $:any;
   styleUrls:['./view.rank.component.css'],
   providers:[RankService]
 })
-export class ViewRankComponent{
+export class ViewRankComponent implements AfterViewInit, AfterViewChecked{
   edit: boolean;
   stakeholderId: any;
   submitDisabled: boolean = true;
@@ -22,10 +22,26 @@ export class ViewRankComponent{
     this.getRiskReport();
   }
 
+  ngOnInit(){
+    
+  }
+
+  ngAfterViewInit(){
+    // setTimeout(() => {
+    //   $("tr.tr-height").each(function(){
+    //     $(this).css("height",$(this)[0].clientHeight);
+    //   });
+    // }, 1000);
+  }  
+
+  ngAfterViewChecked(){
+    
+  }
+
   getRiskReport(){
     this.rs.getRiskReport().subscribe((response:any)=>{
       this.reports = response;
-    })
+    });
   }
 
   getFindinsReport(){
@@ -157,8 +173,24 @@ export class ViewRankComponent{
     var length = stackholders.length;
     stackholders.forEach((stackholder:any) => {
       length += stackholder.touchpoints.length;
+      stackholder.touchpoints.forEach(tp => {
+        length += tp.findings.length;
+      });
     });
     return length;
+  }
+
+  getRowSpan2(touchpoints:any[]){
+    var length = touchpoints.length;
+    touchpoints.forEach(tp => {
+      length += tp.findings.length;
+    });
+    return length;
+  }
+
+  getHeight(ele){
+    if($(ele).prev().height()<$(ele)["0"].clientHeight)
+    $(ele).css("height",$(ele)["0"].clientHeight + $(ele).prev().height());
   }
 }
 
